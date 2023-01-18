@@ -1,5 +1,7 @@
 # Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
 v: 0
+icon: ./public/icons/favicon.png
+app_name: "Blog-Doc"
 micros:
     - name: blog-doc-space
       src: .
