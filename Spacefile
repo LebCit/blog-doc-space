@@ -6,4 +6,6 @@ micros:
     - name: blog-doc-space
       src: .
       engine: nodejs16
+      public_routes:
+      - "/*"
       primary: true
