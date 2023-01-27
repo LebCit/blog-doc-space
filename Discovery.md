@@ -31,7 +31,7 @@ A tiny blog and documentation SSG app.
 
 ### Backend (input)
 
--   Node.js 14.x or higher.
+-   Node.js 16.x or higher.
 -   EJS is 100% JavaScript.
 -   Markdown to focus on your content.
 
