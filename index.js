@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 exports.app = app
+const { searchFeature } = require("./config/settings.json")
 
 const port = process.env.PORT || 3000
 
@@ -12,6 +13,9 @@ if (!process.env.DETA_SPACE_APP) {
 	liveReload()
 }
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 const router = (global.router = express.Router())
 app.use(router)
 
@@ -21,6 +25,7 @@ app.use("/", require("./routes/archiveRoute"))
 app.use("/", require("./routes/tagsRoute"))
 app.use("/", require("./routes/rssRoute"))
 app.use("/", require("./routes/sitemapRoute"))
+if (searchFeature) app.use("/", require("./routes/searchRoute"))
 
 // 404 route
 app.use((req, res, next) => {
