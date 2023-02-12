@@ -1,5 +1,15 @@
 {
     "siteURL": "https://blocdoc-1-v3476171.deta.app/",
     "searchFeature": true,
-    "addIdsToHeadings": true
+    "addIdsToHeadings": true,
+    "menuLinks": {
+        "archive": "Archive",
+        "tags": "Tags",
+        "search": "Search",
+        "doc": "Documentation",
+        "license": "License",
+        "https://github.com/LebCit/blog-doc-space": "GitHub Repo",
+        "admin": "Admin"
+    },
+    "footer": "App built with ❤️ by <a href='https://lebcit.github.io/'>LebCit</a>"
 }

@@ -2,6 +2,9 @@ const router = global.router
 
 const getPosts = require("../functions/getPosts")
 
+// Settings
+const { menuLinks, footer } = require("../config/settings.json")
+
 const titles = {
 	docTitle: "Search",
 	docDescription: "Make a research in the site's posts",
@@ -12,7 +15,9 @@ const titles = {
 // Render the search form on the search route.
 router.get("/search", (req, res) => {
 	res.render("layouts/search", {
+		links: menuLinks,
 		titles: titles,
+		footer: footer,
 	})
 })
 
@@ -46,10 +51,12 @@ router.get("/search/:query", (req, res) => {
 		const resultLength = result.length
 		// Render the search page with the resultant post(s)
 		res.render("layouts/search", {
+			links: menuLinks,
 			titles: titles,
 			posts: result,
 			resultLength: resultLength,
 			results: true,
+			footer: footer,
 		})
 	} else {
 		/**
@@ -58,8 +65,10 @@ router.get("/search/:query", (req, res) => {
 		 * with a message.
 		 */
 		res.render("layouts/search", {
+			links: menuLinks,
 			titles: titles,
 			noResults: true,
+			footer: footer,
 		})
 	}
 })

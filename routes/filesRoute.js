@@ -6,7 +6,7 @@ const getPosts = require("../functions/getPosts")
 const idsInHeadings = require("../functions/addIdsToHeadings")
 
 // Settings
-const { addIdsToHeadings } = require("../config/settings.json")
+const { addIdsToHeadings, menuLinks, footer } = require("../config/settings.json")
 
 // Find files ending with `.ejs` and `.md` in sub-directories of `views` and ignore `components` and `layouts` sub-directories.
 glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*"] }, (err, files) => {
@@ -53,10 +53,12 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 			if (path?.startsWith("views/pages/")) {
 				// Render the pagesTemplate for each page and pass it's front matter as a data object into pagesTemplate
 				res.render("layouts/pagesTemplate", {
+					links: menuLinks,
 					titles: titles,
 					title: file.data.title,
 					subTitle: file.data.subTitle,
 					pageContent: addIdsToHeadings ? idsInHeadings(html) : html,
+					footer: footer,
 				})
 			} else {
 				// Get the index of each post in the posts array by it's filename
@@ -78,6 +80,7 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 
 				// Render the postsTemplate for each post and pass it's front matter as a data object into postsTemplate
 				res.render("layouts/postsTemplate", {
+					links: menuLinks,
 					titles: titles,
 					title: file.data.title,
 					date: file.data.date,
@@ -90,11 +93,15 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 					nextPost: nextPost,
 					previousPostTitle: previousPostTitle,
 					nextPostTitle: nextPostTitle,
+					footer: footer,
 				})
 			}
 		} else if (path?.startsWith("views/templates/")) {
 			// Render the EJS template
-			res.render(`templates/${fileWithExtension}`)
+			res.render(`templates/${fileWithExtension}`, {
+				links: menuLinks,
+				footer: footer,
+			})
 		} else {
 			const titles = {
 				docTitle: "Page Not Found",
@@ -102,11 +109,13 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 			}
 			// Render the 404 error page if no file in the pages, posts and templates sub-directories matches the filename request parameter
 			res.status(404).render("layouts/error", {
+				links: menuLinks,
 				titles: titles,
 				headerTitle: "Page Not Found",
 				headerSubtitle: "Nothing to land on here !",
 				imageSrc: "/images/404-not-found-error.png",
 				imageAlt: "Sailor on a 404 mast looking out to sea",
+				footer: footer,
 			})
 		}
 	})

@@ -3,6 +3,9 @@ const router = global.router
 const getPosts = require("../functions/getPosts")
 const paginator = require("../functions/paginator")
 
+// Settings
+const { menuLinks, footer } = require("../config/settings.json")
+
 const paginatedPosts = paginator(getPosts(), 1, 5) // Paginate all the posts
 const lastPage = paginatedPosts.total_pages - 1 // Get the last page
 
@@ -19,11 +22,13 @@ router.get("/", (req, res) => {
 	const postsLength = getPosts().length
 
 	res.render("layouts/postsList", {
+		links: menuLinks,
 		titles: titles,
 		posts: newestFivePosts,
 		firstPage: true,
 		lastPage: lastPage,
 		paginated: postsLength > 5 ? true : false, // To display or not the pagination component on the main route
+		footer: footer,
 	})
 })
 
@@ -35,12 +40,14 @@ router.get("/page/:actualBlogPage", (req, res) => {
 	const paginatedPostsList = paginator(getPosts().slice(5), actualBlogPage, 5)
 
 	res.render("layouts/postsList", {
+		links: menuLinks,
 		titles: titles,
 		posts: paginatedPostsList.data,
 		paginatedPostsList: paginatedPostsList,
 		firstPage: false,
 		lastPage: lastPage,
 		paginated: true, // To display the pagination component on each blog page route
+		footer: footer,
 	})
 })
 

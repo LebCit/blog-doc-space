@@ -3,6 +3,9 @@ const router = global.router
 const postsByTagCount = require("../functions/postsByTagCount")
 const postsByTagList = require("../functions/postsByTagList")
 
+// Settings
+const { menuLinks, footer } = require("../config/settings.json")
+
 // Render all the tags from the list of posts on the postsByTagCount route
 router.get("/tags", (req, res) => {
 	// Define the titles for the tags route
@@ -13,8 +16,10 @@ router.get("/tags", (req, res) => {
 		subTitle: "A list of all the tags",
 	}
 	res.render("layouts/postsByTagCount", {
+		links: menuLinks,
 		titles: titles,
 		postsByTagCount: postsByTagCount(),
+		footer: footer,
 	})
 })
 
@@ -32,9 +37,11 @@ router.get("/tags/:tag", (req, res) => {
 	if (postsByTag != 0) {
 		// If the postsByTagArray is not empty, render the list of post(s) for the requested tag
 		res.render("layouts/postsList", {
+			links: menuLinks,
 			titles: titles,
 			posts: postsByTag,
 			paginated: false, // To hide the pagination component on any requested tag route
+			footer: footer,
 		})
 	} else {
 		// If no tag matches the requested tag, render the 404 page
@@ -43,11 +50,13 @@ router.get("/tags/:tag", (req, res) => {
 			docDescription: "The server cannot find the requested resource",
 		}
 		res.status(404).render("layouts/error", {
+			links: menuLinks,
 			titles: titles,
 			headerTitle: "Page Not Found",
 			headerSubtitle: "Nothing to land on here !",
 			imageSrc: "/images/404-not-found-error.png",
 			imageAlt: "Sailor on a 404 mast looking out to sea",
+			footer: footer,
 		})
 	}
 })
