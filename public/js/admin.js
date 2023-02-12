@@ -85,6 +85,7 @@ For example, if you give your page the following tile :
 \`title : My awesome page title\`
 The URL to the page will be \`https://domain.name/my-awesome-page-title\`
 
+So choose wisely your page's title the first time you create it !
 ⚠️ You'll be able to update the page's title but this will not change the page's URL !
 
 ## The content
@@ -153,6 +154,7 @@ For example, if you give your post the following tile :
 \`title : My awesome post title\`
 The URL to the post will be \`https://domain.name/my-awesome-post-title\`
 
+So choose wisely your post's title the first time you create it !
 ⚠️ You'll be able to update the post's title but this will not change the post's URL !
 
 ## Optional fields
