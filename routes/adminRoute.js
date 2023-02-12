@@ -56,7 +56,10 @@ router.post("/admin", (req, res) => {
 			.replace(/\s+/g, "-")
 		const createdFilePath = `${__dirname}/../views/${fileType}s`
 
-		fs.writeFileSync(`${createdFilePath}/${createdFileName}.md`, fileContents, "utf8")
+		// Wait till the file gets created, then redirect to the newly created file.
+		fs.promises.writeFile(`${createdFilePath}/${createdFileName}.md`, fileContents, "utf8").then(() => {
+			res.redirect(`/${createdFileName}`)
+		})
 		res.redirect(`/${createdFileName}`)
 	} else if (actionType === "update") {
 		const updatedFile = fileTitle.split("/").pop().replace(".md", "")
