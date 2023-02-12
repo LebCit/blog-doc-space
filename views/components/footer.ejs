@@ -8,6 +8,10 @@
 		</div>
 	</div>
 </div>
+<% if (locals.admin) { %>
+	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+	<script src="/js/admin.js"></script>
+<% } %>
 <% if (locals.build && locals.searchJs) { %>
 	<script src="js/search.js"></script>
 <% } %>

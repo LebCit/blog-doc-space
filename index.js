@@ -26,6 +26,7 @@ app.use("/", require("./routes/tagsRoute"))
 app.use("/", require("./routes/rssRoute"))
 app.use("/", require("./routes/sitemapRoute"))
 if (searchFeature) app.use("/", require("./routes/searchRoute"))
+app.use("/", require("./routes/adminRoute"))
 
 // 404 route
 app.use((req, res, next) => {
