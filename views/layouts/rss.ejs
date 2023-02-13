@@ -3,9 +3,9 @@
 	<channel>
 		<title><%= siteTitle %></title>
 		<link><%= siteURL %></link>
-		<description>A tiny blog and documentation SSG app</description>
+		<description><%= siteDescription %></description>
 		<language>en-us</language>
-		<copyright>Copyright (c) 2022 - Present, LebCit under the MIT License</copyright>
+		<copyright><%= rssCopyright %></copyright>
 		<pubDate><%= posts[0].date.toUTCString() %></pubDate>
 		<lastBuildDate><%= posts[0].date.toUTCString() %></lastBuildDate>
 		<docs>https://www.rssboard.org/rss-specification</docs>

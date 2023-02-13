@@ -12,9 +12,9 @@ const lastPage = paginatedPosts.total_pages - 1 // Get the last page
 const titles = {
 	siteTitle: siteTitle,
 	docTitle: "Home",
-	docDescription: "A tiny blog and documentation SSG app",
+	docDescription: siteDescription,
 	title: siteTitle,
-	subTitle: "A tiny blog and documentation SSG app",
+	subTitle: siteDescription,
 }
 
 // Render, at most, the newest five posts from the list of posts on the main route

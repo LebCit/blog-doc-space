@@ -7,7 +7,9 @@ const { siteTitle, siteDescription, siteURL, rssCopyright } = require("../config
 router.get("/rss", (req, res) => {
 	res.set("Content-Type", "text/xml").render("layouts/rss", {
 		siteTitle: siteTitle,
+		siteDescription: siteDescription,
 		siteURL: siteURL,
+		rssCopyright: rssCopyright,
 		posts: getPosts(),
 	})
 })
