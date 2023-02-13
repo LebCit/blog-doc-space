@@ -1,7 +1,7 @@
 const router = global.router
 
 const getPosts = require("../functions/getPosts")
-const { siteTitle, siteDescription, siteURL, rssCopyright } = require("../config/settings.json")
+const { siteTitle, siteDescription, siteURL, rssSiteLanguage, rssCopyright } = require("../config/settings.json")
 
 // Render RSS feed on the rss route
 router.get("/rss", (req, res) => {
@@ -9,6 +9,7 @@ router.get("/rss", (req, res) => {
 		siteTitle: siteTitle,
 		siteDescription: siteDescription,
 		siteURL: siteURL,
+		rssSiteLanguage: rssSiteLanguage,
 		rssCopyright: rssCopyright,
 		posts: getPosts(),
 	})

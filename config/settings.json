@@ -2,6 +2,7 @@
     "siteTitle": "Bloc-Doc",
     "siteDescription": "A tiny blog and documentation SSG app",
     "siteURL": "https://blocdoc-1-v3476171.deta.app/",
+    "rssSiteLanguage": "en-US",
     "rssCopyright": "Copyright (c) 2022 - Present, LebCit under the MIT License",
     "searchFeature": true,
     "addIdsToHeadings": true,
