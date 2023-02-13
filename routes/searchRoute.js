@@ -3,9 +3,10 @@ const router = global.router
 const getPosts = require("../functions/getPosts")
 
 // Settings
-const { menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, menuLinks, footer } = require("../config/settings.json")
 
 const titles = {
+	siteTitle: siteTitle,
 	docTitle: "Search",
 	docDescription: "Make a research in the site's posts",
 	title: "Search",

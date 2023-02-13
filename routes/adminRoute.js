@@ -5,7 +5,7 @@ const matter = require("gray-matter")
 const glob = require("glob")
 
 // Settings
-const { menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, menuLinks, footer } = require("../config/settings.json")
 
 const config = fs.readFileSync("config/settings.json", "utf8", (err, data) => {
 	if (err) throw err
@@ -14,10 +14,11 @@ const config = fs.readFileSync("config/settings.json", "utf8", (err, data) => {
 })
 
 const titles = {
+	siteTitle: siteTitle,
 	docTitle: "Administration",
-	docDescription: "Bloc-Doc administration page",
+	docDescription: `${siteTitle} administration page`,
 	title: "Administration",
-	subTitle: "Bloc-Doc administration page",
+	subTitle: `${siteTitle} administration page`,
 }
 
 const files = glob.sync("views/**/*.md")

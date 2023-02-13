@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 exports.app = app
-const { searchFeature, menuLinks, footer } = require("./config/settings.json")
+const { siteTitle ,searchFeature, menuLinks, footer } = require("./config/settings.json")
 
 const port = process.env.PORT || 3000
 
@@ -31,6 +31,7 @@ app.use("/", require("./routes/adminRoute"))
 // 404 route
 app.use((req, res, next) => {
 	const titles = {
+		siteTitle: siteTitle,
 		docTitle: "Page Not Found",
 		docDescription: "The server cannot find the requested resource",
 	}
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
 	console.error(err.stack)
 	const titles = {
+		siteTitle: siteTitle,
 		docTitle: "Internal Server Error",
 		docDescription: "The server encountered an unexpected condition that prevented it from fulfilling the request",
 	}

@@ -6,7 +6,7 @@ const getPosts = require("../functions/getPosts")
 const idsInHeadings = require("../functions/addIdsToHeadings")
 
 // Settings
-const { addIdsToHeadings, menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, addIdsToHeadings, menuLinks, footer } = require("../config/settings.json")
 
 // Find files ending with `.ejs` and `.md` in sub-directories of `views` and ignore `components` and `layouts` sub-directories.
 glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*"] }, (err, files) => {
@@ -46,6 +46,7 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 			const html = md.render(content) // Convert the Markdown file content to HTML
 
 			const titles = {
+				siteTitle: siteTitle,
 				docTitle: file.data.title,
 				docDescription: file.data.subTitle ? file.data.subTitle : file.data.description,
 			}
@@ -104,6 +105,7 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 			})
 		} else {
 			const titles = {
+				siteTitle: siteTitle,
 				docTitle: "Page Not Found",
 				docDescription: "The server cannot find the requested resource",
 			}

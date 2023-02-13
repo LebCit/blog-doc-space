@@ -4,15 +4,16 @@ const getPosts = require("../functions/getPosts")
 const paginator = require("../functions/paginator")
 
 // Settings
-const { menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, siteDescription, menuLinks, footer } = require("../config/settings.json")
 
 const paginatedPosts = paginator(getPosts(), 1, 5) // Paginate all the posts
 const lastPage = paginatedPosts.total_pages - 1 // Get the last page
 
 const titles = {
+	siteTitle: siteTitle,
 	docTitle: "Home",
 	docDescription: "A tiny blog and documentation SSG app",
-	title: "Bloc-Doc",
+	title: siteTitle,
 	subTitle: "A tiny blog and documentation SSG app",
 }
 

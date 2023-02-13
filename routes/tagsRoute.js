@@ -4,12 +4,13 @@ const postsByTagCount = require("../functions/postsByTagCount")
 const postsByTagList = require("../functions/postsByTagList")
 
 // Settings
-const { menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, menuLinks, footer } = require("../config/settings.json")
 
 // Render all the tags from the list of posts on the postsByTagCount route
 router.get("/tags", (req, res) => {
 	// Define the titles for the tags route
 	const titles = {
+		siteTitle: siteTitle,
 		docTitle: "Tags",
 		docDescription: "A list of all the tags",
 		title: "Tags",
@@ -29,6 +30,7 @@ router.get("/tags/:tag", (req, res) => {
 	const postsByTag = postsByTagList(tag)
 	// Define the titles for any requested tag route
 	const titles = {
+		siteTitle: siteTitle,
 		docTitle: `Posts Tagged "${tag}"`,
 		docDescription: `List of posts tagged ${tag}`,
 		title: postsByTag.length > 1 ? `Posts Tagged "${tag}"` : `Post Tagged "${tag}"`,
@@ -46,6 +48,7 @@ router.get("/tags/:tag", (req, res) => {
 	} else {
 		// If no tag matches the requested tag, render the 404 page
 		const titles = {
+			siteTitle: siteTitle,
 			docTitle: "Page Not Found",
 			docDescription: "The server cannot find the requested resource",
 		}
