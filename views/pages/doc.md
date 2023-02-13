@@ -132,7 +132,7 @@ The implementation can be found on the following [GitHub repository](https://git
 
 ## RSS ! {# RSS}
 
-⚠️ You **MUST** provide the **live URL** of your site in the **settings.json** file under the **config** folder before deploying the application.
+⚠️ You **MUST** provide the **live URL** of your site in the [Administration page](/admin) by modifying the `siteURL` value before deploying the application.
 
 At build time, a `rss.xml` file is generated in the **\_site** folder.  
 This file takes the live URL that you provided to generate the correct links for your feed.  
@@ -149,9 +149,9 @@ If you wish for browsers and software, that supports it, to automatically find y
 <link rel="alternate" type="application/rss+xml" title="Your site title" href="https://your-site.com/rss.xml" />
 ```
 
-Of course, you **MUST** edit **rss.ejs** in the **layouts** folder under the **views** folder.  
-You **SHOULD** replace the `<title>`, `<description>` and `<copyright>` tags with the ones of your site.  
-You **MAY** replace the `<language>` tag with the language of your site.  
+Of course, you **MUST** also modify `siteTitle`, `siteDescription` and `rssCopyright` in the [Administration page](/admin).  
+You **SHOULD** replace the `siteTitle`, `siteDescription` and `rssCopyright` **values** with the ones of your site.  
+You **MAY** replace the `rssSiteLanguage` value with the language of your site.  
 A list of available language codes can be found on the [RSS language codes page](https://www.rssboard.org/rss-language-codes).
 
 Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://vivaldi.com/)
@@ -165,7 +165,7 @@ Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://
 
 ## Sitemap {# sitemap}
 
-Like the RSS feed, you **MUST** provide the **live URL** of your site in the **settings.json** file under the **config** folder to generate the correct links for each page, post, tag and template as well as for the blog routes.
+Like the RSS feed, you **MUST** provide the **live URL** of your site in the [Administration page](/admin) by modifying the `siteURL` value to generate the correct links for each page, post, tag and template as well as for the blog routes.
 
 You can check the sitemap of your site under the `/sitemap` route.  
 At build time, a `sitemap.xml` is generated in the **\_site** folder.
@@ -179,7 +179,7 @@ You can check the search of your site under the `/search` route.
 At build time, a `posts.json` and a `search.js` are generated in **\_site/js**.  
 Also, at build time, a `search.html` is generated in the **\_site** folder.
 
-You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature` a value of `false` in the **settings.json** file under the **config** folder.
+You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature` a value of `false` in the [Administration page](/admin).
 
 To see it in action, take a look at :
 
@@ -260,7 +260,7 @@ The HTML output will be : <h2 id="honey-amp-bees">Honey & Bees</h2>
 
 At build time, predefined ids will be generated into the HTML of the static site.
 
-If you wish to disable this feature, set the `addIdsToHeadings` value to `false` in the **settings.json** file under the **config** folder.
+If you wish to disable this feature, set the `addIdsToHeadings` value to `false` in the [Administration page](/admin).
 
 ## What's next ?
 
