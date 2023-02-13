@@ -7,5 +7,5 @@ micros:
       src: .
       engine: nodejs16
       public_routes:
-      - "/*"
+          - "/(?!(admin))*"
       primary: true
