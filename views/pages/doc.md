@@ -56,30 +56,15 @@ A tiny blog and documentation SSG app.
 
 ## How to install Blog-Doc ? {# installing Blog-Doc}
 
-Blog-Doc is a `Node.js` app. You should have [Node.js](https://nodejs.org/en/) on your machine.  
-Always go for the **LTS** version. At the time of writing those lines it's 18.12.1 !
+Bloc-Doc is a [Deta Space](https://deta.space/) application.  
+You can install it on your **Personal Cloud** by visiting the [Discovery page of Blog-Doc](https://deta.space/discovery/@lebcit/blocdoc) and click on the **Install on Space** button.
 
-To install it, just head over it's [Github repository](https://github.com/LebCit/blog-doc) and download it.  
-You can also download it's zip by clicking on the following link : [Bloc-Doc ZIP](https://github.com/LebCit/blog-doc/archive/refs/heads/master.zip).
-
-Once everything is in place, extract the zipped files to a new folder and open it in your IDE (I use the one and only [VS Code](https://code.visualstudio.com/)).  
-Then type in the terminal :
-
-```bash
-npm install
-```
-
-After the install, you'll see that Blog-Doc comes with some posts, a page and a template. Those files are located under the **views** folder in the **pages**, **posts** and **templates** folders. You can begin by removing those existing files and create your own [Posts and Pages](/posts-and-pages) and also [Templates](/templates).
-
-To see what you content looks like, type in your terminal the following command :
-
-```bash
-npm run watch
-```
-
-This command will allow you to explore the app in the browser of your choice by visiting [localhost on port 3000](http://localhost:3000).
+Enjoy 🚀
 
 ## Generate a static site {# Generate a static site}
+
+⚠️ This section is for the [Node.js app of Blog-Doc](https://blog-doc.deta.dev/)  
+⚠️ It will be soon updated to be available in the [Space app of Blog-Doc](https://blocdoc-1-v3476171.deta.app/)
 
 ### How is it done ?!
 
@@ -100,6 +85,8 @@ npm run build
 This command will create a **\_site** folder in which all the necessary folders and files are created. You can now copy the entire content of the **\_site** folder to the server of your choice or just test it locally.
 
 ## How to use it ? {# using Blog-Doc}
+
+⚠️ This section is for the [Node.js app of Blog-Doc](https://blog-doc.deta.dev/) for now !
 
 ### Test it locally
 
