@@ -6,7 +6,7 @@ const getPosts = require("../functions/getPosts")
 const idsInHeadings = require("../functions/addIdsToHeadings")
 
 // Settings
-const { siteTitle, addIdsToHeadings, menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, addIdsToHeadings, menuLinks, footerCopyright } = require("../config/settings.json")
 
 // Find files ending with `.ejs` and `.md` in sub-directories of `views` and ignore `components` and `layouts` sub-directories.
 glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*"] }, (err, files) => {
@@ -59,7 +59,7 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 					title: file.data.title,
 					subTitle: file.data.subTitle,
 					pageContent: addIdsToHeadings ? idsInHeadings(html) : html,
-					footer: footer,
+					footerCopyright: footerCopyright,
 				})
 			} else {
 				// Get the index of each post in the posts array by it's filename
@@ -94,14 +94,15 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 					nextPost: nextPost,
 					previousPostTitle: previousPostTitle,
 					nextPostTitle: nextPostTitle,
-					footer: footer,
+					footerCopyright: footerCopyright,
 				})
 			}
 		} else if (path?.startsWith("views/templates/")) {
 			// Render the EJS template
 			res.render(`templates/${fileWithExtension}`, {
+				titles: { siteTitle: siteTitle },
 				links: menuLinks,
-				footer: footer,
+				footerCopyright: footerCopyright,
 			})
 		} else {
 			const titles = {
@@ -117,7 +118,7 @@ glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*
 				headerSubtitle: "Nothing to land on here !",
 				imageSrc: "/images/404-not-found-error.png",
 				imageAlt: "Sailor on a 404 mast looking out to sea",
-				footer: footer,
+				footerCopyright: footerCopyright,
 			})
 		}
 	})

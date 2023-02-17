@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 exports.app = app
-const { siteTitle ,searchFeature, menuLinks, footer } = require("./config/settings.json")
+const { siteTitle ,searchFeature, menuLinks, footerCopyright } = require("./config/settings.json")
 
 const port = process.env.PORT || 3000
 
@@ -26,7 +26,11 @@ app.use("/", require("./routes/tagsRoute"))
 app.use("/", require("./routes/rssRoute"))
 app.use("/", require("./routes/sitemapRoute"))
 if (searchFeature) app.use("/", require("./routes/searchRoute"))
-app.use("/", require("./routes/adminRoute"))
+app.use("/", require("./routes/admin/adminRoute"))
+app.use("/", require("./routes/admin/adminCreateRoute"))
+app.use("/", require("./routes/admin/adminUpdateRoute"))
+app.use("/", require("./routes/admin/adminDeleteRoute"))
+app.use("/", require("./routes/admin/adminConfigRoute"))
 
 // 404 route
 app.use((req, res, next) => {
@@ -42,7 +46,7 @@ app.use((req, res, next) => {
 		headerSubtitle: "Nothing to land on here !",
 		imageSrc: "/images/404-not-found-error.png",
 		imageAlt: "Sailor on a 404 mast looking out to sea",
-		footer: footer,
+		footerCopyright: footerCopyright,
 	})
 })
 
@@ -61,7 +65,7 @@ app.use((err, req, res, next) => {
 		headerSubtitle: "Server is on a break here !",
 		imageSrc: "/images/500-internal-server-error.png",
 		imageAlt: "Sad robot in front of empty box",
-		footer: footer,
+		footerCopyright: footerCopyright,
 	})
 })
 

@@ -4,7 +4,7 @@ const postsByTagCount = require("../functions/postsByTagCount")
 const postsByTagList = require("../functions/postsByTagList")
 
 // Settings
-const { siteTitle, menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, menuLinks, footerCopyright } = require("../config/settings.json")
 
 // Render all the tags from the list of posts on the postsByTagCount route
 router.get("/tags", (req, res) => {
@@ -20,7 +20,7 @@ router.get("/tags", (req, res) => {
 		links: menuLinks,
 		titles: titles,
 		postsByTagCount: postsByTagCount(),
-		footer: footer,
+		footerCopyright: footerCopyright,
 	})
 })
 
@@ -43,7 +43,7 @@ router.get("/tags/:tag", (req, res) => {
 			titles: titles,
 			posts: postsByTag,
 			paginated: false, // To hide the pagination component on any requested tag route
-			footer: footer,
+			footerCopyright: footerCopyright,
 		})
 	} else {
 		// If no tag matches the requested tag, render the 404 page
@@ -59,7 +59,7 @@ router.get("/tags/:tag", (req, res) => {
 			headerSubtitle: "Nothing to land on here !",
 			imageSrc: "/images/404-not-found-error.png",
 			imageAlt: "Sailor on a 404 mast looking out to sea",
-			footer: footer,
+			footerCopyright: footerCopyright,
 		})
 	}
 })

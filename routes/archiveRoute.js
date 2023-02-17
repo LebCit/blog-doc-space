@@ -3,7 +3,7 @@ const router = global.router
 const getPosts = require("../functions/getPosts")
 
 // Settings
-const { siteTitle, menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, menuLinks, footerCopyright } = require("../config/settings.json")
 
 const titles = {
 	siteTitle: siteTitle,
@@ -20,7 +20,7 @@ router.get("/archive", (req, res) => {
 		titles: titles,
 		posts: getPosts(),
 		paginated: false, // To hide the pagination component on the archive route
-		footer: footer,
+		footerCopyright: footerCopyright,
 	})
 })
 

@@ -3,7 +3,7 @@ const router = global.router
 const getPosts = require("../functions/getPosts")
 
 // Settings
-const { siteTitle, menuLinks, footer } = require("../config/settings.json")
+const { siteTitle, menuLinks, footerCopyright } = require("../config/settings.json")
 
 const titles = {
 	siteTitle: siteTitle,
@@ -18,7 +18,7 @@ router.get("/search", (req, res) => {
 	res.render("layouts/search", {
 		links: menuLinks,
 		titles: titles,
-		footer: footer,
+		footerCopyright: footerCopyright,
 	})
 })
 
@@ -57,7 +57,7 @@ router.get("/search/:query", (req, res) => {
 			posts: result,
 			resultLength: resultLength,
 			results: true,
-			footer: footer,
+			footerCopyright: footerCopyright,
 		})
 	} else {
 		/**
@@ -69,7 +69,7 @@ router.get("/search/:query", (req, res) => {
 			links: menuLinks,
 			titles: titles,
 			noResults: true,
-			footer: footer,
+			footerCopyright: footerCopyright,
 		})
 	}
 })

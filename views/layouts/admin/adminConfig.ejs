@@ -1,0 +1,159 @@
+<%- include('../../components/head') %>
+<div id="layout">
+	<%#
+	<!-- Menu -->
+	%> <%- include('../../components/menu') %> <%#
+	<!-- Main container -->
+	%>
+	<div id="main">
+		<%# Page header %>
+		<div class="header">
+			<h1><%= titles.title %></h1>
+			<h2><%= titles.subTitle %></h2>
+		</div>
+
+		<%# Page content %>
+		<div class="content">
+			<form id="config-form" class="pure-form pure-form-stacked" action="/admin-config" method="post">
+				<fieldset>
+					<legend>MODIFY THE CONFIGURATION</legend>
+					<label for="site-title"><b>Site title* - REQUIRED !</b></label>
+					<input
+						type="text"
+						id="site-title"
+						name="siteTitle"
+						class="pure-input-1"
+						value="<%= settings.siteTitle %>"
+						placeholder="Type your site title here"
+						required
+					/>
+
+					<label for="site-description"><b>Site description* - REQUIRED !</b></label>
+					<input
+						type="text"
+						id="site-description"
+						name="siteDescription"
+						class="pure-input-1"
+						value="<%= settings.siteDescription %>"
+						placeholder="Type your site description here"
+						required
+					/>
+
+					<label for="site-url"><b>Site URL* - REQUIRED !</b></label>
+					<input
+						type="url"
+						id="site-url"
+						name="siteURL"
+						class="pure-input-1"
+						value="<%= settings.siteURL %>"
+						placeholder="https://my-domaine-name.com"
+						pattern="https://.*"
+						required
+					/>
+
+					<label for="rss-site-language"><b>RSS site language* - REQUIRED !</b></label>
+					<input
+						type="text"
+						id="rss-site-language"
+						name="rssSiteLanguage"
+						class="pure-input-1-4"
+						value="<%= settings.rssSiteLanguage %>"
+						placeholder="en-US"
+						required
+					/>
+					<span class="pure-form-message">
+						<a href="https://www.rssboard.org/rss-language-codes">RSS language codes page</a>
+					</span>
+
+					<label for="rss-copyright"><b>RSS copyright* - REQUIRED !</b></label>
+					<input
+						type="text"
+						id="rss-copyright"
+						name="rssCopyright"
+						class="pure-input-1"
+						value="<%= settings.rssCopyright %>"
+						placeholder="Copyright (c) 2022 - Present, LebCit under the MIT License"
+						required
+					/>
+
+					<label for="search-feature"><b>Search feature* - REQUIRED !</b></label>
+					<select id="search-feature" name="searchFeature" class="pure-u-1-2" required>
+						<option value="">Please choose an option</option>
+						<% const sF = JSON.stringify(settings.searchFeature) %>
+						<option value="<%= settings.searchFeature %>" selected>
+							<%= sF.charAt(0).toUpperCase() + sF.slice(1) %>
+						</option>
+						<% if (settings.searchFeature===true) { %>
+						<option value="false">False</option>
+						<% } else { %>
+						<option value="true">True</option>
+						<% } %>
+					</select>
+
+					<label for="ids-for-headings"><b>Ids for headings* - REQUIRED !</b></label>
+					<select id="ids-for-headings" name="addIdsToHeadings" class="pure-input-1-2" required>
+						<option value="">Please choose an option</option>
+						<% const aItH = JSON.stringify(settings.addIdsToHeadings) %>
+						<option value="<%= settings.addIdsToHeadings %>" selected>
+							<%= aItH.charAt(0).toUpperCase() + aItH.slice(1) %>
+						</option>
+						<% if (settings.addIdsToHeadings===true) { %>
+						<option value="false">False</option>
+						<% } else { %>
+						<option value="true">True</option>
+						<% } %>
+					</select>
+
+					<span id="menuLinks" hidden><%= JSON.stringify(settings.menuLinks) %></span>
+
+					<div id="container"></div>
+
+					<template id="template">
+						<div>
+							<label for="link-target">Link target</label>
+							<input
+								type="text"
+								id="link-target"
+								name="linkTarget"
+								class="pure-input-1"
+								placeholder="Target/destination of the link"
+								required
+							/>
+							<label for="link-title">Link title</label>
+							<input
+								type="text"
+								id="link-title"
+								name="linkTitle"
+								class="pure-input-1"
+								placeholder="Title of the link"
+								required
+							/>
+							<!-- <button type="button" id="add-link">Add a link</button> -->
+							<button type="button" id="remove-link" class="pure-button">Remove this link</button>
+						</div>
+					</template>
+					<button type="button" id="add-link" class="pure-button pure-checkbox pure-u-1-2">Add a link</button>
+
+					<label for="footer-copyright"><b>Footer copyright* - REQUIRED !</b></label>
+					<input
+						type="text"
+						id="footer-copyright"
+						name="footerCopyright"
+						class="pure-input-1"
+						value="<%= settings.footerCopyright %>"
+						placeholder="App built with ❤️ by <a href='https://lebcit.github.io/'>LebCit</a>"
+						required
+					/>
+					<span class="pure-form-message">
+						⚠️ IF YOU USE HTML IN THE FOOTER COPYRIGHT, ATTRIBUTES MUST BE SINGLE QUOTED ! ⚠️
+					</span>
+
+					<button id="submit-config-button" type="button" class="pure-button pure-button-primary">
+						Submit
+					</button>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+<%- include('../../components/footer') %>

@@ -2,14 +2,17 @@
 	<div class="pure-g">
 		<div class="pure-u-1">
 			<p class="copyright">
-				<%- footer %>
+				<%- footerCopyright %>
 			</p>
 		</div>
 	</div>
 </div>
-<% if (locals.admin) { %>
+<% if (locals.adminCrud) { %>
 	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-	<script src="/js/admin.js"></script>
+	<script type="module" src="/js/admin/admin.js"></script>
+<% } %>
+<% if (locals.adminConfig) { %>
+	<script type="module" src="/js/admin/admin.js"></script>
 <% } %>
 <% if (locals.build && locals.searchJs) { %>
 	<script src="js/search.js"></script>
