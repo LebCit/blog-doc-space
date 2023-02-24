@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 exports.app = app
-const { siteTitle ,searchFeature, menuLinks, footerCopyright } = require("./config/settings.json")
+const { siteTitle, searchFeature, menuLinks, footerCopyright } = require("./config/settings.json")
 
 const port = process.env.PORT || 3000
 
@@ -28,8 +28,6 @@ app.use("/", require("./routes/sitemapRoute"))
 if (searchFeature) app.use("/", require("./routes/searchRoute"))
 app.use("/", require("./routes/admin/adminRoute"))
 app.use("/", require("./routes/admin/adminCreateRoute"))
-app.use("/", require("./routes/admin/adminUpdateRoute"))
-app.use("/", require("./routes/admin/adminDeleteRoute"))
 app.use("/", require("./routes/admin/adminConfigRoute"))
 
 // 404 route

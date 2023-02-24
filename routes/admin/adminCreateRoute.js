@@ -3,7 +3,7 @@ const router = global.router
 const fs = require("fs")
 
 // Settings
-const { siteTitle, menuLinks, footerCopyright } = require("../../config/settings.json")
+const { siteTitle, adminLinks, footerCopyright } = require("../../config/settings.json")
 
 // Route to create a page or a post.
 const titles = {
@@ -15,12 +15,11 @@ const titles = {
 }
 
 router.get("/admin-create", (req, res) => {
-	res.render("layouts/admin/adminCRUD", {
-		links: menuLinks,
+	res.render("layouts/admin/adminCreate", {
+		links: adminLinks,
 		titles: titles,
 		footerCopyright: footerCopyright,
 		adminCreate: true,
-		adminCrud: true,
 	})
 })
 

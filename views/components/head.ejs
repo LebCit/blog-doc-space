@@ -1,57 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<%# Metadata %>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="<%= titles.docDescription %>" />
+
+		<%# Title %>
 		<title><%= titles.siteTitle %> | <%= titles.docTitle %></title>
+
+		<%# Pure.css %>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css" />
+
 		<% if (locals.build) { %>
 		<link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon" />
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
-			integrity="sha256-AXV9/14XTNljCQp7u3n02VIiYAICq8ocXkc11rvMlSw="
-			crossorigin="anonymous"
-		/>
 		<link rel="stylesheet" href="css/styles.min.css" />
 		<link rel="stylesheet" href="css/code-theme.min.css" />
 		<% } else if (locals.dynamic) { %>
 		<link rel="shortcut icon" href="../icons/favicon.ico" type="image/x-icon" />
-
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
-			integrity="sha256-AXV9/14XTNljCQp7u3n02VIiYAICq8ocXkc11rvMlSw="
-			crossorigin="anonymous"
-		/>
 		<link rel="stylesheet" href="../css/styles.min.css" />
 		<link rel="stylesheet" href="../css/code-theme.min.css" />
 		<% } else { %>
 		<link rel="shortcut icon" href="/icons/favicon.ico" type="image/x-icon" />
-
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
-			integrity="sha256-AXV9/14XTNljCQp7u3n02VIiYAICq8ocXkc11rvMlSw="
-			crossorigin="anonymous"
-		/>
 		<link rel="stylesheet" href="/css/styles.min.css" />
 		<link rel="stylesheet" href="/css/code-theme.min.css" />
-		<% } %>
-		<% if (locals.adminCrud) { %>
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
-			<%# TOAST UI EDITOR %>
-			<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-
-			<%# Sweet alert 2 %>
-			<script src=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.all.min.js "></script>
-			<link href=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.css " rel="stylesheet">
-		<% } %>
-		<% if (locals.adminConfig) { %>
-		 <%# Sweet alert 2 %>
-		 <script src=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.all.min.js "></script>
-		 <link href=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.css " rel="stylesheet">
+		<% } %> <%#
+		<!-- COMMENT ADDED FOR READABILITY. LOADING STYLES AND SCRIPTS DEPENDING ON THE VISITED ROUTE. -->
+		%> <% if (locals.adminTable || locals.adminCreate || locals.adminUpdate || locals.adminConfig) { %>
+		<script src=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.all.min.js "></script>
+		<link href=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.css " rel="stylesheet" />
+		<% } %> <%#
+		<!-- Comment added for readability -->
+		%> <% if (locals.adminCreate || locals.adminUpdate) { %>
+		<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+		<% } %> <%#
+		<!-- Comment added for readability -->
+		%> <% if (locals.adminTable) { %>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tabulator-tables/dist/css/tabulator.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/tabulator-tables/dist/js/tabulator.min.js"></script>
 		<% } %>
 	</head>
 	<body>

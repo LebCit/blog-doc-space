@@ -106,10 +106,21 @@
 
 					<span id="menuLinks" hidden><%= JSON.stringify(settings.menuLinks) %></span>
 
+					<h3>Menu links</h3>
 					<div id="container"></div>
 
+					<style>
+						.link {
+							border: black dashed;
+							margin: 10px 0;
+							padding: 10px;
+						}
+						.blue-background-class {
+							background-color: #c8ebfb;
+						}
+					</style>
 					<template id="template">
-						<div>
+						<div class="link">
 							<label for="link-target">Link target</label>
 							<input
 								type="text"
@@ -128,11 +139,11 @@
 								placeholder="Title of the link"
 								required
 							/>
-							<!-- <button type="button" id="add-link">Add a link</button> -->
 							<button type="button" id="remove-link" class="pure-button">Remove this link</button>
 						</div>
 					</template>
 					<button type="button" id="add-link" class="pure-button pure-checkbox pure-u-1-2">Add a link</button>
+					<hr />
 
 					<label for="footer-copyright"><b>Footer copyright* - REQUIRED !</b></label>
 					<input

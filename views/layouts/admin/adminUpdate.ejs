@@ -1,0 +1,138 @@
+<%- include('../../components/head') %>
+
+<div id="layout">
+	<%#
+	<!-- Menu -->
+	%> <%- include('../../components/menu') %> <%#
+	<!-- Main container -->
+	%>
+	<div id="main">
+		<%# Page header %>
+		<div class="header">
+			<h1><%= titles.title %></h1>
+			<h2><%= titles.subTitle %></h2>
+		</div>
+
+		<%# Page content %>
+		<div class="content">
+			<span id="file" class="hidden"><%= JSON.stringify(file) %></span>
+			<% const fileTitle = file[0].replace(".md", "") %>
+			<form id="file-form" class="pure-form pure-form-stacked" action="/admin-update/<%= fileTitle %>" method="post">
+				<fieldset>
+					<legend>
+						UPDATE
+						<b><%= file[1].data.title %></b>
+					</legend>
+
+					<div class="pure-g">
+						<% const filePath = file[1].path.split("../").pop() %>
+						<input type="text" name="filePath" id="file-path" class="hidden" value="<%= filePath %>" />
+						<% if (file[1].path.includes("/pages/")) { %> <%#
+						<!-- PAGE FRONT MATTER -->
+						%>
+						<div id="page-front-matter" class="pure-u-1">
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="page-title-input"><b>Page title* - REQUIRED !</b></label>
+								<input
+									type="text"
+									name="pageTitle"
+									id="page-title-input"
+									class="pure-u-1"
+									placeholder="Type your page title here"
+									value="<%= file[1].data.title %>"
+									required
+								/>
+							</div>
+
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="page-description-input"><b>Page description* - REQUIRED !</b></label>
+								<input
+									type="text"
+									name="pageSubTitle"
+									id="page-description-input"
+									class="pure-u-1"
+									placeholder="Describe your page's content shortly"
+									value="<%= file[1].data.subTitle %>"
+									required
+								/>
+							</div>
+						</div>
+						<% } %> <%#
+						<!-- Comment added for readability -->
+						%> <% if (file[1].path.includes("/posts/")) { %> <%#
+						<!-- POST FRONT MATTER -->
+						%>
+						<div id="post-front-matter" class="pure-u-1">
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="post-title-input"><b>Post title* - REQUIRED !</b></label>
+								<input
+									type="text"
+									name="postTitle"
+									id="post-title-input"
+									class="pure-u-1"
+									placeholder="Type your post title here"
+									value="<%= file[1].data.title %>"
+									required
+								/>
+							</div>
+
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="post-date-input"><b>Post Date* - REQUIRED !</b></label>
+								<input type="date" name="postDate" id="post-date-input" class="pure-u-1" value="<%=
+								file[1].data.date.split("/").join("-") %>" required />
+							</div>
+
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="post-description-input">Post description - Optional, better for SEO</label>
+								<input
+									type="text"
+									name="postDescription"
+									id="post-description-input"
+									class="pure-u-1"
+									placeholder="Describe your post's content shortly"
+									value="<%= file[1].data.description %>"
+								/>
+							</div>
+
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="post-image-input">Post image - Optional, better for design</label>
+								<input
+									type="url"
+									name="postImage"
+									id="post-image-input"
+									class="pure-u-1"
+									placeholder="https://my-post-image.png"
+									pattern="https://.*"
+									value="<%= file[1].data.featuredImage %>"
+								/>
+							</div>
+
+							<div class="pure-u-1-2 pure-u-sm-1">
+								<label for="post-tags-input">Post tag(s) - Optional, better for categorizing</label>
+								<input
+									type="text"
+									name="postTags"
+									id="post-tags-input"
+									class="pure-u-1"
+									placeholder="Coffee, Mood, Wall-Decor, JS-Party"
+									value="<%= file[1].data.tags %>"
+								/>
+							</div>
+						</div>
+						<% } %> <%# TOAST UI EDITOR %>
+						<div id="editor" style="margin: 0.25em 0"></div>
+
+						<%# Hidden textarea to get the content from the above editor %>
+						<div class="pure-u-1 hidden">
+							<textarea name="fileContents" id="file-contents" rows="10" class="pure-input-1"></textarea>
+						</div>
+					</div>
+
+					<button id="submit-button" type="button" class="pure-button pure-button-primary">Submit</button>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+<%- include('../../components/footer') %>

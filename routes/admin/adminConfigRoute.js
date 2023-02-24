@@ -14,15 +14,9 @@ const titles = {
 	subTitle: `${settings.siteTitle} settings configuration page`,
 }
 
-const config = fs.readFileSync("config/settings.json", "utf8", (err, data) => {
-	if (err) throw err
-
-	return data
-})
-
 router.get("/admin-config", (req, res) => {
 	res.render("layouts/admin/adminConfig", {
-		links: settings.menuLinks,
+		links: settings.adminLinks,
 		titles: titles,
 		settings: settings,
 		footerCopyright: settings.footerCopyright,
@@ -41,6 +35,15 @@ router.post("/admin-config", (req, res) => {
 	settings.menuLinks = object
 	settings.searchFeature = JSON.parse(settings.searchFeature)
 	settings.addIdsToHeadings = JSON.parse(settings.addIdsToHeadings)
+
+	let adminLinks = {
+		admin: "Admin ⚡",
+		"admin-pages": "📃 Pages",
+		"admin-posts": "📝 Posts",
+		"admin-create": "➕ New",
+		"admin-config": "⚙️ Settings",
+	}
+	settings.adminLinks = adminLinks
 
 	fs.writeFileSync("config/settings.json", JSON.stringify(settings), "utf8")
 	res.redirect("/admin")

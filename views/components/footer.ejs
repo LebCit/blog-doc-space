@@ -1,28 +1,27 @@
 <div class="footer">
 	<div class="pure-g">
 		<div class="pure-u-1">
-			<p class="copyright">
-				<%- footerCopyright %>
-			</p>
+			<p class="copyright"><%- footerCopyright %></p>
 		</div>
 	</div>
 </div>
-<% if (locals.adminCrud) { %>
-	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-	<script type="module" src="/js/admin/admin.js"></script>
-<% } %>
-<% if (locals.adminConfig) { %>
-	<script type="module" src="/js/admin/admin.js"></script>
-<% } %>
-<% if (locals.build && locals.searchJs) { %>
-	<script src="js/search.js"></script>
-<% } %>
-<% if (locals.build) { %>
-	<script src="js/main.js"></script>
+
+<% if (locals.adminCreate || locals.adminUpdate || locals.adminTable || locals.adminConfig) { %>
+<script type="module" src="/js/admin/admin.js"></script>
+<% } %> <%#
+<!-- Comment added for readability -->
+%> <% if (locals.adminCreate || locals.adminUpdate) { %>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<% } %> <%#
+<!-- Comment added for readability -->
+%> <% if (locals.build && locals.searchJs) { %>
+<script src="js/search.js"></script>
+<% } %> <% if (locals.build) { %>
+<script src="js/main.js"></script>
 <% } else if (locals.dynamic) { %>
-	<script src="../js/main.js"></script>
+<script src="../js/main.js"></script>
 <% } else { %>
-	<script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 <% } %>
 	</body>
 </html>

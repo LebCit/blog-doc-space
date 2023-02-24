@@ -1,0 +1,35 @@
+<%- include('../../components/head') %>
+<div id="layout">
+	<%#
+	<!-- Menu -->
+	%> <%- include('../../components/menu') %> <%#
+	<!-- Main container -->
+	%>
+	<div id="main">
+		<%# Page header %>
+		<div class="header">
+			<h1><%= titles.title %></h1>
+			<h2><%= titles.subTitle %></h2>
+		</div>
+
+		<%# Page content %>
+		<div class="content" style="max-width: 100%">
+			<% if (locals.pagesTable) { %>
+			<span id="pages-data" class="hidden"><%= JSON.stringify(pages) %></span>
+			<% } else { %>
+			<span id="posts-data" class="hidden"><%= JSON.stringify(posts) %></span>
+			<% } %>
+
+			<style>
+				.delete-button {
+					color: white;
+					border-radius: 4px;
+					text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+					background: rgb(202, 60, 60);
+				}
+			</style>
+			<div id="admin-table"></div>
+		</div>
+	</div>
+</div>
+<%- include('../../components/footer') %>
