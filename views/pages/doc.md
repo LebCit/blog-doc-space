@@ -56,7 +56,7 @@ A tiny blog and documentation SSG app.
 
 ## How to install Blog-Doc ? {# installing Blog-Doc}
 
-Bloc-Doc is a [Deta Space](https://deta.space/) application.  
+Blog-Doc is a [Deta Space](https://deta.space/) application.  
 You can install it on your **Personal Cloud** by visiting the [Discovery page of Blog-Doc](https://deta.space/discovery/@lebcit/blocdoc) and click on the **Install on Space** button.
 
 Enjoy 🚀
@@ -148,7 +148,7 @@ Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://
         border-style: dashed;
     }
 </style>
-<img class="pure-img-responsive" src="/images/bloc-doc-rss.xml.png">
+<img class="pure-img-responsive" src="/images/blog-doc-rss.xml.png">
 
 ## Sitemap {# sitemap}
 

@@ -1,5 +1,5 @@
 ---
-title: "Bloc-Doc: Node.js App & SSG"
+title: "Blog-Doc: Node.js App & SSG"
 tagline: "A tiny and dead simple static site generator written in JavaScript."
 theme_color: "#e8b750"
 git: "https://github.com/LebCit/blog-doc-space"

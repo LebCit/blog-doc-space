@@ -55,7 +55,7 @@ Blog-Doc is a `Node.js` app. You should have [Node.js](https://nodejs.org/en/) o
 Always go for the **LTS** version. At the time of writing those lines it's 18.12.1 !
 
 To install it, just head over it's [Github repository](https://github.com/LebCit/blog-doc) and download it.  
-You can also download it's zip by clicking on the following link : [Bloc-Doc ZIP](https://github.com/LebCit/blog-doc/archive/refs/heads/master.zip).
+You can also download it's zip by clicking on the following link : [Blog-Doc ZIP](https://github.com/LebCit/blog-doc/archive/refs/heads/master.zip).
 
 Once everything is in place, extract the zipped files to a new folder and open it in your IDE (I use the one and only [VS Code](https://code.visualstudio.com/)).  
 Then type in the terminal :
@@ -151,7 +151,7 @@ A list of available language codes can be found on the [RSS language codes page]
 
 Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://vivaldi.com/)
 
-![Screenshot of Blog-Doc feed in Vivaldi browser](/public/images/bloc-doc-rss.xml.png)
+![Screenshot of Blog-Doc feed in Vivaldi browser](/public/images/blog-doc-rss.xml.png)
 
 ## Sitemap
 

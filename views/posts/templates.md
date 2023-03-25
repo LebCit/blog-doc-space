@@ -14,9 +14,9 @@ A simple example would be to create a contact form, this would take a serious am
 
 ## Architecture & Design
 
-Bloc-Doc's architecture parses Markdown content to HTML which is injected into EJS templates that are rendered on routes matching the Markdown's file name.  
+Blog-Doc's architecture parses Markdown content to HTML which is injected into EJS templates that are rendered on routes matching the Markdown's file name.  
 The design is obviously at the templates' level. We can pass personalized CSS for a post or a page directly from the Markdown file, but structuring a whole web page from Markdown would be a time killer...  
-This is why we use a templating language, EJS in Bloc-Doc, to generate our final HTML markup with the power of plain JavaScript.  
+This is why we use a templating language, EJS in Blog-Doc, to generate our final HTML markup with the power of plain JavaScript.  
 Another advantage is that we could completely change the design of a site for a particular page to whatever we like with a template, but this would result in a labyrinthine system if we try to achieve it from a Markdown file...
 
 ## How to use a template ?

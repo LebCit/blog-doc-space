@@ -138,7 +138,7 @@ async function build() {
 			const titles = {
 				docTitle: "Home",
 				docDescription: "A tiny blog and documentation SSG app",
-				title: "Bloc-Doc",
+				title: "Blog-Doc",
 				subTitle: "A tiny blog and documentation SSG app",
 			}
 
