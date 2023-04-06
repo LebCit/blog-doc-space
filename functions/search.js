@@ -39,7 +39,7 @@ fetch("/js/posts.json")
 			// Insert the single-post-preview.css at the end of the head tag
 			document.head.insertAdjacentHTML(
 				"beforeend",
-				'<link rel="stylesheet" href="css/single-post-preview.css" />'
+				'<link rel="stylesheet" href="/css/single-post-preview.css" />'
 			)
 
 			// Define an empty string that will hold the search result(s)
@@ -58,9 +58,7 @@ fetch("/js/posts.json")
 				// Define the image path depending on the postFeaturedImage
 				let imagePath
 				if (!postFeaturedImage) {
-					imagePath = "./images/graphic-of-white-camera-on-black-background-no-image-available.webp"
-				} else if (postFeaturedImage && postFeaturedImage.startsWith("/")) {
-					imagePath = `.${postFeaturedImage}`
+					imagePath = "/images/white-camera-on-black-background.webp"
 				} else {
 					imagePath = `${postFeaturedImage}`
 				}
@@ -72,7 +70,7 @@ fetch("/js/posts.json")
 				if (postTags) {
 					// Define the markup of each tag
 					postTags.forEach((tag) => {
-						tagLink = `<li><a href="tags/${tag}.html"><span>${tag}</span></a></li> `
+						tagLink = `<span class="post-tag"><a href="/tags/${tag}">${tag}</a></span> `
 						// Add each tag markup to the tagsLinks
 						tagsLinks += tagLink
 					})
@@ -89,11 +87,11 @@ fetch("/js/posts.json")
 						</ul>
 					</div>
 					<div class="description">
-						<h1><a href="/${postFilename}.html" rel="bookmark">${postTitle}</a></h1>
+						<h1><a href="/posts/${postFilename}" rel="bookmark">${postTitle}</a></h1>
 						${postDescription ? `<h2>${postDescription}</h2>` : ""}
 						<p>${postExcerpt}</p>
 						<p class="read-more">
-							<a href="/${postFilename}.html" aria-label="Read more about ${postTitle}" tabindex="0" role="button" class="btn info" > Read the post
+							<a href="/posts/${postFilename}" aria-label="Read more about ${postTitle}" tabindex="0" role="button" class="btn info" > Read the post
 								<span class="arrow arrow-right"></span>
 							</a>
 						</p>
@@ -106,9 +104,9 @@ fetch("/js/posts.json")
 			// Count the number of matching post(s)
 			let searchResultCount
 			if (result.length >= 2) {
-				searchResultCount = `<h3>Your search returned ${result.length} posts</h3>`
+				searchResultCount = `<p>Your search returned ${result.length} posts</p>`
 			} else {
-				searchResultCount = `<h3>Your search returned 1 post</h3>`
+				searchResultCount = `<p>Your search returned 1 post</p>`
 			}
 			// Insert searchResultCount at the beginning of searchResult
 			const searchResult = document.getElementById("searchResult")
@@ -125,8 +123,8 @@ fetch("/js/posts.json")
 				Please try some other keyword(s) or,
 				<br />
 				browse the posts in the
-				<a class="archive-link" href="/archive.html">archive</a>
-				.
+				<a class="archive-link" href="/posts">archive</a>
+				📦
 			</p>
 			`
 			// Insert searchResultCount at the beginning of searchResult

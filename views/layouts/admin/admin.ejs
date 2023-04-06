@@ -1,143 +1,199 @@
-<%- include('../../components/head') %>
-<div id="layout">
-	<%#
-	<!-- Menu -->
-	%> <%- include('../../components/menu') %> <%#
-	<!-- Main container -->
-	%>
-	<div id="main">
-		<%# Page header %>
-		<div class="header">
-			<h1><%= titles.title %></h1>
-			<h2><%= titles.subTitle %></h2>
-		</div>
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('../../components/head') %>
+	<body>
+		<div id="layout">
+			<%#
+			<!-- Menu -->
+			%> <%- include('../../components/menu') %> <%#
+			<!-- Main container -->
+			%>
+			<div id="main">
+				<%# Page header %>
+				<div class="header">
+					<h1><%= titles.docTitle %></h1>
+					<h2><%= titles.docDescription %></h2>
+				</div>
 
-		<%# Page content %>
-		<div class="content">
-			<style>
-				a {
-					text-decoration: none;
-					line-height: initial;
-				}
-				.cards-list {
-					z-index: 0;
-					width: 100%;
-					display: flex;
-					justify-content: space-around;
-					flex-wrap: wrap;
-				}
+				<%# Page content %>
+				<div class="content">
+					<style>
+						a {
+							text-decoration: none;
+							line-height: initial;
+						}
+						.cards-list {
+							z-index: 0;
+							width: 100%;
+							display: flex;
+							justify-content: space-around;
+							flex-wrap: wrap;
+						}
 
-				.card {
-					margin: 30px auto;
-					width: 300px;
-					height: 300px;
-					border-radius: 40px;
-					box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
-					cursor: pointer;
-					transition: 0.4s;
-				}
+						.card {
+							margin: 30px auto;
+							width: 300px;
+							height: 300px;
+							border-radius: 40px;
+							box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+							cursor: pointer;
+							transition: 0.4s;
+						}
 
-				.card .card_image {
-					width: inherit;
-					height: inherit;
-					border-radius: 40px;
-				}
+						.card .card_image {
+							width: inherit;
+							height: inherit;
+							border-radius: 40px;
+						}
 
-				.card .card_image img {
-					width: inherit;
-					height: inherit;
-					border-radius: 40px;
-					object-fit: cover;
-				}
+						.card .card_image img {
+							width: inherit;
+							height: inherit;
+							border-radius: 40px;
+							object-fit: cover;
+						}
 
-				.card .card_title {
-					text-align: center;
-					border-radius: 0px 0px 40px 40px;
-					font-family: sans-serif;
-					font-weight: bold;
-					font-size: 30px;
-					margin-top: -80px;
-					height: 40px;
-				}
+						.card .card_title {
+							text-align: center;
+							border-radius: 0px 0px 40px 40px;
+							font-family: sans-serif;
+							font-weight: bold;
+							font-size: 30px;
+							margin-top: -80px;
+							height: 40px;
+						}
 
-				.card:hover {
-					transform: scale(0.9, 0.9);
-					box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
-				}
+						.card:hover {
+							transform: scale(0.9, 0.9);
+							box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+						}
 
-				.title-white {
-					color: white;
-				}
+						.title-white {
+							color: white;
+						}
 
-				.title-black {
-					color: black;
-				}
+						.title-black {
+							color: black;
+						}
 
-				@media all and (max-width: 500px) {
-					.card-list {
-						/* On small screens, we are no longer using row direction but column */
-						flex-direction: column;
-					}
-				}
+						@media all and (max-width: 500px) {
+							.card-list {
+								/* On small screens, we are no longer using row direction but column */
+								flex-direction: column;
+							}
+						}
 
-				.center {
-					text-align: center;
-				}
-			</style>
+						.center {
+							text-align: center;
+						}
+					</style>
 
-			<h2 class="center">Choose the route you wish to visit !</h2>
+					<h2 class="center">Choose the route you wish to visit !</h2>
 
-			<div class="cards-list">
-				<a href="/admin-create">
-					<div class="card">
-						<div class="card_image">
-							<img src="/images/admin/create.svg" />
-						</div>
-						<div class="card_title title-black">
-							<p>Create</p>
+					<div class="cards-list">
+						<a href="/admin-create">
+							<div class="card">
+								<div class="card_image">
+									<img src="/admin/images/create.svg" />
+								</div>
+								<div class="card_title title-black">
+									<p>Create</p>
+								</div>
+							</div>
+						</a>
+
+						<a href="/admin-config">
+							<div class="card">
+								<div class="card_image">
+									<img src="/admin/images/settings.svg" />
+								</div>
+								<div class="card_title title-black">
+									<p>Settings</p>
+								</div>
+							</div>
+						</a>
+
+						<a href="/admin-pages">
+							<div class="card">
+								<div class="card_image">
+									<img src="/admin/images/pages.svg" />
+								</div>
+								<div class="card_title title-black">
+									<p>Pages</p>
+								</div>
+							</div>
+						</a>
+
+						<a href="/admin-posts">
+							<div class="card">
+								<div class="card_image">
+									<img src="/admin/images/posts.svg" />
+								</div>
+								<div class="card_title title-black">
+									<p>Posts</p>
+								</div>
+							</div>
+						</a>
+
+						<a href="/admin-gallery">
+							<div class="card">
+								<div class="card_image">
+									<img src="/admin/images/gallery.svg" />
+								</div>
+								<div class="card_title title-black">
+									<p>Gallery</p>
+								</div>
+							</div>
+						</a>
+
+						<div>
+							<div class="card">
+								<div class="card_image">
+									<img class="bd-trigger" src="/admin/images/build.svg" />
+								</div>
+								<div class="card_title title-black bd-trigger">
+									<p>Build Static Site</p>
+								</div>
+							</div>
 						</div>
 					</div>
-				</a>
 
-				<a href="/admin-config">
-					<div class="card">
-						<div class="card_image">
-							<img src="/images/admin/settings.svg" />
-						</div>
-						<div class="card_title title-black">
-							<p>Settings</p>
-						</div>
-					</div>
-				</a>
-
-				<a href="/admin-pages">
-					<div class="card">
-						<div class="card_image">
-							<img src="/images/admin/pages.svg" />
-						</div>
-						<div class="card_title title-black">
-							<p>Pages</p>
-						</div>
-					</div>
-				</a>
-
-				<a href="/admin-posts">
-					<div class="card">
-						<div class="card_image">
-							<img src="/images/admin/posts.svg" />
-						</div>
-						<div class="card_title title-black">
-							<p>Posts</p>
-						</div>
-					</div>
-				</a>
+					<p class="center">
+						Illustrations by
+						<a href="https://storyset.com/">Storyset</a>
+					</p>
+				</div>
 			</div>
-
-			<p class="center">
-				Illustrations by
-				<a href="https://storyset.com/">Storyset</a>
-			</p>
 		</div>
-	</div>
-</div>
-<%- include('../../components/footer') %>
+
+		<script>
+			const bdTriggers = document.querySelectorAll(".bd-trigger")
+			bdTriggers.forEach((bdTrigger) => {
+				bdTrigger.addEventListener("click", () => {
+					Swal.fire({
+						icon: "info",
+						title: "Working on it. Please be patient.",
+						showConfirmButton: false,
+						didOpen: () => {
+							Swal.showLoading()
+						},
+						allowOutsideClick: () => !Swal.isLoading(),
+					})
+					fetch("/build")
+						.then((response) => {
+							if (response.redirected) {
+								Swal.close()
+								window.location.href = response.url // Redirect to download route if build is successful
+							} else {
+								console.error("Build failed") // Log error if build fails
+							}
+						})
+						.catch((error) => {
+							console.error(`Error: ${error}`)
+						})
+				})
+			})
+		</script>
+		<%- include('../../components/footer') %>
+	</body>
+</html>

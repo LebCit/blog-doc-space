@@ -30,7 +30,7 @@ The card is composed of two parts:
 To change the fallback image :
 
 1. Put your own image under the **images** folder located in the **public** folder.
-2. Open the **singlePostPreview.ejs** file located in the **components** folder under the **views** folder. On line 30, replace the path to the `postFeaturedImage`. In other words, on line 30, replace `graphic-of-white-camera-on-black-background-no-image-available.webp` by the filename of your image.
+2. Open the **singlePostPreview.ejs** file located in the **components** folder under the **views** folder. On line 30, replace the path to the `postFeaturedImage`. In other words, on line 30, replace `white-camera-on-black-background.webp` by the filename of your image.
 
 ### Publishing date & tag(s)
 

@@ -1,4 +1,4 @@
-module.exports = (items, current_page, per_page_items) => {
+export function paginator(items, current_page, per_page_items) {
 	let page = current_page || 1,
 		per_page = per_page_items || 10,
 		offset = (page - 1) * per_page,

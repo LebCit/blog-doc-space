@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A tiny blog and documentation SSG app",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "node functions/build.js",
     "watch": "nodemon -e ejs,css,js,json,md"
@@ -10,9 +11,10 @@
   "author": "LebCit",
   "license": "MIT",
   "dependencies": {
+    "archiver": "^5.3.1",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
-    "glob": "^8.1.0",
+    "formidable": "^3.2.5",
     "gray-matter": "^4.0.3",
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1"

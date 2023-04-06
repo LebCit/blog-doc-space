@@ -1,9 +1,14 @@
-const fs = require("fs")
-const matter = require("gray-matter")
+import { readdir } from "node:fs/promises"
+import matter from "gray-matter"
+import { dirname } from "path"
+import { fileURLToPath } from "url"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-module.exports = () => {
+export async function getPosts() {
 	// Get the posts from their directory
-	const posts = fs.readdirSync(`${__dirname}/../views/posts`).filter((post) => post.endsWith(".md"))
+	const files = await readdir(`${__dirname}/../views/posts`)
+	const posts = files.filter((post) => post.endsWith(".md"))
 	// Set the post content as an empty array
 	const postContent = []
 	// Inject into the post content array the front matter

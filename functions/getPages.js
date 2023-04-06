@@ -1,9 +1,14 @@
-const fs = require("fs")
-const matter = require("gray-matter")
+import { readdir } from "node:fs/promises"
+import matter from "gray-matter"
+import { dirname } from "path"
+import { fileURLToPath } from "url"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-module.exports = () => {
+export async function getPages() {
 	// Get the pages from their directory
-	const pages = fs.readdirSync(`${__dirname}/../views/pages`).filter((page) => page.endsWith(".md"))
+	const files = await readdir(`${__dirname}/../views/pages`)
+	const pages = files.filter((page) => page.endsWith(".md"))
 	// Set the page content as an empty array
 	const pageContent = []
 	// Inject into the page content array the front matter

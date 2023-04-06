@@ -1,127 +1,126 @@
-const router = global.router
+import { Router } from "express"
+const router = Router()
 
-const matter = require("gray-matter")
-const glob = require("glob")
-const getPosts = require("../functions/getPosts")
-const idsInHeadings = require("../functions/addIdsToHeadings")
+import { dirname } from "path"
+import { fileURLToPath } from "url"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+import matter from "gray-matter"
+import markdownIt from "markdown-it"
+import markdownItHighlightjs from "markdown-it-highlightjs"
+import { getFiles } from "../functions/getFiles.js"
+import { getPosts } from "../functions/getPosts.js"
+import { idsInHeadings } from "../functions/idsInHeadings.js"
+
+const viewsFiles = await getFiles("views")
+const posts = await getPosts()
 
 // Settings
-const { siteTitle, addIdsToHeadings, menuLinks, footerCopyright } = require("../config/settings.json")
+import { settings } from "../config/settings.js"
+const { siteTitle, menuLinks, footerCopyright, addIdsToHeadings } = settings
 
-// Find files ending with `.ejs` and `.md` in sub-directories of `views` and ignore `components` and `layouts` sub-directories.
-glob("views/**/*(*.ejs|*.md)", { ignore: ["views/components/*", "views/layouts/*"] }, (err, files) => {
-	if (err) {
-		console.log(err)
-		return
-	}
+const files = viewsFiles.filter((path) => !path.startsWith("views/components") && !path.startsWith("views/layouts"))
 
-	/**
-	 * Glob returns an array of the full path for each file starting from `views` like the following example :
-	 * ['views/pages/myPage.md',...,'views/posts/myPost.md',...,'views/templates/myTemplate.ejs'...].
-	 * To Get an array of the files only, we map() the returned array from Glob (files)
-	 * and split each path by specifying the slash `/` as a separator,
-	 * then we use pop() to extract just the filename with it's extension.
-	 */
-	const filesArray = files.map((file) => file.split("/").pop())
+// Using a route parameter to render each post/page/template on a route matching it's filename
+export const filesRoute = router.get("/:folder/:filename", (req, res) => {
+	// Get the file by searching in the files array for a file matching the request parameters and any extension
+	const fileWithExtension = files.find(
+		(file) => file === `views/${req.params.folder}/${req.params.filename + file.match(/\.[0-9a-z]+$/i)[0]}`
+	)
+	// Get the path of that fileWithExtension by searching in the files array
+	const path = files.find((file) => file.endsWith(fileWithExtension))
 
-	// Using a route parameter to render each post/page/template on a route matching it's filename
-	router.get("/:filename", (req, res) => {
-		// Get the file by searching in filesArray for a file matching the request parameter and any extension
-		const fileWithExtension = filesArray.find(
-			(file) => file === req.params.filename + file.match(/\.[0-9a-z]+$/i)[0]
-		)
-		// Get the path of that fileWithExtension by searching in the files array
-		const path = files.find((file) => file.endsWith(fileWithExtension))
+	// Markdown Files Logic
+	if (fileWithExtension?.endsWith(".md")) {
+		// `?` optional chaining operator to check if the variable is not nullish before accessing it
+		// Read the Markdown file and parse it's front matter
+		const file = matter.read(`${__dirname}/../${path}`)
 
-		// Markdown Files Logic
-		if (fileWithExtension?.endsWith(".md")) {
-			// `?` optional chaining operator to check if the variable is not nullish before accessing it
-			// Read the Markdown file and parse it's front matter
-			const file = matter.read(`${__dirname}/../${path}`)
+		// Convert the Markdown file content to HTML with markdown-it
+		// Allows HTML tags inside the Markdown file, use highlight.js with markdown-it and highlight inline code
+		const md = markdownIt({ html: true }).use(markdownItHighlightjs, { auto: true, inline: true })
+		const content = file.content // Read the Markdown file content
+		const html = md.render(content) // Convert the Markdown file content to HTML
 
-			// Convert the Markdown file content to HTML with markdown-it
-			// Allows HTML tags inside the Markdown file, use highlight.js with markdown-it and highlight inline code
-			const md = require("markdown-it")({ html: true }).use(require("markdown-it-highlightjs"), { inline: true })
-			const content = file.content // Read the Markdown file content
-			const html = md.render(content) // Convert the Markdown file content to HTML
+		const titles = {
+			siteTitle: siteTitle,
+			docTitle: file.data.title,
+			docDescription: file.data.description,
+		}
 
-			const titles = {
-				siteTitle: siteTitle,
-				docTitle: file.data.title,
-				docDescription: file.data.subTitle ? file.data.subTitle : file.data.description,
-			}
-
-			if (path?.startsWith("views/pages/")) {
-				// Render the pagesTemplate for each page and pass it's front matter as a data object into pagesTemplate
-				res.render("layouts/pagesTemplate", {
-					links: menuLinks,
-					titles: titles,
-					title: file.data.title,
-					subTitle: file.data.subTitle,
-					pageContent: addIdsToHeadings ? idsInHeadings(html) : html,
-					footerCopyright: footerCopyright,
-				})
-			} else {
-				// Get the index of each post in the posts array by it's filename
-				const actualPostIndex = getPosts().findIndex((post) => post[0] === `${req.params.filename}.md`)
-				// Get the previous post index while the actual post index is smaller than the posts array length - 1 (posts array length - 1 is the index of the last post)
-				const previousPostIndex = actualPostIndex < getPosts().length - 1 ? actualPostIndex + 1 : null
-				// Get the next post index while the actual post index is greater than 0 (0 is the index of the first post)
-				const nextPostIndex = actualPostIndex > 0 ? actualPostIndex - 1 : null
-				// Get the previous post by it's index while it's not the last post or return null
-				const previousPost =
-					previousPostIndex !== null ? getPosts()[previousPostIndex][0].replace(".md", "") : null
-				// Get the next post by it's index while it's not the first post or return null
-				const nextPost = nextPostIndex !== null ? getPosts()[nextPostIndex][0].replace(".md", "") : null
-				// Get the previous post title by it's index while it's not the last post or return null
-				const previousPostTitle =
-					previousPostIndex !== null ? getPosts()[previousPostIndex][1].data.title : null
-				// Get the next post title while it's not the first post or return null
-				const nextPostTitle = nextPostIndex !== null ? getPosts()[nextPostIndex][1].data.title : null
-
-				// Render the postsTemplate for each post and pass it's front matter as a data object into postsTemplate
-				res.render("layouts/postsTemplate", {
-					links: menuLinks,
-					titles: titles,
-					title: file.data.title,
-					date: file.data.date,
-					description: file.data.description,
-					featuredImage: file.data.featuredImage,
-					featuredImageAltText: file.data.featuredImageAltText,
-					tags: file.data.tags,
-					postContent: addIdsToHeadings ? idsInHeadings(html) : html,
-					previousPost: previousPost,
-					nextPost: nextPost,
-					previousPostTitle: previousPostTitle,
-					nextPostTitle: nextPostTitle,
-					footerCopyright: footerCopyright,
-				})
-			}
-		} else if (path?.startsWith("views/templates/")) {
-			// Render the EJS template
-			res.render(`templates/${fileWithExtension}`, {
-				titles: { siteTitle: siteTitle },
+		if (path?.startsWith("views/pages/")) {
+			// Render the pagesTemplate for each page and pass it's front matter as a data object into pagesTemplate
+			res.render("layouts/base", {
+				mdRoute: true,
+				page: true,
 				links: menuLinks,
+				titles: titles,
+				htmlContent: addIdsToHeadings ? idsInHeadings(html) : html,
+				featuredImage: file.data.featuredImage,
 				footerCopyright: footerCopyright,
 			})
 		} else {
-			const titles = {
-				siteTitle: siteTitle,
-				docTitle: "Page Not Found",
-				docDescription: "The server cannot find the requested resource",
+			// Get the index of each post in the posts array by it's filename
+			const actualPostIndex = posts.findIndex((post) => post[0] === `${req.params.filename}.md`)
+			// Get the previous post index while the actual post index is smaller than the posts array length - 1 (posts array length - 1 is the index of the last post)
+			const previousPostIndex = actualPostIndex < posts.length - 1 ? actualPostIndex + 1 : null
+			// Get the next post index while the actual post index is greater than 0 (0 is the index of the first post)
+			const nextPostIndex = actualPostIndex > 0 ? actualPostIndex - 1 : null
+			// Get the previous post by it's index while it's not the last post or return null
+			const previousPost = previousPostIndex !== null ? posts[previousPostIndex][0].replace(".md", "") : null
+			// Get the next post by it's index while it's not the first post or return null
+			const nextPost = nextPostIndex !== null ? posts[nextPostIndex][0].replace(".md", "") : null
+			// Get the previous post title by it's index while it's not the last post or return null
+			const previousPostTitle = previousPostIndex !== null ? posts[previousPostIndex][1].data.title : null
+			// Get the next post title while it's not the first post or return null
+			const nextPostTitle = nextPostIndex !== null ? posts[nextPostIndex][1].data.title : null
+			// Get the related posts
+			const relatedPostsArray = file.data.relatedPosts
+			let relatedPosts = []
+			if (relatedPostsArray) {
+				relatedPostsArray.forEach((relatedPost) => {
+					relatedPost = posts.filter((post) => post[0] === `${relatedPost}.md`)
+					relatedPosts.push(relatedPost)
+				})
 			}
-			// Render the 404 error page if no file in the pages, posts and templates sub-directories matches the filename request parameter
-			res.status(404).render("layouts/error", {
+
+			// Render the postsTemplate for each post and pass it's front matter as a data object into postsTemplate
+			res.render("layouts/base", {
+				mdRoute: true,
+				post: true,
 				links: menuLinks,
 				titles: titles,
-				headerTitle: "Page Not Found",
-				headerSubtitle: "Nothing to land on here !",
-				imageSrc: "/images/404-not-found-error.png",
-				imageAlt: "Sailor on a 404 mast looking out to sea",
+				date: file.data.date,
+				featuredImage: file.data.featuredImage,
+				tags: file.data.tags,
+				htmlContent: addIdsToHeadings ? idsInHeadings(html) : html,
+				previousPost: previousPost,
+				nextPost: nextPost,
+				previousPostTitle: previousPostTitle,
+				nextPostTitle: nextPostTitle,
+				relatedPosts: relatedPosts ? relatedPosts.flatMap((x) => x) : relatedPosts,
 				footerCopyright: footerCopyright,
 			})
 		}
-	})
+	} else if (path?.startsWith("views/templates/")) {
+		// Render the EJS template
+		res.render(`templates/${fileWithExtension}`)
+	} else {
+		const titles = {
+			siteTitle: siteTitle,
+			docTitle: "Page Not Found",
+			docDescription: "The server cannot find the requested resource",
+			subTitle: "Nothing to land on here !",
+		}
+		// Render the 404 error page if no file in the pages, posts and templates sub-directories matches the filename request parameter
+		res.status(404).render("layouts/base", {
+			errorRoute: true,
+			links: menuLinks,
+			titles: titles,
+			imageSrc: "/images/404-not-found-error.png",
+			imageAlt: "Sailor on a 404 mast looking out to sea",
+			footerCopyright: footerCopyright,
+		})
+	}
 })
-
-module.exports = router

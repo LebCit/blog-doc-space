@@ -4,7 +4,8 @@
 		"body": [
 			"---",
 			"title: $1",
-			"subTitle: $2",
+			"description: $2",
+			"featuredImage: $3",
 			"---",
 			""
 		],

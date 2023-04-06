@@ -1,12 +1,11 @@
-const router = global.router
+import { Router } from "express"
+const router = Router()
 
-const sitemap = require("../functions/sitemap")
+import { sitemap } from "../functions/sitemap.js"
 
 // Render the sitemap on the sitemap route
-router.get("/sitemap", (req, res) => {
+export const sitemapRoute = router.get("/sitemap", (req, res) => {
 	res.set("Content-Type", "text/xml").render("layouts/sitemap", {
 		urls: sitemap(),
 	})
 })
-
-module.exports = router

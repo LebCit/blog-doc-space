@@ -1,0 +1,22 @@
+<% if (locals.page) { %>
+<div><%- htmlContent %></div>
+<% } else { %>
+<p class="post-meta">
+	<span>Posted on</span>
+	<span class="posted-on"><time class="post-date"><%= date %></time></span>
+	<%#
+	<!-- If the post has a `tags` key in his front matter -->
+	%><% if (tags) { %>
+	<br />
+	<%#
+	<!-- If the `tags` value is not empty -->
+	%> <% if (tags.length) { %>
+	<span>Tagged</span>
+	<% } %> <%#
+	<!-- Comment added for readability -->
+	%> <% tags.forEach(tag => { %>
+	<a href="/tags/<%=tag%>" class="post-tag"><%= tag %></a>
+	<% }) %> <% } %>
+</p>
+<div><%- htmlContent %></div>
+<%- include('../components/postsPagination') %> <% } %>

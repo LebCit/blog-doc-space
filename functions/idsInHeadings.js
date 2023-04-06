@@ -4,7 +4,7 @@
  * This function is used for the Markdown pages and posts only since we can add an id to any tag in a template.
  */
 
-module.exports = (str) => {
+export function idsInHeadings(str) {
 	// Regex to match h2 to h6 tags in the string
 	const regex = /<h[2-4](.*?)>(.*?)<\/h[2-4]>/gi
 	// Return all headings from a string as an array with match()
@@ -23,6 +23,7 @@ module.exports = (str) => {
 			if (ids) {
 				let idTag = ids[0] // The curly braces fom the opening one to the closing one `{# my-heading-id}`
 				let idTxt = ids[1] // The id itself `my-heading-id`
+
 				// Replace accented characters, by their non accented letter
 				idTxt = idTxt.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 				/**

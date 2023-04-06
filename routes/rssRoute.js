@@ -1,18 +1,21 @@
-const router = global.router
+import { Router } from "express"
+const router = Router()
 
-const getPosts = require("../functions/getPosts")
-const { siteTitle, siteDescription, siteURL, rssSiteLanguage, rssCopyright } = require("../config/settings.json")
+import { getPosts } from "../functions/getPosts.js"
+const posts = await getPosts()
+
+// Settings
+import { settings } from "../config/settings.js"
+const { siteTitle, siteDescription, siteURL, rssSiteLanguage, rssCopyright } = settings
 
 // Render RSS feed on the rss route
-router.get("/rss", (req, res) => {
+export const rssRoute = router.get("/rss", (req, res) => {
 	res.set("Content-Type", "text/xml").render("layouts/rss", {
 		siteTitle: siteTitle,
 		siteDescription: siteDescription,
 		siteURL: siteURL,
 		rssSiteLanguage: rssSiteLanguage,
 		rssCopyright: rssCopyright,
-		posts: getPosts(),
+		posts: posts,
 	})
 })
-
-module.exports = router

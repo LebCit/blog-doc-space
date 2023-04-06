@@ -12,21 +12,13 @@
 		<% posts.forEach(post => { %>
 			<item>
 				<title><%= post[1].data.title %></title>
-				<% if (locals.build) { %>
-				<link><%= siteURL + post[0].replace(/\.[^/.]+$/, "") + ".html" %></link>
-				<% } else { %>
 				<link><%= siteURL + post[0].replace(/\.[^/.]+$/, "") %></link>
-				<% } %>
 				<% if (post[1].data.description) { %>
 				<description><%= post[1].data.description %></description>
 				<% } %>
 				<% if (post[1].data.tags) { %>
 				<% post[1].data.tags.forEach(tag => { %>
-				<% if (locals.build) { %>
-				<category domain="<%= siteURL + "tags/" + tag + ".html" %>"><%= tag %></category>
-				<% } else { %>
 				<category domain="<%= siteURL + "tags/" + tag %>"><%= tag %></category>
-				<% } %>
 				<% }) %>
 				<% } %>
 				<pubDate><%= post.date.toUTCString() %></pubDate>

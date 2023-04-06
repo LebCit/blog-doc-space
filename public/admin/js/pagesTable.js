@@ -26,7 +26,7 @@ const table = new Tabulator("#admin-table", {
 			headerFilter: true,
 			headerFilterPlaceholder: "Find a Page...",
 		},
-		{ title: "Description", field: "1.data.subTitle" },
+		{ title: "Description", field: "1.data.description" },
 		{
 			formatter: function () {
 				return "<button class='pure-button delete-button'>&#10008; DELETE !</button>"
@@ -51,9 +51,12 @@ const table = new Tabulator("#admin-table", {
 					showCancelButton: true,
 					confirmButtonText: "Delete",
 					didOpen: () => {
+						const deleteForm = document.getElementById("delete-form")
 						const b = Swal.getConfirmButton()
-						b.type = "submit"
-						b.setAttribute("form", "delete-form")
+						b.type = "button"
+						b.addEventListener("click", () => {
+							deleteForm.submit()
+						})
 					},
 				})
 			},

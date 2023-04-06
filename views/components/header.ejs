@@ -1,0 +1,44 @@
+<%#
+<!-- Featured image -->
+%> <% if (locals.featuredImage) { %> <%#
+<!-- Added comment for readability -->
+%>
+<style>
+	.post-header {
+		background-image: url("<%=featuredImage%>");
+	}
+</style>
+<style>
+	.post-header {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+	}
+	.post-header .overlay {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.post-header .overlay h1,
+	.post-header .overlay h2 {
+		color: #fff;
+	}
+	@media (min-width: 48em) {
+		.post-header .overlay {
+			display: inline-block;
+			width: 50%;
+		}
+	}
+</style>
+
+<% } %> <% if (locals.featuredImage) { %>
+<div class="header post-header">
+	<div class="overlay">
+		<h1><%= locals.mainRoute ? titles.siteTitle : titles.docTitle %></h1>
+		<h2><%= locals.tagRoute || locals.errorRoute ? titles.subTitle : titles.docDescription %></h2>
+	</div>
+</div>
+<% } else { %>
+<div class="header">
+	<h1><%= locals.mainRoute ? titles.siteTitle : titles.docTitle %></h1>
+	<h2><%= locals.tagRoute || locals.errorRoute ? titles.subTitle : titles.docDescription %></h2>
+</div>
+<% } %>

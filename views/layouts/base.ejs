@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('../components/head') %>
+	<body>
+		<div id="layout">
+			<%- include('../components/menu') %>
+			<div id="main">
+				<%# Page header %> <%- include('../components/header') %> <%# Page content %>
+				<div <% if (locals.build) { %>
+					id="content" <% } %> class="content"> <%#
+					<!-- Comment added for readability -->
+					%> <% if (locals.mainRoute || locals.archiveRoute || locals.tagRoute) { %> <%#
+					<!-- Index -->
+					%> <%- include('./index') %> <% } %> <%#
+					<!-- Pages and Posts Template -->
+					%> <% if (locals.mdRoute) { %> <%- include('./mdTemplate') %> <% } %> <%#
+					<!-- Comment added for readability -->
+					%> <% if (locals.tagsRoute) { %> <%- include('./postsByTagCount') %> <% } %> <%#
+					<!-- Comment added for readability -->
+					%> <% if (locals.searchRoute) { %> <%- include('./search') %> <% } %> <%#
+					<!-- Comment added for readability -->
+					%> <% if (locals.errorRoute) { %>
+					<img class="pure-img-responsive" src="<%= imageSrc %>" alt="<%= imageAlt %>" />
+					<%- include('../components/backToHome') %> <% } %>
+				</div>
+			</div>
+		</div>
+		<%- include('../components/footer') %>
+	</body>
+</html>

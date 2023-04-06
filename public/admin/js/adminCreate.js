@@ -12,6 +12,7 @@ const editor = new toastui.Editor({
 	hideModeSwitch: true,
 })
 
+const fileForm = document.getElementById("file-form")
 const submitButton = document.getElementById("submit-button")
 
 fileTypeSelect.selectedIndex = 0
@@ -30,8 +31,8 @@ fileTypeSelect.addEventListener("change", (e) => {
 		// SHOW PAGE FRONT MATTER
 		pageFrontMatterDiv.classList.remove("hidden")
 		const pageFrontMatterDivChildren = pageFrontMatterDiv.children
-		for (let input of pageFrontMatterDivChildren) {
-			input = input.lastElementChild
+		for (let index = 0; index < 2; index++) {
+			const input = pageFrontMatterDivChildren[index].lastElementChild
 			input.setAttribute("required", "")
 		}
 
@@ -47,12 +48,17 @@ fileTypeSelect.addEventListener("change", (e) => {
 		editor.setMarkdown(`## The Title
 
 The title of your page will be the \`path\` part of the URL to this page.
-For example, if you give your page the following tile :
-\`title : My awesome page title\`
-The URL to the page will be \`https://domain.name/my-awesome-page-title\`
+For example, if you give your page the following title :
+\`My awesome page title\`
+The URL to the page will be \`https://domain.name/pages/my-awesome-page-title\`
 
 So choose wisely your page's title the first time you create it !
 ⚠️ You'll be able to update the page's title but this will not change the page's URL !
+
+## Optional field
+
+The \`image\` field is optional.
+It means that you can leave it empty, it's totally up to you !
 
 ## The content
 
@@ -66,25 +72,51 @@ Finally, click the submit button to create your new page 😉`)
 
 		// ALERT FOR PAGE CREATION
 		submitButton.addEventListener("click", () => {
-			Swal.fire({
-				title: "Create a page ?!",
-				html: `By clicking on <b>Create</b>,<br>a new <b>page</b> will be created,<br>with the content provided in the editor.`,
-				icon: "question",
-				showCancelButton: true,
-				confirmButtonText: "Create",
-				didOpen: () => {
-					const b = Swal.getConfirmButton()
-					b.type = "submit"
-					b.setAttribute("form", "file-form")
-				},
+			const required = fileForm.querySelectorAll("input[required]")
+			let arr = []
+			required.forEach((el) => {
+				arr.push(el.value)
 			})
+
+			if (arr.includes("")) {
+				required.forEach((el) => {
+					if (el.validity.valueMissing) {
+						el.previousElementSibling.style.display = "block"
+					}
+					el.addEventListener("input", () => {
+						if (el.validity.valueMissing) {
+							el.previousElementSibling.style.display = "block"
+						} else {
+							el.previousElementSibling.style.display = "none"
+						}
+					})
+				})
+			} else {
+				Swal.fire({
+					title: "Create a page ?!",
+					html: `By clicking on <b>Create</b>,<br>a new <b>page</b> will be created,<br>with the content provided in the editor.`,
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonText: "Create",
+					didOpen: () => {
+						const mdContent = editor.getMarkdown()
+						const textArea = document.getElementById("file-contents")
+						textArea.value += mdContent
+						const b = Swal.getConfirmButton()
+						b.type = "button"
+						b.addEventListener("click", () => {
+							fileForm.submit()
+						})
+					},
+				})
+			}
 		})
 	} else if (fileTypeSelectValue === "post") {
 		// HIDE THE PAGE FRONT MATTER
 		pageFrontMatterDiv.classList.add("hidden")
 		const pageFrontMatterDivChildren = pageFrontMatterDiv.children
-		for (let input of pageFrontMatterDivChildren) {
-			input = input.lastElementChild
+		for (let index = 0; index < 2; index++) {
+			const input = pageFrontMatterDivChildren[index].lastElementChild
 			input.removeAttribute("required")
 		}
 
@@ -100,9 +132,9 @@ Finally, click the submit button to create your new page 😉`)
 		editor.setMarkdown(`## The Title
 
 The title of your post will be the \`path\` part of the URL to this post.
-For example, if you give your post the following tile :
-\`title : My awesome post title\`
-The URL to the post will be \`https://domain.name/my-awesome-post-title\`
+For example, if you give your post the following title :
+\`My awesome post title\`
+The URL to the post will be \`https://domain.name/posts/my-awesome-post-title\`
 
 So choose wisely your post's title the first time you create it !
 ⚠️ You'll be able to update the post's title but this will not change the post's URL !
@@ -124,18 +156,44 @@ Finally, click the submit button to create your new page 😉`)
 
 		// ALERT FOR POST CREATION
 		submitButton.addEventListener("click", () => {
-			Swal.fire({
-				title: "Create a post ?!",
-				html: `By clicking on <b>Create</b>,<br>a new <b>post</b> will be created,<br>with the content provided in the editor.`,
-				icon: "question",
-				showCancelButton: true,
-				confirmButtonText: "Create",
-				didOpen: () => {
-					const b = Swal.getConfirmButton()
-					b.type = "submit"
-					b.setAttribute("form", "file-form")
-				},
+			const required = fileForm.querySelectorAll("input[required]")
+			let arr = []
+			required.forEach((el) => {
+				arr.push(el.value)
 			})
+
+			if (arr.includes("")) {
+				required.forEach((el) => {
+					if (el.validity.valueMissing) {
+						el.previousElementSibling.style.display = "block"
+					}
+					el.addEventListener("input", () => {
+						if (el.validity.valueMissing) {
+							el.previousElementSibling.style.display = "block"
+						} else {
+							el.previousElementSibling.style.display = "none"
+						}
+					})
+				})
+			} else {
+				Swal.fire({
+					title: "Create a post ?!",
+					html: `By clicking on <b>Create</b>,<br>a new <b>post</b> will be created,<br>with the content provided in the editor.`,
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonText: "Create",
+					didOpen: () => {
+						const mdContent = editor.getMarkdown()
+						const textArea = document.getElementById("file-contents")
+						textArea.value += mdContent
+						const b = Swal.getConfirmButton()
+						b.type = "button"
+						b.addEventListener("click", () => {
+							fileForm.submit()
+						})
+					},
+				})
+			}
 		})
 	} else {
 		submitButton.classList.add("pure-button-disabled")
@@ -143,8 +201,8 @@ Finally, click the submit button to create your new page 😉`)
 		// HIDE THE PAGE FRONT MATTER
 		pageFrontMatterDiv.classList.add("hidden")
 		const pageFrontMatterDivChildren = pageFrontMatterDiv.children
-		for (let input of pageFrontMatterDivChildren) {
-			input = input.lastElementChild
+		for (let index = 0; index < 2; index++) {
+			const input = pageFrontMatterDivChildren[index].lastElementChild
 			input.removeAttribute("required")
 		}
 
@@ -158,9 +216,33 @@ Finally, click the submit button to create your new page 😉`)
 	}
 })
 
-const fileForm = document.getElementById("file-form")
-const textArea = document.getElementById("file-contents")
-fileForm.addEventListener("submit", () => {
-	const mdContent = editor.getMarkdown()
-	textArea.value += mdContent
-})
+// Alert after successful add of a page or post
+let urlParams = new URLSearchParams(window.location.search)
+
+if (urlParams.has("created")) {
+	let urlParamsValue = urlParams.get("created")
+
+	if (urlParamsValue.includes("pages")) {
+		Swal.fire({
+			titleText: "Success !",
+			text: "Page created !",
+			icon: "success",
+			showConfirmButton: false,
+			allowOutsideClick: false,
+			timer: 2000,
+		}).then(() => {
+			window.location.replace(window.location.origin + urlParamsValue)
+		})
+	} else {
+		Swal.fire({
+			titleText: "Success !",
+			text: "Post created !",
+			icon: "success",
+			showConfirmButton: false,
+			allowOutsideClick: false,
+			timer: 2000,
+		}).then(() => {
+			window.location.replace(window.location.origin + urlParamsValue)
+		})
+	}
+}

@@ -1,5 +1,6 @@
 const menuLinks = document.getElementById("menuLinks")
 const menuLinksObject = JSON.parse(menuLinks.textContent)
+delete menuLinksObject.admin
 menuLinks.remove()
 
 const container = document.getElementById("container")
@@ -34,6 +35,8 @@ for (const link in menuLinksObject) {
 		const clone = template.content.firstElementChild.cloneNode(true)
 		// Add an id to each clone
 		clone.id = `menuLink_${count}`
+		// Add a data-id to each clone
+		clone.dataset.id = `${count}`
 
 		// Select each element in the clone that has an id
 		let cloneElWithId = clone.querySelectorAll("[id]")
@@ -99,6 +102,8 @@ addLinkButton.addEventListener("click", () => {
 	const clone = template.content.firstElementChild.cloneNode(true)
 	// Add an id to the new clone
 	clone.id = `menu-link_${highestIdNumber()}`
+	// Add a data-id to each clone
+	clone.dataset.id = `${highestIdNumber()}`
 
 	// Select each element in the clone that has an id
 	let cloneElWithId = clone.querySelectorAll("[id]")
@@ -128,19 +133,74 @@ addLinkButton.addEventListener("click", () => {
 	removeClone()
 })
 
+const configForm = document.getElementById("config-form")
+const required = configForm.querySelectorAll("*[required]")
+const siteURL = configForm.querySelector("#site-url")
 const submitConfigButton = document.getElementById("submit-config-button")
 
 submitConfigButton.addEventListener("click", () => {
-	Swal.fire({
-		title: "Modify The Configuration ?!",
-		html: `By clicking on <b>Modify</b>,<br>the <b>Configuration</b> will be modified !<br>Double check the footer copyright<br>if you have used HTML in it,<br>otherwise your app will break !`,
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonText: "Modify",
-		didOpen: () => {
-			const b = Swal.getConfirmButton()
-			b.type = "submit"
-			b.setAttribute("form", "config-form")
-		},
+	let arr = []
+	required.forEach((el) => {
+		arr.push(el.value)
 	})
+
+	if (arr.includes("")) {
+		required.forEach((el) => {
+			if (el.validity.valueMissing) {
+				el.previousElementSibling.style.display = "block"
+			}
+			el.addEventListener("input", () => {
+				if (el.validity.valueMissing) {
+					el.previousElementSibling.style.display = "block"
+				} else {
+					el.previousElementSibling.style.display = "none"
+				}
+			})
+		})
+	} else if (!siteURL.value.startsWith("https")) {
+		siteURL.nextElementSibling.style.display = "block"
+		siteURL.addEventListener("input", (e) => {
+			if (!e.target.value.startsWith("https")) {
+				siteURL.nextElementSibling.style.display = "block"
+			} else {
+				siteURL.nextElementSibling.style.display = "none"
+			}
+		})
+	} else {
+		Swal.fire({
+			title: "Modify The Configuration ?!",
+			html: `By clicking on <b>Modify</b>,<br>the <b>Configuration</b> will be modified !<br>Double check the footer copyright<br>if you have used HTML in it,<br>otherwise your app will break !`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Modify",
+			didOpen: () => {
+				const b = Swal.getConfirmButton()
+				b.type = "button"
+				b.addEventListener("click", () => {
+					configForm.submit()
+				})
+			},
+		})
+	}
+})
+
+Sortable.create(container, {
+	animation: 150,
+	ghostClass: "blue-background-class",
+	store: {
+		/**
+		 * Save the order of elements. Called onEnd (when the item is dropped).
+		 * @param {Sortable}  sortable
+		 */
+		set: function (sortable) {
+			let links = container.childNodes
+			links.forEach((link, index) => {
+				let inputs = link.querySelectorAll("input")
+				inputs.forEach((input) => {
+					let inputNumber = input.name.replace(/\D/g, "")
+					input.name = input.name.replace(inputNumber, index + 1)
+				})
+			})
+		},
+	},
 })

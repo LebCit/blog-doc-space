@@ -1,27 +1,28 @@
-const router = global.router
+import { Router } from "express"
+const router = Router()
 
-const getPosts = require("../functions/getPosts")
+import { getPosts } from "../functions/getPosts.js"
+const posts = await getPosts()
 
 // Settings
-const { siteTitle, menuLinks, footerCopyright } = require("../config/settings.json")
+import { settings } from "../config/settings.js"
+const { siteTitle, menuLinks, footerCopyright } = settings
 
 const titles = {
 	siteTitle: siteTitle,
 	docTitle: "Archive",
 	docDescription: "A list of all the posts",
-	title: "Archive",
-	subTitle: "A list of all the posts",
 }
 
-// Render all the posts from the list of posts on the archive route
-router.get("/archive", (req, res) => {
-	res.render("layouts/postsList", {
+// Render all the posts from the list of posts on the archive route.
+export const archiveRoute = router.get("/posts", (req, res) => {
+	res.render("layouts/base", {
+		archiveRoute: true,
 		links: menuLinks,
 		titles: titles,
-		posts: getPosts(),
-		paginated: false, // To hide the pagination component on the archive route
+		posts: posts,
+		paginated: false, // To hide the pagination component on the archive route.
+		featuredImage: "/images/assorted-folders-photo.avif",
 		footerCopyright: footerCopyright,
 	})
 })
-
-module.exports = router

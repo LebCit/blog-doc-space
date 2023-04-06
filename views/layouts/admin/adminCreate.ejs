@@ -1,127 +1,177 @@
-<%- include('../../components/head') %>
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('../../components/head') %>
+	<body>
+		<div id="layout">
+			<%#
+			<!-- Menu -->
+			%> <%- include('../../components/menu') %> <%#
+			<!-- Main container -->
+			%>
+			<div id="main">
+				<%# Page header %>
+				<div class="header">
+					<h1><%= titles.docTitle %></h1>
+					<h2><%= titles.docDescription %></h2>
+				</div>
 
-<div id="layout">
-	<%#
-	<!-- Menu -->
-	%> <%- include('../../components/menu') %> <%#
-	<!-- Main container -->
-	%>
-	<div id="main">
-		<%# Page header %>
-		<div class="header">
-			<h1><%= titles.title %></h1>
-			<h2><%= titles.subTitle %></h2>
+				<%# Page content %>
+				<div class="content" style="max-width: 100%">
+					<form id="file-form" class="pure-form pure-form-stacked" action="/admin-create" method="post">
+						<fieldset>
+							<legend>CREATE A PAGE OR A POST</legend>
+
+							<div class="pure-g">
+								<div class="pure-u-1 pure-u-lg-1-3">
+									<label for="file-type-select">File type</label>
+									<select name="fileType" id="file-type-select" required>
+										<option value="">Please choose a file type</option>
+										<option value="page">Page</option>
+										<option value="post">Post</option>
+										<!-- <option value="template">Template</option> -->
+									</select>
+								</div>
+
+								<%# PAGE FRONT MATTER %>
+								<div id="page-front-matter" class="pure-u-1 hidden pure-u-lg-3-4">
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="page-title-input"><b>Page title* - REQUIRED !</b></label>
+										<span class="pure-form-message" style="display: none">
+											⚠️ Page title cannot be empty ! ⚠️
+										</span>
+										<input
+											type="text"
+											name="pageTitle"
+											id="page-title-input"
+											class="pure-u-1"
+											placeholder="Type your page title here"
+											required
+										/>
+									</div>
+
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="page-description-input">
+											<b>Page description* - REQUIRED !</b>
+										</label>
+										<span class="pure-form-message" style="display: none">
+											⚠️ Page description cannot be empty ! ⚠️
+										</span>
+										<input
+											type="text"
+											name="pageDescription"
+											id="page-description-input"
+											class="pure-u-1"
+											placeholder="Describe your page's content shortly"
+											required
+										/>
+									</div>
+
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="page-image-select">Page image - Optional, better for design</label>
+										<select name="pageImage" id="page-image-select">
+											<option value="">Choose an image from the gallery</option>
+											<% images.forEach(image => { %> <%#
+											<!-- Get the filename of each image -->
+											%> <% const imageName = image.split("/").pop() %>
+											<option value="<%= image %>"><%= imageName %></option>
+											<% }) %>
+										</select>
+									</div>
+								</div>
+
+								<%# POST FRONT MATTER %>
+								<div id="post-front-matter" class="pure-u-1 hidden pure-u-lg-3-4">
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="post-title-input"><b>Post title* - REQUIRED !</b></label>
+										<span class="pure-form-message" style="display: none">
+											⚠️ Post title cannot be empty ! ⚠️
+										</span>
+										<input
+											type="text"
+											name="postTitle"
+											id="post-title-input"
+											class="pure-u-1"
+											placeholder="Type your post title here"
+											required
+										/>
+									</div>
+
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="post-date-input"><b>Post Date* - REQUIRED !</b></label>
+										<span class="pure-form-message" style="display: none">
+											⚠️ A post must have a date ! ⚠️
+										</span>
+										<input
+											type="date"
+											name="postDate"
+											id="post-date-input"
+											class="pure-u-1"
+											required
+										/>
+									</div>
+
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="post-description-input">
+											Post description - Optional, better for SEO
+										</label>
+										<input
+											type="text"
+											name="postDescription"
+											id="post-description-input"
+											class="pure-u-1"
+											placeholder="Describe your post's content shortly"
+										/>
+									</div>
+
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="post-image-select">Post image - Optional, better for design</label>
+										<select name="postImage" id="post-image-select">
+											<option value="">Choose an image from the gallery</option>
+											<% images.forEach(image => { %> <%#
+											<!-- Get the filename of each image -->
+											%> <% const imageName = image.split("/").pop() %>
+											<option value="<%= image %>"><%= imageName %></option>
+											<% }) %>
+										</select>
+									</div>
+
+									<div class="pure-u-1-2 pure-u-sm-1">
+										<label for="post-tags-input">
+											Post tag(s) - Optional, better for categorizing
+										</label>
+										<input
+											type="text"
+											name="postTags"
+											id="post-tags-input"
+											class="pure-u-1"
+											placeholder="Coffee, Mood, Wall-Decor, JS-Party"
+										/>
+									</div>
+								</div>
+
+								<%# TOAST UI EDITOR %>
+								<div id="editor" style="margin: 0.25em 0"></div>
+
+								<%# Hidden textarea to get the content from the above editor %>
+								<div class="pure-u-1" hidden>
+									<textarea
+										name="fileContents"
+										id="file-contents"
+										rows="10"
+										class="pure-input-1"
+									></textarea>
+								</div>
+							</div>
+
+							<button id="submit-button" type="button" class="pure-button pure-button-primary">
+								Submit
+							</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
 		</div>
 
-		<%# Page content %>
-		<div class="content">
-			<form id="file-form" class="pure-form pure-form-stacked" action="/admin-create" method="post">
-				<fieldset>
-					<legend>CREATE A PAGE OR A POST</legend>
-
-					<div class="pure-g">
-						<div class="pure-u-1 pure-u-lg-1-3">
-							<label for="file-type-select">File type</label>
-							<select name="fileType" id="file-type-select" required>
-								<option value="">Please choose a file type</option>
-								<option value="page">Page</option>
-								<option value="post">Post</option>
-								<!-- <option value="template">Template</option> -->
-							</select>
-						</div>
-
-						<%# PAGE FRONT MATTER %>
-						<div id="page-front-matter" class="pure-u-1 hidden">
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="page-title-input"><b>Page title* - REQUIRED !</b></label>
-								<input
-									type="text"
-									name="pageTitle"
-									id="page-title-input"
-									class="pure-u-1"
-									placeholder="Type your page title here"
-								/>
-							</div>
-
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="page-description-input"><b>Page description* - REQUIRED !</b></label>
-								<input
-									type="text"
-									name="pageSubTitle"
-									id="page-description-input"
-									class="pure-u-1"
-									placeholder="Describe your page's content shortly"
-								/>
-							</div>
-						</div>
-
-						<%# POST FRONT MATTER %>
-						<div id="post-front-matter" class="pure-u-1 hidden">
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="post-title-input"><b>Post title* - REQUIRED !</b></label>
-								<input
-									type="text"
-									name="postTitle"
-									id="post-title-input"
-									class="pure-u-1"
-									placeholder="Type your post title here"
-								/>
-							</div>
-
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="post-date-input"><b>Post Date* - REQUIRED !</b></label>
-								<input type="date" name="postDate" id="post-date-input" class="pure-u-1" />
-							</div>
-
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="post-description-input">Post description - Optional, better for SEO</label>
-								<input
-									type="text"
-									name="postDescription"
-									id="post-description-input"
-									class="pure-u-1"
-									placeholder="Describe your post's content shortly"
-								/>
-							</div>
-
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="post-image-input">Post image - Optional, better for design</label>
-								<input
-									type="url"
-									name="postImage"
-									id="post-image-input"
-									class="pure-u-1"
-									placeholder="https://my-post-image.png"
-									pattern="https://.*"
-								/>
-							</div>
-
-							<div class="pure-u-1-2 pure-u-sm-1">
-								<label for="post-tags-input">Post tag(s) - Optional, better for categorizing</label>
-								<input
-									type="text"
-									name="postTags"
-									id="post-tags-input"
-									class="pure-u-1"
-									placeholder="Coffee, Mood, Wall-Decor, JS-Party"
-								/>
-							</div>
-						</div>
-
-						<%# TOAST UI EDITOR %>
-						<div id="editor" style="margin: 0.25em 0"></div>
-
-						<%# Hidden textarea to get the content from the above editor %>
-						<div class="pure-u-1" hidden>
-							<textarea name="fileContents" id="file-contents" rows="10" class="pure-input-1"></textarea>
-						</div>
-					</div>
-
-					<button id="submit-button" type="button" class="pure-button pure-button-primary">Submit</button>
-				</fieldset>
-			</form>
-		</div>
-	</div>
-</div>
-
-<%- include('../../components/footer') %>
+		<%- include('../../components/footer') %>
+	</body>
+</html>
