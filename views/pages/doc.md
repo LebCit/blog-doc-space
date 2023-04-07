@@ -1,7 +1,7 @@
 ---
 title: Install Blog-Doc
 description: Installing and using the app
-featuredImage: 
+featuredImage:
 ---
 
 ## Blog-Doc {# Blog-Doc}
@@ -58,12 +58,31 @@ The Simplest Node.js CMS & SSG !
 
 ## How to install Blog-Doc ? {# installing Blog-Doc}
 
-Blog-Doc is a [Deta Space](https://deta.space/) application.  
-You can install it on your **Personal Cloud** by visiting the [Discovery page of Blog-Doc](https://deta.space/discovery/@lebcit/blocdoc) and click on the **Install on Space** button.
+Blog-Doc is a Deta Space application.  
+You can install it on your Personal Cloud by visiting the [Discovery page of Blog-Doc](https://deta.space/discovery/@lebcit/blocdoc) and click on the **Install on Space** button.
 
-If you want to try Blog-Doc, head over it's [GitHub repository](https://github.com/LebCit/blog-doc-space), download and unzip it to a new folder.  
-Open the folder in your IDE (I use [VS Code](https://code.visualstudio.com/), type in the terminal `npm i` and wait for the installation to finish.  
-Once everything installed, type in the terminal `npm run watch`.
+Blog-Doc is also a `Node.js` app. You should have [Node.js](https://nodejs.org/en/) on your machine.  
+Always go for the **LTS** version. At the time of writing those lines it's 18.12.1 !
+
+If you want to try Blog-Doc, head over it's [Github repository](https://github.com/LebCit/blog-doc-space) and download it.  
+You can also download it's zip by clicking on the following link : [Blog-Doc ZIP](https://github.com/LebCit/blog-doc-space/archive/refs/heads/master.zip).
+
+Once downloaded, extract the zipped folders and files to a new folder and open it in your IDE (I use the one and only [VS Code](https://code.visualstudio.com/)).  
+Then type in the terminal :
+
+```bash
+npm install
+```
+
+After the install, to see what Blog-Doc looks like, type in your terminal the following command :
+
+```bash
+npm run watch
+```
+
+This command will allow you to explore the app in the browser of your choice by visiting [localhost on port 3000](http://localhost:3000).
+
+Blog-Doc comes with some posts and pages. You can now begin to create your own pages and posts from the administration, then remove the existing ones also from the administration.
 
 In Space or locally, I wish you an enjoyable trip with Blog-Doc 🚀
 
@@ -79,7 +98,7 @@ The file behind this trick in Blog-Doc is **build.js**. You can find this file u
 
 ### How does it work ?
 
-If you're using Blog-Doc on Space or on a Node.js server, head over the [Administration page](/admin) and click on the **Build Static Site** card. A zipped folder named **\_site.zip** will be available for you to download. The content of this folder is your static site. Read how to use in the next section.
+If you're using Blog-Doc on Space or on a Node.js server, head over the [Administration page](/admin) and click on the **Build Static Site** card. A zipped folder named **\_site.zip** will be available for you to download. The content of this folder is your static site. Read how to use in it the next section.
 
 If you're using Blog-Doc locally, type the following command in your terminal :
 
@@ -250,7 +269,7 @@ If you wish to disable this feature, set the `addIdsToHeadings` value to `false`
 Finally here !  
 Since Blog-Doc turned into a CMS, I've planned to add a gallery and a way to retrieve images for the pages and posts directly.  
 Now it's almost done. Almost, because there is always space to bring on improvements.  
-For now, you can visit the gallery by hitting the `/admin-gallery` route, or go to the [Administration page ](/admin) and click on the **Gallery** link in the menu or it's card.
+For now, you can visit the gallery by hitting the `/admin-gallery` route, or go to the [Administration page](/admin) and click on the **Gallery** link in the menu or it's card.
 
 In the global spirit of Blog-Doc, [The Galley](/admin-gallery) is pretty simple to use.  
 You'll find a drop zone where you can drop your image(s) or click on it and choose the image(s) you wish to upload.  
