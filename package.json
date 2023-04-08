@@ -1,7 +1,7 @@
 {
   "name": "blog-doc-space",
   "version": "1.0.0",
-  "description": "A tiny blog and documentation SSG app",
+  "description": "The Simplest Node.js CMS & SSG",
   "main": "index.js",
   "type": "module",
   "scripts": {

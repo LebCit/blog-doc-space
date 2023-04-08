@@ -1,6 +1,6 @@
 # Blog-Doc
 
-A tiny blog and documentation SSG app
+The Simplest Node.js CMS & SSG
 
 ## Features ⚡
 
