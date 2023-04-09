@@ -34,7 +34,7 @@
 
 								<%# PAGE FRONT MATTER %>
 								<div id="page-front-matter" class="pure-u-1 hidden pure-u-lg-3-4">
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="page-title-input"><b>Page title* - REQUIRED !</b></label>
 										<span class="pure-form-message" style="display: none">
 											⚠️ Page title cannot be empty ! ⚠️
@@ -49,7 +49,7 @@
 										/>
 									</div>
 
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="page-description-input">
 											<b>Page description* - REQUIRED !</b>
 										</label>
@@ -66,9 +66,9 @@
 										/>
 									</div>
 
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="page-image-select">Page image - Optional, better for design</label>
-										<select name="pageImage" id="page-image-select">
+										<select name="pageImage" id="page-image-select" class="pure-u-1">
 											<option value="">Choose an image from the gallery</option>
 											<% images.forEach(image => { %> <%#
 											<!-- Get the filename of each image -->
@@ -81,7 +81,7 @@
 
 								<%# POST FRONT MATTER %>
 								<div id="post-front-matter" class="pure-u-1 hidden pure-u-lg-3-4">
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="post-title-input"><b>Post title* - REQUIRED !</b></label>
 										<span class="pure-form-message" style="display: none">
 											⚠️ Post title cannot be empty ! ⚠️
@@ -96,7 +96,7 @@
 										/>
 									</div>
 
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="post-date-input"><b>Post Date* - REQUIRED !</b></label>
 										<span class="pure-form-message" style="display: none">
 											⚠️ A post must have a date ! ⚠️
@@ -110,7 +110,7 @@
 										/>
 									</div>
 
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="post-description-input">
 											Post description - Optional, better for SEO
 										</label>
@@ -123,9 +123,9 @@
 										/>
 									</div>
 
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="post-image-select">Post image - Optional, better for design</label>
-										<select name="postImage" id="post-image-select">
+										<select name="postImage" id="post-image-select" class="pure-u-1">
 											<option value="">Choose an image from the gallery</option>
 											<% images.forEach(image => { %> <%#
 											<!-- Get the filename of each image -->
@@ -135,7 +135,7 @@
 										</select>
 									</div>
 
-									<div class="pure-u-1-2 pure-u-sm-1">
+									<div class="pure-u-1 pure-u-md-3-4">
 										<label for="post-tags-input">
 											Post tag(s) - Optional, better for categorizing
 										</label>
