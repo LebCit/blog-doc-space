@@ -8,7 +8,7 @@ const __dirname = dirname(__filename)
 
 import matter from "gray-matter"
 import markdownIt from "markdown-it"
-import markdownItHighlightjs from "markdown-it-highlightjs"
+import markdownItPrism from "markdown-it-prism"
 import { getFiles } from "../functions/getFiles.js"
 import { getPosts } from "../functions/getPosts.js"
 import { idsInHeadings } from "../functions/idsInHeadings.js"
@@ -38,8 +38,8 @@ export const filesRoute = router.get("/:folder/:filename", (req, res) => {
 		const file = matter.read(`${__dirname}/../${path}`)
 
 		// Convert the Markdown file content to HTML with markdown-it
-		// Allows HTML tags inside the Markdown file, use highlight.js with markdown-it and highlight inline code
-		const md = markdownIt({ html: true }).use(markdownItHighlightjs, { auto: true, inline: true })
+		// Allows HTML tags inside the Markdown file, use prism.js with markdown-it and highlight inline code
+		const md = markdownIt({ html: true }).use(markdownItPrism, { highlightInlineCode: true })
 		const content = file.content // Read the Markdown file content
 		const html = md.render(content) // Convert the Markdown file content to HTML
 

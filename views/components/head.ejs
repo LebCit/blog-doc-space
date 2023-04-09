@@ -15,8 +15,9 @@
 
 	<link rel="shortcut icon" href="/icons/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="/css/styles.min.css" />
-	<link rel="stylesheet" href="/css/code-theme.min.css" />
-	<%#
+	<% if (locals.mdRoute) { %>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs-okaidia-theme/prism-okaidia.min.css" />
+	<% } %> <%#
 	<!-- COMMENT ADDED FOR READABILITY. LOADING STYLES AND SCRIPTS DEPENDING ON THE VISITED ROUTE. -->
 	%> <% if (locals.admin || locals.adminTable || locals.adminCreate || locals.adminUpdate || locals.adminConfig ||
 	locals.adminGallery) { %>

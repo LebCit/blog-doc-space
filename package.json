@@ -17,7 +17,7 @@
     "formidable": "^3.2.5",
     "gray-matter": "^4.0.3",
     "markdown-it": "^13.0.1",
-    "markdown-it-highlightjs": "^4.0.1"
+    "markdown-it-prism": "^2.3.0"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.1",
