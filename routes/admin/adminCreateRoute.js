@@ -69,8 +69,12 @@ ${fileContents}`
 		if (fileType === "page") {
 			const createdPageName = pageTitle
 				.toLowerCase()
-				.replace(/[^a-zA-Z0-9-_ ]/g, "")
-				.replace(/\s+/g, "-")
+				.replace(/[^a-zA-Z0-9-_ ]/g, "") // Remove special characters except hyphen and underscore
+				.replace(/_+/g, "-") // Replace any number of underscore by one hyphen
+				.replace(/\s+/g, "-") // Replace any number of space by one hyphen
+				.replace(/^-+/, "") // Remove any number of hyphen at the beginning
+				.replace(/-+/g, "-") // Replace any number of hyphen by one hyphen only
+				.replace(/-+$/, "") // Remove any number of hyphen at the end
 
 			writeFile(`${createdFilePath}/${createdPageName}.md`, pageContents, "utf8").then(() => {
 				res.redirect(`/admin-create?created=/pages/${createdPageName}`)
@@ -78,8 +82,12 @@ ${fileContents}`
 		} else {
 			const createdPostName = postTitle
 				.toLowerCase()
-				.replace(/[^a-zA-Z0-9-_ ]/g, "")
-				.replace(/\s+/g, "-")
+				.replace(/[^a-zA-Z0-9-_ ]/g, "") // Remove special characters except hyphen and underscore
+				.replace(/_+/g, "-") // Replace any number of underscore by one hyphen
+				.replace(/\s+/g, "-") // Replace any number of space by one hyphen
+				.replace(/^-+/, "") // Remove any number of hyphen at the beginning
+				.replace(/-+/g, "-") // Replace any number of hyphen by one hyphen only
+				.replace(/-+$/, "") // Remove any number of hyphen at the end
 
 			writeFile(`${createdFilePath}/${createdPostName}.md`, postContents, "utf8").then(() => {
 				res.redirect(`/admin-create?created=/posts/${createdPostName}`)
