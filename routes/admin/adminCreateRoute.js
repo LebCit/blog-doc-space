@@ -51,7 +51,6 @@ title : ${pageTitle}
 description: ${pageDescription}
 featuredImage: ${pageImage}
 ---
-
 ${fileContents}`
 
 		const postContents = `---
@@ -61,7 +60,6 @@ description: ${postDescription}
 featuredImage: ${postImage}
 tags: [${postTags}]
 ---
-
 ${fileContents}`
 
 		const createdFilePath = `${__dirname}/../../views/${fileType}s`
