@@ -17,6 +17,7 @@ The Simplest Node.js CMS & SSG
 -   Tags list route ![Bookmarks icon](/public/icons/bookmarks.svg)
 -   Individual route for each tag ![Bookmark icon](/public/icons/bookmark.svg)
 -   Titles & Meta Descriptions ![H1 icon](/public/icons/h-1.svg)
+-   Drag and drop your menu links to sort them ![Menu order icon](/public/icons/menu-order.svg)
 -   [RSS feed](#rss) ![RSS icon](/public/icons/rss.svg)
 -   [Sitemap](#sitemap) ![Sitemap icon](/public/icons/sitemap.svg)
 -   [Search](#search) ![Search icon](/public/icons/search.svg)
