@@ -1,9 +1,8 @@
 ---
 title: Install Blog-Doc
 description: Installing and using the app
-featuredImage:
+featuredImage: 
 ---
-
 ## Blog-Doc {# Blog-Doc}
 
 The Simplest Node.js CMS & SSG !
@@ -62,7 +61,7 @@ The Simplest Node.js CMS & SSG !
 Blog-Doc is a Deta Space application.  
 You can install it on your Personal Cloud by visiting the [Discovery page of Blog-Doc](https://deta.space/discovery/@lebcit/blocdoc) and click on the **Install on Space** button.
 
-Blog-Doc is also a `Node.js` app. You should have [Node.js](https://nodejs.org/en/) on your machine.  
+Blog-Doc is also a `Node.js`{language=markup} app. You should have [Node.js](https://nodejs.org/en/) on your machine.  
 Always go for the **LTS** version. At the time of writing those lines it's 18.12.1 !
 
 If you want to try Blog-Doc, head over it's [Github repository](https://github.com/LebCit/blog-doc-space) and download it.  
@@ -95,13 +94,13 @@ When you try to reproduce an idea like a CMS or an SSG, you learn a lot and espe
 
 Rendering a static file out of a template is an easy task, but turning different routes working together to produce a Node.js app into some folders and a lot of files to generate a static site is not an easy one !
 
-The file behind this trick in Blog-Doc is **build.js**. You can find this file under the **functions** folder. It's very similar to the [filesRoute.js](/posts/the-files-route). The difference between the two is that **filesRoute.js** renders the posts, pages and templates in the Node.js app while **build.js** generates out of those posts, pages and templates a ready to use static site.
+The file behind this trick in Blog-Doc is `build.js`{language=markup} You can find this file under the `functions`{language=markup} folder. It's very similar to the [filesRoute.js](/posts/the-files-route). The difference between the two is that `filesRoute.js`{language=markup} renders the posts, pages and templates in the Node.js app while `build.js`{language=markup} generates out of those posts, pages and templates a ready to use static site.
 
 ### How does it work ?
 
-If you're using Blog-Doc on Space or on a Node.js server, head over the [Administration page](/admin) and click on the **Build Static Site** card. A zipped folder named **\_site.zip** will be available for you to download. The content of this folder is your static site. Read how to use in it the next section.
+If you're using Blog-Doc on Space or on a Node.js server, head over the [Administration page](/admin) and click on the **Build Static Site** card. A zipped folder named `_site.zip`{language=markup} will be available for you to download. The content of this folder is your static site. Read how to use in it the next section.
 
-If you're using Blog-Doc locally, type the following command in your terminal :
+If you're using Blog-Doc locally, you can generate the static site from the CMS as described above, or type the following command in your terminal :
 
 ```bash
 npm run build
@@ -147,13 +146,13 @@ The implementation can be found on the following [GitHub repository](https://git
 
 ⚠️ You **MUST** provide the **live URL** of your site in the [Settings page](/admin-config#site-url) by modifying the `siteURL` value before deploying the application.
 
-At build time, a `rss.xml` file is generated in the **\_site** folder.  
+At build time, a `rss.xml`{language=markup} file is generated in the **\_site** folder.  
 This file takes the live URL that you provided to generate the correct links for your feed.  
-_Nota Bene : the live URL **MUST** end with a slash `/` !_
+_Nota Bene : the live URL **MUST** end with a slash `/`{language=markup} !_
 
-Of course, you **MUST** also modify `siteTitle`, `siteDescription` and `rssCopyright` in the [Settings page](/admin-config).  
-You **SHOULD** replace the `siteTitle`, `siteDescription` and `rssCopyright` **values** with the ones of your site.  
-You **MAY** replace the `rssSiteLanguage` value with the language of your site.  
+Of course, you **MUST** also modify `siteTitle`{language=markup}, `siteDescription`{language=markup} and `rssCopyright`{language=markup} in the [Settings page](/admin-config).  
+You **SHOULD** replace the `siteTitle`{language=markup}, `siteDescription`{language=markup} and `rssCopyright`{language=markup} **values** with the ones of your site.  
+You **MAY** replace the `rssSiteLanguage`{language=markup} value with the language of your site.  
 A list of available language codes can be found on the [RSS language codes page](https://www.rssboard.org/rss-language-codes).
 
 Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://vivaldi.com/)
@@ -167,22 +166,22 @@ Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://
 
 ## Sitemap {# sitemap}
 
-Like the RSS feed, you **MUST** provide the **live URL** of your site in the [Settings page](/admin-config#site-url) by modifying the `siteURL` value to generate the correct links for each page, post, tag and template as well as for the blog routes.  
-Please remember that the **Site URL** **MUST** end with a slash `/` !
+Like the RSS feed, you **MUST** provide the **live URL** of your site in the [Settings page](/admin-config#site-url) by modifying the `siteURL`{language=markup} value to generate the correct links for each page, post, tag and template as well as for the blog routes.  
+Please remember that the **Site URL** **MUST** end with a slash `/`{language=markup} !
 
-You can check the sitemap of your site under the `/sitemap` route.  
-At build time, a `sitemap.xml` is generated in the **\_site** folder.
+You can check the sitemap of your site under the `/sitemap`{language=markup} route.  
+At build time, a `sitemap.xml`{language=markup} is generated in the **\_site** folder.
 
 ## Search {# search feature}
 
 Blog-Doc has a built-in search feature.  
 The search functionality allows a user to make a research on **the titles** and **the contents** of the posts.
 
-You can check the search of your site under the `/search` route.  
-At build time, a `posts.json` and a `search.js` are generated in **\_site/js**.  
-Also, at build time, an `index.html` is generated under the `search` folder in the **\_site** folder.
+You can check the search of your site under the `/search`{language=markup} route.  
+At build time, a `posts.json`{language=markup} and a `search.js`{language=markup} are generated in **\_site/js**.  
+Also, at build time, an `index.html`{language=markup} is generated under the **search** folder in the **\_site** folder.
 
-You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature` a value of `false` in the [Settings page](/admin-config#search-feature).
+You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature`{language=markup} a value of `false`{language=markup} in the [Settings page](/admin-config#search-feature).
 
 To see it in action, take a look at :
 
@@ -223,7 +222,7 @@ Visit the [supported languages by Prism](https://prismjs.com/#supported-language
 
 ## Ids for H2 till H4 in Markdown {# ids in markdown}
 
-Adding an `id` attribute to a heading tag, H2 till H4 only, is an optional activated feature by default.
+Adding an `id`{language=markup} attribute to a heading tag, H2 till H4 only, is an optional activated feature by default.
 
 This feature was built with edge cases and typing typos in mind :
 
@@ -237,7 +236,7 @@ This feature was built with edge cases and typing typos in mind :
 -   Replace any number of hyphen by one hyphen only
 -   Remove any number of hyphen at the end
 
-To add an `id`, add a curly braces with a hashtag followed by the id's text.  
+To add an `id`{language=markup}, add a curly braces with a hashtag followed by the id's text.  
 The following examples will give you a better idea :
 
 ```markdown
@@ -268,7 +267,7 @@ between the words or at the end, the HTML output will still be :
 <h2 id="my-awesome-h2-title">My awesome H2 title</h2>
 ```
 
-Anything before the **last** hashtag is ignored and special characters in the id's text are ignored too :
+Anything before the **last** hashtag `#`{language=markup} is ignored and special characters in the id's text are ignored too :
 
 ```markdown
 ## My awesome H2 title { /!@# a comment ?%^& # -my= awesome+ h2 \ ( title ) | }
@@ -276,7 +275,7 @@ Anything before the **last** hashtag is ignored and special characters in the id
 The HTML output will be : <h2 id="my-awesome-h2-title">My awesome H2 title</h2>
 ```
 
-⚠️ Please be aware that the following special characters, if used **inside the id's text** after the **last** hashtag, will not be deleted :
+⚠️ Please be aware that the following special characters, if used **inside the id's text** after the **last** hashtag `#`{language=markup}, will not be deleted :
 
 ```txt
 & will be parsed to amp (ampersand)
@@ -295,14 +294,14 @@ The HTML output will be : <h2 id="honey-amp-bees">Honey & Bees</h2>
 
 At build time, predefined ids will be generated into the HTML of the static site.
 
-If you wish to disable this feature, set the `addIdsToHeadings` value to `false` in the [Settings page](/admin-config#ids-for-headings).
+If you wish to disable this feature, set the `addIdsToHeadings`{language=markup} value to `false`{language=markup} in the [Settings page](/admin-config#ids-for-headings).
 
 ## The Gallery ! {# gallery }
 
 Finally here !  
 Since Blog-Doc turned into a CMS, I've planned to add a gallery and a way to retrieve images for the pages and posts directly.  
 Now it's almost done. Almost, because there is always space to bring on improvements.  
-For now, you can visit the gallery by hitting the `/admin-gallery` route, or go to the [Administration page](/admin) and click on the **Gallery** link in the menu or it's card.
+For now, you can visit the gallery by hitting the `/admin-gallery`{language=markup} route, or go to the [Administration page](/admin) and click on the **Gallery** link in the menu or it's card.
 
 In the global spirit of Blog-Doc, [The Galley](/admin-gallery) is pretty simple to use.  
 You'll find a drop zone where you can drop your image(s) or click on it and choose the image(s) you wish to upload.  
