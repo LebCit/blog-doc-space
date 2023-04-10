@@ -5,7 +5,7 @@ The Simplest Node.js CMS & SSG
 ## Features ⚡
 
 -   Administrate your app from the front-end ! ![Settings icon](/public/icons/settings.svg)
--   [Gallery](#gallery) to upload your images ![Image upload icon](/public/icons/photo-up.svg)
+-   [Gallery](#the-gallery) to upload your images ![Image upload icon](/public/icons/photo-up.svg)
 -   Create, Read, Update & Delete your pages and posts ![Pencil icon](/public/icons/pencil.svg)
 -   Paginated blog with chosen number of posts per page ![Left and right arrows icon](/public/icons/arrows-left-right.svg)
 -   Posts pagination to navigate between your posts ![Arrow left and right icon](/public/icons/arrow-left-right.svg)
@@ -286,7 +286,7 @@ At build time, predefined ids will be generated into the HTML of the static site
 
 If you wish to disable this feature, set the `addIdsToHeadings` value to `false` in the Settings page.
 
-## The Gallery ! {# gallery }
+## The Gallery !
 
 Finally here !  
 Since Blog-Doc turned into a CMS, I've planned to add a gallery and a way to retrieve images for the pages and posts directly.  
