@@ -21,6 +21,7 @@ The Simplest Node.js CMS & SSG
 -   [RSS feed](#rss) ![RSS icon](/public/icons/rss.svg)
 -   [Sitemap](#sitemap) ![Sitemap icon](/public/icons/sitemap.svg)
 -   [Search](#search) ![Search icon](/public/icons/search.svg)
+-   [Code highlighting](#code-highlighting) with Prism ![Highlight icon](/public/icons/highlight.svg)
 -   [Ids for H2 till H4 in Markdown](#ids-for-h2-till-h4-in-markdown) ![Hash icon](/public/icons/hash.svg)
 -   Hot reloading in development mode ![Flame icon](/public/icons/flame.svg)
 
@@ -176,6 +177,38 @@ To see it in action, take a look at :
 
 -   [Search in Node.js app](https://blocdoc-1-v3476171.deta.app/search)
 -   [Search in static site](https://blog-doc-static-express.deta.dev/search.html) THIS WILL BE REPLACED BY AN EXAMPLE ON SPACE !
+
+## Code highlighting
+
+Blog-Doc uses [Prism](https://prismjs.com/) to highlight **inline code** and **block of code**.
+
+To write **inline code**, surround your code with backticks <code>\`\`</code>.  
+To highlight it, provide the language for the **inline code** by putting after it a curly braces with the alias of the language of the code.  
+The following examples will give you a better idea.  
+Assuming this `css` line `p : color { red }`, to highlight it you'll write <code>\`p { color: red }\`{language=css}</code>.  
+The code is surrounded with backticks <code>\`\`</code> and followed by `{language=alias of code language}`.
+
+To write a **block of code**, surround your block with a pair of 3 backticks <code>\`\`\`</code>.  
+To highlight it, provide the alias of the language for the block just after the first 3 backticks.  
+We'll take the previous example and highlight it as a block :
+
+<pre><code>
+```css
+p { color: red }
+```
+</code></pre>
+
+We'll get the following output :
+
+```css
+p {
+	color: red;
+}
+```
+
+⚠️ **The alias of the code language**, inline or block, **is always lowercase** ⚠️
+
+Visit the [supported languages by Prism](https://prismjs.com/#supported-languages) to get the correct alias if you're unsure.
 
 ## Ids for H2 till H4 in Markdown
 

@@ -27,6 +27,7 @@ The Simplest Node.js CMS & SSG !
 -   RSS feed ![RSS icon](/public/icons/rss.svg)
 -   Sitemap ![Sitemap icon](/public/icons/sitemap.svg)
 -   Search ![Search icon](/public/icons/search.svg)
+-   Code highlighting with [Prism](https://prismjs.com/) ![Highlight icon](/public/icons/highlight.svg)
 -   Ids for H2 till H4 in Markdown ![Hash icon](/public/icons/hash.svg)
 -   Hot reloading in development mode ![Flame icon](/public/icons/flame.svg)
 
