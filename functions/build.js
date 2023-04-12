@@ -31,6 +31,10 @@ const {
 	siteURL,
 	siteDescription,
 	featuredImage,
+	archiveImage,
+	tagsImage,
+	tagImage,
+	searchImage,
 	postsPerPage,
 	postPreviewFallbackImage,
 	rssSiteLanguage,
@@ -229,6 +233,7 @@ async function build() {
 				titles: titles,
 				posts: posts,
 				paginated: false, // To hide the pagination component on the archive route.
+				featuredImage: archiveImage,
 				postPreviewFallbackImage: postPreviewFallbackImage,
 				footerCopyright: footerCopyright,
 			})
@@ -250,7 +255,7 @@ async function build() {
 				links: menuLinks,
 				titles: titles,
 				postsByTagCount: postsByTagCount(),
-				featuredImage: "/images/pile-of-assorted-color-papers-photo.avif",
+				featuredImage: tagsImage,
 				footerCopyright: footerCopyright,
 			})
 			// Create html file for the tags route.
@@ -287,6 +292,7 @@ async function build() {
 						titles: titles,
 						posts: postsByTag,
 						paginated: false, // To hide the pagination component on any requested tag route
+						featuredImage: tagImage,
 						postPreviewFallbackImage: postPreviewFallbackImage,
 						footerCopyright: footerCopyright,
 					})
@@ -350,6 +356,7 @@ async function build() {
 				searchRoute: true,
 				links: menuLinks,
 				titles: titles,
+				featuredImage: searchImage,
 				postPreviewFallbackImage: postPreviewFallbackImage,
 				footerCopyright: footerCopyright,
 			})
