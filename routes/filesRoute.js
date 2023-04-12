@@ -108,8 +108,14 @@ export const filesRoute = router.get("/:folder/:filename", (req, res) => {
 			})
 		}
 	} else if (path?.startsWith("views/templates/")) {
+		// Nota Bene : path === fileWithExtension !
+		const templateFileName = fileWithExtension.split("/").pop()
 		// Render the EJS template
-		res.render(`templates/${fileWithExtension}`)
+		res.render(`templates/${templateFileName}`, {
+			links: menuLinks,
+			titles: { siteTitle: siteTitle }, // FOR THE MENU !
+			footerCopyright: footerCopyright,
+		})
 	} else {
 		const titles = {
 			siteTitle: siteTitle,
