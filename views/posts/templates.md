@@ -88,6 +88,7 @@ Otherwise, Blog-Doc comes with an identical template to the previous code. You c
 
 If you followed the articles related to [Blog-Doc](/tags/Blog-Doc) from the beginning till this one, you now have a solid understanding of how everything works under the hood, how the components are displayed on the front-end, how the posts, pages and templates files are rendered on the front-end, and how to use them.
 
-You can take Blog-Doc as a prototype and modify it totally to use it with another design and/or another template language.
+You can take Blog-Doc as a prototype and modify it totally to use it with another design and/or another template language.  
+**As a proof of concept, I've rebuild [my own blog](https://lebcit.github.io/) with Blog-Doc** ❤️
 
 I really hope that this app will be useful in any way for a lot of people out there, I'm considering it as my personal contribution to the Node.js, Express, EJS and Markdown communities.
