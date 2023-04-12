@@ -90,6 +90,29 @@
 								<% }) %> <% } %>
 							</select>
 
+							<label for="archive-image-select">Site Archive image - Optional, better for design !</label>
+							<select name="archiveImage" id="archive-image-select">
+								<option value="">Choose an image from the gallery</option>
+								<% if (settings.archiveImage) { %>
+								<option value="<%= settings.archiveImage %>" selected>
+									<%= settings.archiveImage.split("/").pop() %>
+								</option>
+								<% let otherImages = images.filter(image => image !== settings.archiveImage) %><%#
+								<!-- Display the other images from the gallery -->
+								%> <% otherImages.forEach(image => { %> <%#
+								<!-- Get the filename of each other image -->
+								%> <% const otherImageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= otherImageName %></option>
+								<% }) %> <%#
+								<!-- If the post doesn't have an archiveImage -->
+								%> <% } else { %> <%#
+								<!-- Comment added for readability -->
+								%> <% images.forEach(image => { %> <%#
+								<!-- Get the filename of each image -->
+								%> <% const imageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= imageName %></option>
+								<% }) %> <% } %>
+							</select>
 							<label for="posts-per-page"><b>Posts per page* - REQUIRED !</b></label>
 							<input
 								type="number"

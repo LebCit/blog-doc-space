@@ -6,7 +6,7 @@ const posts = await getPosts()
 
 // Settings
 import { settings } from "../config/settings.js"
-const { siteTitle, menuLinks, footerCopyright } = settings
+const { siteTitle, menuLinks, archiveImage, postPreviewFallbackImage, footerCopyright } = settings
 
 const titles = {
 	siteTitle: siteTitle,
@@ -22,7 +22,7 @@ export const archiveRoute = router.get("/posts", (req, res) => {
 		titles: titles,
 		posts: posts,
 		paginated: false, // To hide the pagination component on the archive route.
-		featuredImage: "/images/assorted-folders-photo.avif",
+		featuredImage: archiveImage,
 		footerCopyright: footerCopyright,
 	})
 })
