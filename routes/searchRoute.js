@@ -63,6 +63,7 @@ export const searchRoute = router
 				resultLength: resultLength,
 				results: true,
 				featuredImage: searchImage,
+				postPreviewFallbackImage: postPreviewFallbackImage,
 				paginated: false,
 				footerCopyright: footerCopyright,
 			})

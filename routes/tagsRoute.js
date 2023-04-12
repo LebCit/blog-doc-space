@@ -47,6 +47,7 @@ export const tagsRoute = router
 				posts: postsByTag,
 				paginated: false, // To hide the pagination component on any requested tag route
 				featuredImage: tagImage,
+				postPreviewFallbackImage: postPreviewFallbackImage,
 				footerCopyright: footerCopyright,
 			})
 		} else {

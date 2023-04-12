@@ -23,6 +23,7 @@ export const archiveRoute = router.get("/posts", (req, res) => {
 		posts: posts,
 		paginated: false, // To hide the pagination component on the archive route.
 		featuredImage: archiveImage,
+		postPreviewFallbackImage: postPreviewFallbackImage,
 		footerCopyright: footerCopyright,
 	})
 })

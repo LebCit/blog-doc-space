@@ -8,7 +8,15 @@ const posts = await getPosts()
 
 // Settings
 import { settings } from "../config/settings.js"
-const { siteTitle, siteDescription, featuredImage, menuLinks, postsPerPage, footerCopyright } = settings
+const {
+	siteTitle,
+	siteDescription,
+	featuredImage,
+	menuLinks,
+	postsPerPage,
+	postPreviewFallbackImage,
+	footerCopyright,
+} = settings
 
 const paginatedPosts = paginator(posts, 1, postsPerPage) // Paginate all the posts. Set the first page to 1 and X posts per page.
 const newestPosts = paginatedPosts.data // Get the first X posts.
@@ -33,6 +41,7 @@ export const mainRoute = router
 			lastPage: lastPage,
 			paginated: postsLength > postsPerPage ? true : false, // To display or not the pagination component on the main route.
 			featuredImage: featuredImage,
+			postPreviewFallbackImage: postPreviewFallbackImage,
 			footerCopyright: footerCopyright,
 		})
 	})
@@ -54,6 +63,7 @@ export const mainRoute = router
 			lastPage: lastPage,
 			paginated: true, // To display the pagination component on each blog page route
 			featuredImage: featuredImage,
+			postPreviewFallbackImage: postPreviewFallbackImage,
 			footerCopyright: footerCopyright,
 		})
 	})

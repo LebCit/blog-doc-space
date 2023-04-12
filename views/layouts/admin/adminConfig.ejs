@@ -199,6 +199,27 @@
 								required
 							/>
 
+							<label for="post-preview-fallback-image-select">
+								<b>Post preview fallback image - REQUIRED !</b>
+							</label>
+							<span class="pure-form-message" style="display: none">
+								⚠️ Please choose an image from the gallery ! ⚠️
+							</span>
+							<select name="postPreviewFallbackImage" id="post-preview-fallback-image-select" required>
+								<option value="">Choose an image from the gallery</option>
+								<option value="<%= settings.postPreviewFallbackImage %>" selected>
+									<%= settings.postPreviewFallbackImage.split("/").pop() %>
+								</option>
+								<% let otherImages = images.filter(image => image !== settings.postPreviewFallbackImage)
+								%><%#
+								<!-- Display the other images from the gallery -->
+								%> <% otherImages.forEach(image => { %> <%#
+								<!-- Get the filename of each other image -->
+								%> <% const otherImageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= otherImageName %></option>
+								<% }) %>
+							</select>
+
 							<label for="rss-site-language"><b>RSS site language* - REQUIRED !</b></label>
 							<span class="pure-form-message" style="display: none">
 								⚠️ RSS site language cannot be empty ! ⚠️
