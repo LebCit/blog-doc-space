@@ -6,7 +6,7 @@ import { postsByTagList } from "../functions/postsByTagList.js"
 
 // Settings
 import { settings } from "../config/settings.js"
-const { siteTitle, menuLinks, footerCopyright } = settings
+const { siteTitle, menuLinks, tagsImage, tagImage, postPreviewFallbackImage, footerCopyright } = settings
 
 // Render all the tags from the list of posts on the postsByTagCount route
 export const tagsRoute = router
@@ -22,7 +22,7 @@ export const tagsRoute = router
 			links: menuLinks,
 			titles: titles,
 			postsByTagCount: postsByTagCount(),
-			featuredImage: "/images/pile-of-assorted-color-papers-photo.avif",
+			featuredImage: tagsImage,
 			footerCopyright: footerCopyright,
 		})
 	})
@@ -46,7 +46,7 @@ export const tagsRoute = router
 				titles: titles,
 				posts: postsByTag,
 				paginated: false, // To hide the pagination component on any requested tag route
-				featuredImage: "/images/assorted-color-sticky-notes-photo.avif",
+				featuredImage: tagImage,
 				footerCopyright: footerCopyright,
 			})
 		} else {

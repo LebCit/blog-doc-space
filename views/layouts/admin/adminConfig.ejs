@@ -113,6 +113,54 @@
 								<option value="<%= image %>"><%= imageName %></option>
 								<% }) %> <% } %>
 							</select>
+
+							<label for="tags-image-select">Site Tags image - Optional, better for design !</label>
+							<select name="tagsImage" id="tags-image-select">
+								<option value="">Choose an image from the gallery</option>
+								<% if (settings.tagsImage) { %>
+								<option value="<%= settings.tagsImage %>" selected>
+									<%= settings.tagsImage.split("/").pop() %>
+								</option>
+								<% let otherImages = images.filter(image => image !== settings.tagsImage) %><%#
+								<!-- Display the other images from the gallery -->
+								%> <% otherImages.forEach(image => { %> <%#
+								<!-- Get the filename of each other image -->
+								%> <% const otherImageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= otherImageName %></option>
+								<% }) %> <%#
+								<!-- If the post doesn't have a tagsImage -->
+								%> <% } else { %> <%#
+								<!-- Comment added for readability -->
+								%> <% images.forEach(image => { %> <%#
+								<!-- Get the filename of each image -->
+								%> <% const imageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= imageName %></option>
+								<% }) %> <% } %>
+							</select>
+
+							<label for="tag-image-select">Site Tag image - Optional, better for design !</label>
+							<select name="tagImage" id="tag-image-select">
+								<option value="">Choose an image from the gallery</option>
+								<% if (settings.tagImage) { %>
+								<option value="<%= settings.tagImage %>" selected>
+									<%= settings.tagImage.split("/").pop() %>
+								</option>
+								<% let otherImages = images.filter(image => image !== settings.tagImage) %><%#
+								<!-- Display the other images from the gallery -->
+								%> <% otherImages.forEach(image => { %> <%#
+								<!-- Get the filename of each other image -->
+								%> <% const otherImageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= otherImageName %></option>
+								<% }) %> <%#
+								<!-- If the post doesn't have a tagImage -->
+								%> <% } else { %> <%#
+								<!-- Comment added for readability -->
+								%> <% images.forEach(image => { %> <%#
+								<!-- Get the filename of each image -->
+								%> <% const imageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= imageName %></option>
+								<% }) %> <% } %>
+							</select>
 							<label for="posts-per-page"><b>Posts per page* - REQUIRED !</b></label>
 							<input
 								type="number"
