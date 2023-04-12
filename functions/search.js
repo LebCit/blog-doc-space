@@ -2,6 +2,10 @@
 const searchInput = document.getElementById("searchInput")
 searchInput.focus()
 
+const postPreviewFallbackImageSpan = document.getElementById("post-preview-fallback-image")
+const postPreviewFallbackImage = JSON.parse(postPreviewFallbackImageSpan.textContent)
+postPreviewFallbackImageSpan.remove()
+
 // Fetch the posts from posts.json
 fetch("/js/posts.json")
 	.then((response) => response.json())
@@ -58,9 +62,9 @@ fetch("/js/posts.json")
 				// Define the image path depending on the postFeaturedImage
 				let imagePath
 				if (!postFeaturedImage) {
-					imagePath = "/images/white-camera-on-black-background.webp"
+					imagePath = postPreviewFallbackImage
 				} else {
-					imagePath = `${postFeaturedImage}`
+					imagePath = postFeaturedImage
 				}
 
 				// Define an empty string that will hold the tag(s) if any
@@ -70,7 +74,7 @@ fetch("/js/posts.json")
 				if (postTags) {
 					// Define the markup of each tag
 					postTags.forEach((tag) => {
-						tagLink = `<span class="post-tag"><a href="/tags/${tag}">${tag}</a></span> `
+						tagLink = `<li class="post-tag"><a href="/tags/${tag}">${tag}</a></li> `
 						// Add each tag markup to the tagsLinks
 						tagsLinks += tagLink
 					})

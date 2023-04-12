@@ -32,6 +32,7 @@ const {
 	siteDescription,
 	featuredImage,
 	postsPerPage,
+	postPreviewFallbackImage,
 	rssSiteLanguage,
 	rssCopyright,
 	menuLinks,
@@ -181,6 +182,7 @@ async function build() {
 				lastPage: lastPage,
 				paginated: postsLength > postsPerPage ? true : false,
 				featuredImage: featuredImage,
+				postPreviewFallbackImage: postPreviewFallbackImage,
 				footerCopyright: footerCopyright,
 			})
 			// Create html file for the main route.
@@ -204,6 +206,7 @@ async function build() {
 					lastPage: lastPage,
 					paginated: true, // To display the pagination component on each blog page route
 					featuredImage: featuredImage,
+					postPreviewFallbackImage: postPreviewFallbackImage,
 					footerCopyright: footerCopyright,
 				})
 				// Create html file for each page after the main route.
@@ -226,7 +229,7 @@ async function build() {
 				titles: titles,
 				posts: posts,
 				paginated: false, // To hide the pagination component on the archive route.
-				featuredImage: "/images/assorted-folders-photo.avif",
+				postPreviewFallbackImage: postPreviewFallbackImage,
 				footerCopyright: footerCopyright,
 			})
 			// Create html file for the archive route.
@@ -284,7 +287,7 @@ async function build() {
 						titles: titles,
 						posts: postsByTag,
 						paginated: false, // To hide the pagination component on any requested tag route
-						featuredImage: "/images/assorted-color-sticky-notes-photo.avif",
+						postPreviewFallbackImage: postPreviewFallbackImage,
 						footerCopyright: footerCopyright,
 					})
 					// Create html file for each tag.
@@ -347,7 +350,7 @@ async function build() {
 				searchRoute: true,
 				links: menuLinks,
 				titles: titles,
-				featuredImage: "/images/brown-and-silver-telescope-near-water-photo.avif",
+				postPreviewFallbackImage: postPreviewFallbackImage,
 				footerCopyright: footerCopyright,
 			})
 			// Create html file for the search route.
