@@ -161,6 +161,31 @@
 								<option value="<%= image %>"><%= imageName %></option>
 								<% }) %> <% } %>
 							</select>
+
+							<label for="search-image-select">Site Search image - Optional, better for design !</label>
+							<select name="searchImage" id="search-image-select">
+								<option value="">Choose an image from the gallery</option>
+								<% if (settings.searchImage) { %>
+								<option value="<%= settings.searchImage %>" selected>
+									<%= settings.searchImage.split("/").pop() %>
+								</option>
+								<% let otherImages = images.filter(image => image !== settings.searchImage) %><%#
+								<!-- Display the other images from the gallery -->
+								%> <% otherImages.forEach(image => { %> <%#
+								<!-- Get the filename of each other image -->
+								%> <% const otherImageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= otherImageName %></option>
+								<% }) %> <%#
+								<!-- If the post doesn't have a searchImage -->
+								%> <% } else { %> <%#
+								<!-- Comment added for readability -->
+								%> <% images.forEach(image => { %> <%#
+								<!-- Get the filename of each image -->
+								%> <% const imageName = image.split("/").pop() %>
+								<option value="<%= image %>"><%= imageName %></option>
+								<% }) %> <% } %>
+							</select>
+
 							<label for="posts-per-page"><b>Posts per page* - REQUIRED !</b></label>
 							<input
 								type="number"

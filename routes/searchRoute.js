@@ -6,7 +6,7 @@ const posts = await getPosts()
 
 // Settings
 import { settings } from "../config/settings.js"
-const { siteTitle, menuLinks, footerCopyright } = settings
+const { siteTitle, menuLinks, searchImage, postPreviewFallbackImage, footerCopyright } = settings
 
 const titles = {
 	siteTitle: siteTitle,
@@ -21,7 +21,7 @@ export const searchRoute = router
 			searchRoute: true,
 			links: menuLinks,
 			titles: titles,
-			featuredImage: "/images/brown-and-silver-telescope-near-water-photo.avif",
+			featuredImage: searchImage,
 			footerCopyright: footerCopyright,
 		})
 	})
@@ -62,7 +62,7 @@ export const searchRoute = router
 				posts: result,
 				resultLength: resultLength,
 				results: true,
-				featuredImage: "/images/brown-and-silver-telescope-near-water-photo.avif",
+				featuredImage: searchImage,
 				paginated: false,
 				footerCopyright: footerCopyright,
 			})
@@ -77,7 +77,7 @@ export const searchRoute = router
 				links: menuLinks,
 				titles: titles,
 				noResults: true,
-				featuredImage: "/images/brown-and-silver-telescope-near-water-photo.avif",
+				featuredImage: searchImage,
 				footerCopyright: footerCopyright,
 			})
 		}
