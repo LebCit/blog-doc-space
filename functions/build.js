@@ -59,6 +59,7 @@ async function build() {
 		await mkdir("_site/page", { recursive: true })
 		await mkdir("_site/pages", { recursive: true })
 		await mkdir("_site/posts", { recursive: true })
+		await mkdir("_site/templates", { recursive: true })
 		await mkdir("_site/tags", { recursive: true })
 		await mkdir("_site/search", { recursive: true })
 
@@ -152,15 +153,17 @@ async function build() {
 					await writeFile(`_site/posts/${fileWithoutExtension}/index.html`, postHTML, "utf8")
 				}
 			} else if (file.startsWith("views/templates/")) {
+				// Create a folder for each template
+				await mkdir(`_site/templates/${fileWithoutExtension}`, { recursive: true })
+
 				// EJS Files Logic
 				const templateHTML = await ejs.renderFile(file, {
-					titles: { siteTitle: siteTitle },
 					links: menuLinks,
+					titles: { siteTitle: siteTitle }, // FOR THE MENU !
 					footerCopyright: footerCopyright,
 				})
-				const newTemplateHTML = newHTML(templateHTML)
 				// Create html file out of each EJS template.
-				await writeFile(`_site/${fileWithoutExtension}.html`, newTemplateHTML, "utf8")
+				await writeFile(`_site/templates/${fileWithoutExtension}/index.html`, templateHTML, "utf8")
 			}
 		})
 
