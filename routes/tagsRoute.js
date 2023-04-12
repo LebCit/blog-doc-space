@@ -63,7 +63,8 @@ export const tagsRoute = router
 				errorRoute: true,
 				links: menuLinks,
 				titles: titles,
-				featuredImage: "/img/404-graphic-illustration.webp",
+				imageSrc: "/images/404-not-found-error.png",
+				imageAlt: "Sailor on a 404 mast looking out to sea",
 				footerCopyright: footerCopyright,
 			})
 		}
