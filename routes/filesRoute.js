@@ -59,6 +59,8 @@ export const filesRoute = router.get("/:folder/:filename", (req, res) => {
 				htmlContent: addIdsToHeadings ? idsInHeadings(html) : html,
 				featuredImage: file.data.featuredImage,
 				footerCopyright: footerCopyright,
+				editable: true,
+				filename: req.params.filename,
 			})
 		} else {
 			// Get the index of each post in the posts array by it's filename
@@ -101,6 +103,8 @@ export const filesRoute = router.get("/:folder/:filename", (req, res) => {
 				nextPostTitle: nextPostTitle,
 				relatedPosts: relatedPosts ? relatedPosts.flatMap((x) => x) : relatedPosts,
 				footerCopyright: footerCopyright,
+				editable: true,
+				filename: req.params.filename,
 			})
 		}
 	} else if (path?.startsWith("views/templates/")) {

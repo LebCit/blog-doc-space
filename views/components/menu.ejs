@@ -27,4 +27,39 @@
 			%><% } %>
 		</ul>
 	</div>
+
+	<% if (locals.editable) { %>
+	<style>
+		.edit-div {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
+		.edit-link {
+			background-color: #ffc10d;
+			color: #000000 !important;
+			border: 5px solid #000000 !important;
+			border-radius: 5px;
+			font-weight: bold;
+		}
+		.edit-link:hover,
+		.edit-link:focus,
+		.edit-link:active {
+			text-decoration: underline;
+			color: #ffffff !important;
+		}
+		.edit-link span {
+			display: inline-block;
+			transform: rotate(90deg);
+		}
+	</style>
+	<div class="pure-menu edit-div">
+		<li class="pure-menu-item">
+			<a href="/admin-update/<%= filename %>" class="pure-menu-link edit-link">
+				EDIT
+				<span>&#9998;</span>
+			</a>
+		</li>
+	</div>
+	<% } %>
 </div>
