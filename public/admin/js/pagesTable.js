@@ -29,7 +29,7 @@ const table = new Tabulator("#admin-table", {
 		{ title: "Description", field: "1.data.description" },
 		{
 			formatter: function () {
-				return "<button class='pure-button delete-button'>&#10008; DELETE !</button>"
+				return "<button type='button' class='btn btn-danger'>&#10008; DELETE !</button>"
 			},
 			cellClick: function (e, cell) {
 				const postData = cell.getRow().getData()
