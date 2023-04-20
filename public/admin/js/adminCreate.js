@@ -16,7 +16,7 @@ const fileForm = document.getElementById("file-form")
 const submitButton = document.getElementById("submit-button")
 
 fileTypeSelect.selectedIndex = 0
-submitButton.classList.add("pure-button-disabled")
+submitButton.setAttribute("disabled", "")
 
 fileTypeSelect.addEventListener("change", (e) => {
 	const fileTypeSelectValue = e.target.value
@@ -24,7 +24,7 @@ fileTypeSelect.addEventListener("change", (e) => {
 	editor.setMarkdown("")
 
 	if (fileTypeSelectValue) {
-		submitButton.classList.remove("pure-button-disabled")
+		submitButton.removeAttribute("disabled")
 	}
 
 	if (fileTypeSelectValue === "page") {
@@ -196,7 +196,7 @@ Finally, click the submit button to create your new page 😉`)
 			}
 		})
 	} else {
-		submitButton.classList.add("pure-button-disabled")
+		submitButton.setAttribute("disabled", "")
 
 		// HIDE THE PAGE FRONT MATTER
 		pageFrontMatterDiv.classList.add("d-none")
