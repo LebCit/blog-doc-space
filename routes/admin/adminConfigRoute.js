@@ -9,18 +9,17 @@ import { getImages } from "../../functions/getImages.js"
 // Settings
 import { settings } from "../../config/settings.js"
 
-// ROUTE TO MODIFY THE APP SETTINGS.
-const titles = {
-	siteTitle: settings.siteTitle,
-	docTitle: "Config Settings",
-	docDescription: `${settings.siteTitle} settings configuration page`,
-}
-
+// ROUTES TO MODIFY THE APP SETTINGS.
 export const adminConfigRoute = router
-	.get("/admin-config", async (req, res) => {
-		res.render("layouts/admin/adminConfig", {
+	.get("/admin-config-site", async (req, res) => {
+		const titles = {
+			siteTitle: settings.siteTitle,
+			docTitle: "Config Settings",
+			docDescription: `${settings.siteTitle} Site Settings`,
+		}
+
+		res.render("layouts/admin/adminConfigSite", {
 			adminConfig: true,
-			links: settings.adminLinks,
 			titles: titles,
 			settings: settings,
 			images: await getImages(),
@@ -28,30 +27,45 @@ export const adminConfigRoute = router
 		})
 	})
 
-	.post("/admin-config", async (req, res) => {
-		let settings = req.body
+	.get("/admin-config-menu", async (req, res) => {
+		const titles = {
+			siteTitle: settings.siteTitle,
+			docTitle: "Menu Settings",
+			docDescription: `${settings.siteTitle} Menu Settings`,
+		}
 
-		//console.log(settings)
+		res.render("layouts/admin/adminConfigMenu", {
+			adminConfig: true,
+			titles: titles,
+			settings: settings,
+			images: await getImages(),
+			footerCopyright: settings.footerCopyright,
+		})
+	})
 
-		let menuLinks = settings.menuLinks
+	.post("/admin-config-site", async (req, res) => {
+		let siteSettings = req.body
+
+		siteSettings.postsPerPage = JSON.parse(siteSettings.postsPerPage) // Get the value of postsPerPage as a number
+		siteSettings.searchFeature = JSON.parse(siteSettings.searchFeature) // Get the value of searchFeature as a boolean
+		siteSettings.addIdsToHeadings = JSON.parse(siteSettings.addIdsToHeadings) // Get the value of addIdsToHeadings as a boolean
+		siteSettings.menuLinks = settings.menuLinks // Assign the menuLinks to the siteSettings object
+
+		await writeFile("config/settings.json", JSON.stringify(siteSettings), "utf8")
+		res.redirect("/admin")
+	})
+
+	.post("/admin-config-menu", async (req, res) => {
+		let menuSettings = req.body
+
+		delete settings.menuLinks
+
 		let object = {}
-		menuLinks.forEach((obj) => {
+		menuSettings.menuLinks.forEach((obj) => {
 			object[obj.linkTarget] = obj.linkTitle
 		})
-		object.admin = "Admin ⚡" // Added here, because it's removed from the `settings configuration page`.
+		object.admin = "Admin ⚡" // Added here, because it's removed `from menu configuration`
 		settings.menuLinks = object
-		settings.searchFeature = JSON.parse(settings.searchFeature)
-		settings.addIdsToHeadings = JSON.parse(settings.addIdsToHeadings)
-
-		let adminLinks = {
-			admin: "Admin ⚡",
-			"admin-pages": "📃 Pages",
-			"admin-posts": "📝 Posts",
-			"admin-create": "➕ New",
-			"admin-gallery": "🖼️ Gallery",
-			"admin-config": "⚙️ Settings",
-		}
-		settings.adminLinks = adminLinks
 
 		await writeFile("config/settings.json", JSON.stringify(settings), "utf8")
 		res.redirect("/admin")
