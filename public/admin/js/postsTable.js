@@ -61,7 +61,7 @@ const table = new Tabulator("#admin-table", {
 					this is IRREVERSIBLE !
 					<br />
 					This file will be FOREVER LOST if you proceed !
-					<form class="hidden" id="delete-form" action="/delete/${postData[0].replace(".md", "")}" method="post">
+					<form class="d-none" id="delete-form" action="/delete/${postData[0].replace(".md", "")}" method="post">
 					<input type="text" name="filePath" id="file-path" value="${filePath}" />
 					</form>`,
 					icon: "warning",
