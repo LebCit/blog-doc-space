@@ -11,7 +11,7 @@ This post is an introduction to the blog design and functionalities. We'll explo
 
 You'll notice that the homepage, dedicated to the blog, shares with the archive page and the page of a particular tag almost the same design. They give us a view of existing posts, however their designs are slightly different, only the blog is paginated.
 
-The blog sorts your posts by their publication's dates in descending order, newest to oldest, and displays the [defined number of posts](/admin-config#posts-per-page) in the settings on each page. **The blog will not be paginated if the number of posts is less than the defined number of posts !**
+The blog sorts your posts by their publication's dates in descending order, newest to oldest, and displays the [defined number of posts](/admin-config-site#posts-per-page) in the settings on each page. **The blog will not be paginated if the number of posts is less than the defined number of posts !**
 
 ## Single post preview
 
@@ -29,7 +29,7 @@ The card is composed of two parts:
 To change the fallback image :
 
 1. Upload the desired image to the [gallery](/admin-gallery).
-2. And select it in the [post preview fallback image](/admin-config#post-preview-fallback-image-select).
+2. And select it in the [post preview fallback image](/admin-config-site#post-preview-fallback-image-select).
 
 ### Publishing date & tag(s)
 

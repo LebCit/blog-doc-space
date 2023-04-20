@@ -16,7 +16,7 @@ To understand how `getPosts.js`{language=markup} works, you should read [Markdow
 On the other hand, the second one is a pagination function. There are a lot of modules to accomplish the desired output, one of the most popular is [Paginator](https://www.npmjs.com/package/paginator) but I didn't want to add another module to this app for a simple task nor reinvent the wheel, so I did a little research to find a ready made pagination that suits my needs and found it while reading the [Easiest Way to Paginate an Array in JavaScript](https://shouts.dev/articles/easiest-way-to-paginate-an-array-in-javascript).
 
 With both functions ready to spin, the only task left was some logic.  
-Since I decided to have the blog on the entry route `/`{language=markup}, and paginate it with a maximum of the [defined number of posts per page](/admin-config/#posts-per-page), I just had to do the following steps :
+Since I decided to have the blog on the entry route `/`{language=markup}, and paginate it with a maximum of the [defined number of posts per page](/admin-config-site/#posts-per-page), I just had to do the following steps :
 
 1. get the newest **X** posts from the array of posts and display them on the homepage
 2. get the rest of them and display them with a pagination of **X** posts per page
