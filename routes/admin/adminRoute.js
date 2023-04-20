@@ -10,19 +10,18 @@ import { getPosts } from "../../functions/getPosts.js"
 
 // Settings
 import { settings } from "../../config/settings.js"
-const { siteTitle, adminLinks, footerCopyright } = settings
+const { siteTitle, footerCopyright } = settings
 
 const adminRoutes = router
 	.get("/admin", (req, res) => {
 		const titles = {
 			siteTitle: siteTitle,
 			docTitle: "Administration",
-			docDescription: `${siteTitle} administration page`,
+			docDescription: `${siteTitle} Administration`,
 		}
 
 		res.render("layouts/admin/admin", {
 			admin: true,
-			links: adminLinks,
 			titles: titles,
 			footerCopyright: footerCopyright,
 		})
@@ -33,13 +32,12 @@ const adminRoutes = router
 		const titles = {
 			siteTitle: siteTitle,
 			docTitle: "Admin Posts",
-			docDescription: `${siteTitle} posts administration page`,
+			docDescription: `${siteTitle} Posts`,
 		}
 
 		res.render("layouts/admin/adminTable", {
 			adminTable: true,
 			postsTable: true,
-			links: adminLinks,
 			titles: titles,
 			posts: await getPosts(),
 			footerCopyright: footerCopyright,
@@ -51,13 +49,12 @@ const adminRoutes = router
 		const titles = {
 			siteTitle: siteTitle,
 			docTitle: "Admin Pages",
-			docDescription: `${siteTitle} pages administration page`,
+			docDescription: `${siteTitle} Pages`,
 		}
 
 		res.render("layouts/admin/adminTable", {
 			adminTable: true,
 			pagesTable: true,
-			links: adminLinks,
 			titles: titles,
 			pages: await getPages(),
 			footerCopyright: footerCopyright,
@@ -85,7 +82,6 @@ files.forEach((file) => {
 
 			res.render("layouts/admin/adminUpdate", {
 				adminUpdate: true,
-				links: adminLinks,
 				titles: titles,
 				file: file,
 				images: await getImages(),

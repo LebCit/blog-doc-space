@@ -1,9 +1,9 @@
 const menuLinks = document.getElementById("menuLinks")
 const menuLinksObject = JSON.parse(menuLinks.textContent)
-delete menuLinksObject.admin
+delete menuLinksObject.admin // Remove admin link `from menu configuration`
 menuLinks.remove()
 
-const container = document.getElementById("container")
+const container = document.getElementById("menu-links-accordion-container")
 const template = document.getElementById("template")
 
 // Remove a clone when it's removeLinkButton is clicked
@@ -37,6 +37,11 @@ for (const link in menuLinksObject) {
 		clone.id = `menuLink_${count}`
 		// Add a data-id to each clone
 		clone.dataset.id = `${count}`
+		// Modify data-bs-target of each accordion button
+		let accordionButton = clone.querySelector("button")
+		accordionButton.dataset.bsTarget = `${accordionButton.dataset.bsTarget}_${count}`
+		// Add link title before the end of each accordion button
+		accordionButton.insertAdjacentHTML("beforeend", `<span class="ms-2">${menuLinksObject[link]}</span>`)
 
 		// Select each element in the clone that has an id
 		let cloneElWithId = clone.querySelectorAll("[id]")
@@ -72,9 +77,9 @@ for (const link in menuLinksObject) {
 	}
 }
 
-// Add a new clone at the end of the container when the add-link button is clicked
-const addLinkButton = document.getElementById("add-link")
-addLinkButton.addEventListener("click", () => {
+// Add a new clone at the end of the container when the add-new-menu-item button is clicked
+const addNewMenuItem = document.getElementById("add-new-menu-item")
+addNewMenuItem.addEventListener("click", () => {
 	// Get the number of clones
 	let clonesCount = container.childElementCount + 1
 	// Get all remove link buttons
@@ -104,6 +109,11 @@ addLinkButton.addEventListener("click", () => {
 	clone.id = `menu-link_${highestIdNumber()}`
 	// Add a data-id to each clone
 	clone.dataset.id = `${highestIdNumber()}`
+	// Modify data-bs-target of each accordion button
+	let accordionButton = clone.querySelector("button")
+	accordionButton.dataset.bsTarget = `${accordionButton.dataset.bsTarget}_${highestIdNumber()}`
+	// Add `New Menu Item` before the end of each new accordion button
+	accordionButton.insertAdjacentHTML("beforeend", `<span class="ms-2">New Menu Item</span>`)
 
 	// Select each element in the clone that has an id
 	let cloneElWithId = clone.querySelectorAll("[id]")
@@ -133,12 +143,12 @@ addLinkButton.addEventListener("click", () => {
 	removeClone()
 })
 
-const configForm = document.getElementById("config-form")
-const required = configForm.querySelectorAll("*[required]")
-const siteURL = configForm.querySelector("#site-url")
 const submitConfigButton = document.getElementById("submit-config-button")
 
 submitConfigButton.addEventListener("click", () => {
+	const menuConfigForm = document.getElementById("menu-config-form")
+	const required = menuConfigForm.querySelectorAll("*[required]")
+
 	let arr = []
 	required.forEach((el) => {
 		arr.push(el.value)
@@ -147,24 +157,15 @@ submitConfigButton.addEventListener("click", () => {
 	if (arr.includes("")) {
 		required.forEach((el) => {
 			if (el.validity.valueMissing) {
-				el.previousElementSibling.style.display = "block"
+				el.nextElementSibling.style.display = "block"
 			}
 			el.addEventListener("input", () => {
 				if (el.validity.valueMissing) {
-					el.previousElementSibling.style.display = "block"
+					el.nextElementSibling.style.display = "block"
 				} else {
-					el.previousElementSibling.style.display = "none"
+					el.nextElementSibling.style.display = "none"
 				}
 			})
-		})
-	} else if (!siteURL.value.startsWith("https")) {
-		siteURL.nextElementSibling.style.display = "block"
-		siteURL.addEventListener("input", (e) => {
-			if (!e.target.value.startsWith("https")) {
-				siteURL.nextElementSibling.style.display = "block"
-			} else {
-				siteURL.nextElementSibling.style.display = "none"
-			}
 		})
 	} else {
 		Swal.fire({
@@ -177,7 +178,7 @@ submitConfigButton.addEventListener("click", () => {
 				const b = Swal.getConfirmButton()
 				b.type = "button"
 				b.addEventListener("click", () => {
-					configForm.submit()
+					menuConfigForm.submit()
 				})
 			},
 		})
@@ -186,7 +187,7 @@ submitConfigButton.addEventListener("click", () => {
 
 Sortable.create(container, {
 	animation: 150,
-	ghostClass: "blue-background-class",
+	ghostClass: "bg-primary-subtle",
 	store: {
 		/**
 		 * Save the order of elements. Called onEnd (when the item is dropped).

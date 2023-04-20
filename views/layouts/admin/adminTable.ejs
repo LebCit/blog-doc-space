@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/head') %>
-	<body>
-		<div id="layout">
-			<%#
-			<!-- Menu -->
-			%> <%- include('../../components/menu') %> <%#
-			<!-- Main container -->
-			%>
-			<div id="main">
-				<%# Page header %>
-				<div class="header">
-					<h1><%= titles.docTitle %></h1>
-					<h2><%= titles.docDescription %></h2>
-				</div>
+	<%- include('../../components/admin/head') %>
+	<body class="theme-light">
+		<div class="page">
+			<%- include('../../components/admin/menu') %>
 
-				<%# Page content %>
-				<div class="content" style="max-width: 100%">
-					<% if (locals.pagesTable) { %>
-					<span id="pages-data" class="hidden"><%= JSON.stringify(pages) %></span>
-					<% } else { %>
-					<span id="posts-data" class="hidden"><%= JSON.stringify(posts) %></span>
-					<% } %>
+			<div class="page-wrapper">
+				<%- include('../../components/admin/page-header') %>
+				<div class="page-body">
+					<div class="container-xl">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<% if (locals.pagesTable) { %>
+									<span id="pages-data" class="d-none"><%= JSON.stringify(pages) %></span>
+									<% } else { %>
+									<span id="posts-data" class="d-none"><%= JSON.stringify(posts) %></span>
+									<% } %>
 
-					<style>
-						.delete-button {
-							color: white;
-							border-radius: 4px;
-							text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-							background: rgb(202, 60, 60);
-						}
-					</style>
-					<div id="admin-table"></div>
+									<div id="admin-table"></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+				<%- include('../../components/admin/footer') %>
 			</div>
 		</div>
-		<%- include('../../components/footer') %>
+		<%- include('../../components/admin/adminScripts') %>
 	</body>
 </html>

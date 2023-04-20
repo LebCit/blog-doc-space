@@ -46,7 +46,7 @@ const table = new Tabulator("#admin-table", {
 		},
 		{
 			formatter: function () {
-				return "<button class='pure-button delete-button'>&#10008; DELETE !</button>"
+				return "<button type='button' class='btn btn-danger'>&#10008; DELETE !</button>"
 			},
 			cellClick: function (e, cell) {
 				const postData = cell.getRow().getData()
@@ -61,7 +61,7 @@ const table = new Tabulator("#admin-table", {
 					this is IRREVERSIBLE !
 					<br />
 					This file will be FOREVER LOST if you proceed !
-					<form class="hidden" id="delete-form" action="/delete/${postData[0].replace(".md", "")}" method="post">
+					<form class="d-none" id="delete-form" action="/delete/${postData[0].replace(".md", "")}" method="post">
 					<input type="text" name="filePath" id="file-path" value="${filePath}" />
 					</form>`,
 					icon: "warning",

@@ -17,29 +17,6 @@
 	<link rel="stylesheet" href="/css/styles.min.css" />
 	<% if (locals.mdRoute) { %>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs-okaidia-theme/prism-okaidia.min.css" />
-	<% } %> <%#
-	<!-- COMMENT ADDED FOR READABILITY. LOADING STYLES AND SCRIPTS DEPENDING ON THE VISITED ROUTE. -->
-	%> <% if (locals.admin || locals.adminTable || locals.adminCreate || locals.adminUpdate || locals.adminConfig ||
-	locals.adminGallery) { %>
-	<script src=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.all.min.js "></script>
-	<link href=" https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.css " rel="stylesheet" />
-	<% } %> <%#
-	<!-- Comment added for readability -->
-	%> <% if (locals.adminCreate || locals.adminUpdate) { %>
-	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-	<% } %> <%#
-	<!-- Comment added for readability -->
-	%> <% if (locals.adminTable) { %>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tabulator-tables/dist/css/tabulator.min.css" />
-	<script src="https://cdn.jsdelivr.net/npm/tabulator-tables/dist/js/tabulator.min.js"></script>
-	<% } %> <%#
-	<!-- Comment added for readability -->
-	%> <% if (locals.adminGallery) { %>
-	<link
-		rel="stylesheet"
-		href="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
-	/>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.css" />
 	<% } %>
 
 	<script>

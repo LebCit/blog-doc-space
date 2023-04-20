@@ -12,7 +12,7 @@ The Simplest Node.js CMS & SSG !
 -   Administrate your app from the front-end ! <img src="/icons/settings.svg" />
 -   [Gallery](#gallery) to upload your images <img src="/icons/photo-up.svg" />
 -   Create, Read, Update & Delete your pages and posts <img src="/icons/pencil.svg" />
--   Paginated blog with chosen number of [posts per page](/admin-config#posts-per-page) <img src="/icons/arrows-left-right.svg" />
+-   Paginated blog with chosen number of [posts per page](/admin-config-site#posts-per-page) <img src="/icons/arrows-left-right.svg" />
 -   Posts pagination to navigate between your posts <img src="/icons/arrow-left-right.svg" />
 -   Write your content in Markdown <img src="/icons/markdown.svg" />
 -   Ability to use HTML in Markdown <img src="/icons/brand-html5.svg" />
@@ -22,7 +22,7 @@ The Simplest Node.js CMS & SSG !
 -   Tags list route <img src="/icons/bookmarks.svg" />
 -   Individual route for each tag <img src="/icons/bookmark.svg" />
 -   Titles & Meta Descriptions <img src="/icons/h-1.svg" />
--   Drag and drop your [menu links](/admin-config#menuLink_1) to sort them <img src="/icons/menu-order.svg" />
+-   Drag and drop your [menu links](/admin-config-menu#menuLink_1) to sort them <img src="/icons/menu-order.svg" />
 -   [RSS feed](#rss) <img src="/icons/rss.svg" />
 -   [Sitemap](#sitemap) <img src="/icons/sitemap.svg" />
 -   [Search](#search-feature) <img src="/icons/search.svg" />
@@ -144,13 +144,13 @@ The implementation can be found on the following [GitHub repository](https://git
 
 ## RSS ! {# RSS}
 
-⚠️ You **MUST** provide the **live URL** of your site in the [Settings page](/admin-config#site-url) by modifying the `siteURL` value before deploying the application.
+⚠️ You **MUST** provide the **live URL** of your site in the [Settings page](/admin-config-site#site-url) by modifying the `siteURL` value before deploying the application.
 
 At build time, a `rss.xml`{language=markup} file is generated in the **\_site** folder.  
 This file takes the live URL that you provided to generate the correct links for your feed.  
 _Nota Bene : the live URL **MUST** end with a slash `/`{language=markup} !_
 
-Of course, you **MUST** also modify `siteTitle`{language=markup}, `siteDescription`{language=markup} and `rssCopyright`{language=markup} in the [Settings page](/admin-config).  
+Of course, you **MUST** also modify `siteTitle`{language=markup}, `siteDescription`{language=markup} and `rssCopyright`{language=markup} in the [Settings page](/admin-config-site).  
 You **SHOULD** replace the `siteTitle`{language=markup}, `siteDescription`{language=markup} and `rssCopyright`{language=markup} **values** with the ones of your site.  
 You **MAY** replace the `rssSiteLanguage`{language=markup} value with the language of your site.  
 A list of available language codes can be found on the [RSS language codes page](https://www.rssboard.org/rss-language-codes).
@@ -166,7 +166,7 @@ Bellow is a screenshot of the RSS feed of Blog-Doc in [Vivaldi browser](https://
 
 ## Sitemap {# sitemap}
 
-Like the RSS feed, you **MUST** provide the **live URL** of your site in the [Settings page](/admin-config#site-url) by modifying the `siteURL`{language=markup} value to generate the correct links for each page, post, tag and template as well as for the blog routes.  
+Like the RSS feed, you **MUST** provide the **live URL** of your site in the [Settings page](/admin-config-site#site-url) by modifying the `siteURL`{language=markup} value to generate the correct links for each page, post, tag and template as well as for the blog routes.  
 Please remember that the **Site URL** **MUST** end with a slash `/`{language=markup} !
 
 You can check the sitemap of your site under the `/sitemap`{language=markup} route.  
@@ -181,7 +181,7 @@ You can check the search of your site under the `/search`{language=markup} route
 At build time, a `posts.json`{language=markup} and a `search.js`{language=markup} are generated in **\_site/js**.  
 Also, at build time, an `index.html`{language=markup} is generated under the **search** folder in the **\_site** folder.
 
-You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature`{language=markup} a value of `false`{language=markup} in the [Settings page](/admin-config#search-feature).
+You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature`{language=markup} a value of `false`{language=markup} in the [Settings page](/admin-config-site#search-feature).
 
 To see it in action, take a look at :
 
@@ -294,7 +294,7 @@ The HTML output will be : <h2 id="honey-amp-bees">Honey & Bees</h2>
 
 At build time, predefined ids will be generated into the HTML of the static site.
 
-If you wish to disable this feature, set the `addIdsToHeadings`{language=markup} value to `false`{language=markup} in the [Settings page](/admin-config#ids-for-headings).
+If you wish to disable this feature, set the `addIdsToHeadings`{language=markup} value to `false`{language=markup} in the [Settings page](/admin-config-site#ids-for-headings).
 
 ## The Gallery ! {# gallery }
 

@@ -1,168 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/head') %>
-	<body>
-		<div id="layout">
-			<%#
-			<!-- Menu -->
-			%> <%- include('../../components/menu') %> <%#
-			<!-- Main container -->
-			%>
-			<div id="main">
-				<%# Page header %>
-				<div class="header">
-					<h1><%= titles.docTitle %></h1>
-					<h2><%= titles.docDescription %></h2>
-				</div>
+	<%- include('../../components/admin/head') %>
+	<body class="theme-light">
+		<div class="page">
+			<%- include('../../components/admin/menu') %>
 
-				<%# Page content %>
-				<div class="content">
-					<style>
-						a {
-							text-decoration: none;
-							line-height: initial;
-						}
-						.cards-list {
-							z-index: 0;
-							width: 100%;
-							display: flex;
-							justify-content: space-around;
-							flex-wrap: wrap;
-						}
+			<div class="page-wrapper">
+				<%- include('../../components/admin/page-header') %>
+				<div class="page-body">
+					<div class="container-xl">
+						<div class="row row-cards">
+							<style>
+								a {
+									text-decoration: none;
+									line-height: initial;
+								}
 
-						.card {
-							margin: 30px auto;
-							width: 300px;
-							height: 300px;
-							border-radius: 40px;
-							box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
-							cursor: pointer;
-							transition: 0.4s;
-						}
+								.card {
+									background: none;
+									border: none;
+								}
 
-						.card .card_image {
-							width: inherit;
-							height: inherit;
-							border-radius: 40px;
-						}
+								.single-card {
+									margin: 30px auto;
+									width: 250px;
+									height: 250px;
+									border-radius: 40px;
+									box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
+										-5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+									cursor: pointer;
+									transition: 0.4s;
+								}
 
-						.card .card_image img {
-							width: inherit;
-							height: inherit;
-							border-radius: 40px;
-							object-fit: cover;
-						}
+								.single-card .card_image {
+									width: inherit;
+									height: inherit;
+									border-radius: 40px;
+								}
 
-						.card .card_title {
-							text-align: center;
-							border-radius: 0px 0px 40px 40px;
-							font-family: sans-serif;
-							font-weight: bold;
-							font-size: 30px;
-							margin-top: -80px;
-							height: 40px;
-						}
+								.single-card .card_image img {
+									width: inherit;
+									height: inherit;
+									border-radius: 40px;
+									object-fit: cover;
+								}
 
-						.card:hover {
-							transform: scale(0.9, 0.9);
-							box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
-						}
+								.single-card .card_title {
+									border-radius: 0px 0px 40px 40px;
+									font-family: sans-serif;
+									font-weight: bold;
+									font-size: 30px;
+									margin-top: -80px;
+									height: 40px;
+								}
 
-						.title-white {
-							color: white;
-						}
+								.single-card .card_title p {
+									margin-top: revert;
+								}
 
-						.title-black {
-							color: black;
-						}
+								.single-card:hover {
+									transform: scale(0.9, 0.9);
+									box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+										-5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+								}
+							</style>
 
-						@media all and (max-width: 500px) {
-							.card-list {
-								/* On small screens, we are no longer using row direction but column */
-								flex-direction: column;
-							}
-						}
+							<!-- <h2 class="center">Choose the route you wish to visit !</h2> -->
 
-						.center {
-							text-align: center;
-						}
-					</style>
-
-					<h2 class="center">Choose the route you wish to visit !</h2>
-
-					<div class="cards-list">
-						<a href="/admin-create">
-							<div class="card">
-								<div class="card_image">
-									<img src="/admin/images/create.svg" />
-								</div>
-								<div class="card_title title-black">
-									<p>Create</p>
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<a href="/admin-create">
+												<img src="/admin/images/create.svg" />
+											</a>
+										</div>
+										<div class="card_title">
+											<p class="text-center">
+												<a href="/admin-create">Create</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</a>
 
-						<a href="/admin-config">
-							<div class="card">
-								<div class="card_image">
-									<img src="/admin/images/settings.svg" />
-								</div>
-								<div class="card_title title-black">
-									<p>Settings</p>
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<a href="/admin-pages">
+												<img src="/admin/images/pages.svg" />
+											</a>
+										</div>
+										<div class="card_title">
+											<p class="text-center">
+												<a href="/admin-pages">Pages</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</a>
 
-						<a href="/admin-pages">
-							<div class="card">
-								<div class="card_image">
-									<img src="/admin/images/pages.svg" />
-								</div>
-								<div class="card_title title-black">
-									<p>Pages</p>
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<a href="/admin-posts">
+												<img src="/admin/images/posts.svg" />
+											</a>
+										</div>
+										<div class="card_title">
+											<p class="text-center">
+												<a href="/admin-posts">Posts</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</a>
 
-						<a href="/admin-posts">
-							<div class="card">
-								<div class="card_image">
-									<img src="/admin/images/posts.svg" />
-								</div>
-								<div class="card_title title-black">
-									<p>Posts</p>
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<a href="/admin-config-site">
+												<img src="/admin/images/settings.svg" />
+											</a>
+										</div>
+										<div class="card_title">
+											<p class="text-center">
+												<a href="/admin-config-site">Site Settings</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</a>
 
-						<a href="/admin-gallery">
-							<div class="card">
-								<div class="card_image">
-									<img src="/admin/images/gallery.svg" />
-								</div>
-								<div class="card_title title-black">
-									<p>Gallery</p>
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<a href="/admin-config-menu">
+												<img src="/admin/images/menu.svg" />
+											</a>
+										</div>
+										<div class="card_title">
+											<p class="text-center">
+												<a href="/admin-config-menu">Menu Settings</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</a>
 
-						<div>
-							<div class="card">
-								<div class="card_image">
-									<img class="bd-trigger" src="/admin/images/build.svg" />
-								</div>
-								<div class="card_title title-black bd-trigger">
-									<p>Build Static Site</p>
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<a href="/admin-gallery">
+												<img src="/admin/images/gallery.svg" />
+											</a>
+										</div>
+										<div class="card_title">
+											<p class="text-center">
+												<a href="/admin-gallery">Gallery</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
+
+							<div class="col-sm-6 col-lg-4">
+								<div class="card">
+									<div class="single-card">
+										<div class="card_image">
+											<img class="bd-trigger" src="/admin/images/build.svg" />
+										</div>
+										<div class="card_title bd-trigger">
+											<p class="text-primary text-center">Build Static Site</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<p class="text-center">
+								Illustrations by
+								<a href="https://storyset.com/">Storyset</a>
+							</p>
 						</div>
 					</div>
-
-					<p class="center">
-						Illustrations by
-						<a href="https://storyset.com/">Storyset</a>
-					</p>
 				</div>
+				<%- include('../../components/admin/footer') %>
 			</div>
 		</div>
 
@@ -194,6 +221,6 @@
 				})
 			})
 		</script>
-		<%- include('../../components/footer') %>
+		<%- include('../../components/admin/adminScripts') %>
 	</body>
 </html>

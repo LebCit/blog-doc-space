@@ -16,7 +16,7 @@ const fileForm = document.getElementById("file-form")
 const submitButton = document.getElementById("submit-button")
 
 fileTypeSelect.selectedIndex = 0
-submitButton.classList.add("pure-button-disabled")
+submitButton.setAttribute("disabled", "")
 
 fileTypeSelect.addEventListener("change", (e) => {
 	const fileTypeSelectValue = e.target.value
@@ -24,12 +24,12 @@ fileTypeSelect.addEventListener("change", (e) => {
 	editor.setMarkdown("")
 
 	if (fileTypeSelectValue) {
-		submitButton.classList.remove("pure-button-disabled")
+		submitButton.removeAttribute("disabled")
 	}
 
 	if (fileTypeSelectValue === "page") {
 		// SHOW PAGE FRONT MATTER
-		pageFrontMatterDiv.classList.remove("hidden")
+		pageFrontMatterDiv.classList.remove("d-none")
 		const pageFrontMatterDivChildren = pageFrontMatterDiv.children
 		for (let index = 0; index < 2; index++) {
 			const input = pageFrontMatterDivChildren[index].lastElementChild
@@ -37,7 +37,7 @@ fileTypeSelect.addEventListener("change", (e) => {
 		}
 
 		// HIDE POST FRONT MATTER
-		postFrontMatterDiv.classList.add("hidden")
+		postFrontMatterDiv.classList.add("d-none")
 		const postFrontMatterDivChildren = postFrontMatterDiv.children
 		for (let index = 0; index < 2; index++) {
 			const input = postFrontMatterDivChildren[index].lastElementChild
@@ -113,7 +113,7 @@ Finally, click the submit button to create your new page 😉`)
 		})
 	} else if (fileTypeSelectValue === "post") {
 		// HIDE THE PAGE FRONT MATTER
-		pageFrontMatterDiv.classList.add("hidden")
+		pageFrontMatterDiv.classList.add("d-none")
 		const pageFrontMatterDivChildren = pageFrontMatterDiv.children
 		for (let index = 0; index < 2; index++) {
 			const input = pageFrontMatterDivChildren[index].lastElementChild
@@ -121,7 +121,7 @@ Finally, click the submit button to create your new page 😉`)
 		}
 
 		// SHOW THE POST FRONT MATTER
-		postFrontMatterDiv.classList.remove("hidden")
+		postFrontMatterDiv.classList.remove("d-none")
 		const postFrontMatterDivChildren = postFrontMatterDiv.children
 		for (let index = 0; index < 2; index++) {
 			const input = postFrontMatterDivChildren[index].lastElementChild
@@ -196,10 +196,10 @@ Finally, click the submit button to create your new page 😉`)
 			}
 		})
 	} else {
-		submitButton.classList.add("pure-button-disabled")
+		submitButton.setAttribute("disabled", "")
 
 		// HIDE THE PAGE FRONT MATTER
-		pageFrontMatterDiv.classList.add("hidden")
+		pageFrontMatterDiv.classList.add("d-none")
 		const pageFrontMatterDivChildren = pageFrontMatterDiv.children
 		for (let index = 0; index < 2; index++) {
 			const input = pageFrontMatterDivChildren[index].lastElementChild
@@ -207,7 +207,7 @@ Finally, click the submit button to create your new page 😉`)
 		}
 
 		// HIDE POST FRONT MATTER
-		postFrontMatterDiv.classList.add("hidden")
+		postFrontMatterDiv.classList.add("d-none")
 		const postFrontMatterDivChildren = postFrontMatterDiv.children
 		for (let index = 0; index < 2; index++) {
 			const input = postFrontMatterDivChildren[index].lastElementChild

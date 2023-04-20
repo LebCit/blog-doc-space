@@ -25,7 +25,7 @@ Yes, an `.ejs`{language=markup} file is just `HTML`{language=markup} in which we
 
 Those styles will only be available when the pagination component is displayed. This is very useful to avoid loading unnecessary styles in the app.
 
-In [The Main Route](/posts/the-main-route) we have seen that the pagination component will only be displayed for the homepage if the length off all the posts is greater than the [defined number of posts per page](http://localhost:3000/admin-config/#posts-per-page) for the blog in the settings :
+In [The Main Route](/posts/the-main-route) we have seen that the pagination component will only be displayed for the homepage if the length off all the posts is greater than the [defined number of posts per page](http://localhost:3000/admin-config-site/#posts-per-page) for the blog in the settings :
 
 ```js
 // /routes/mainRoute.js

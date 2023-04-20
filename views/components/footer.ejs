@@ -5,28 +5,7 @@
 		</div>
 	</div>
 </div>
-<% if (locals.adminGallery) { %>
-<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.min.js"></script>
-<% } %> <%#
-<!-- Comment added for readability -->
-%> <% if (locals.adminConfig) { %>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-<% } %> <%#
-<!-- Comment added for readability -->
-%> <% if (locals.adminCreate || locals.adminUpdate) { %>
-<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-<% } %> <%#
-<!-- Comment added for readability -->
-%> <% if (locals.adminCreate || locals.adminUpdate || locals.adminTable || locals.adminConfig) { %>
-<script type="module" src="/admin/js/admin.js"></script>
-<% } %> <%#
-<!-- Comment added for readability -->
-%> <% if (locals.build) { %>
+<% if (locals.build) { %>
 <script src="/js/search.js"></script>
 <% } %> <%#
 <!-- Comment added for readability -->
