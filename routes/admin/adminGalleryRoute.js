@@ -15,7 +15,7 @@ import { getImages } from "../../functions/getImages.js"
 
 // Settings
 import { settings } from "../../config/settings.js"
-const { siteTitle, adminLinks, footerCopyright } = settings
+const { siteTitle, footerCopyright } = settings
 
 // ROUTE TO MODIFY THE APP SETTINGS.
 const titles = {
@@ -28,7 +28,6 @@ export const adminGalleryRoute = router
 	.get("/admin-gallery", async (req, res) => {
 		res.render("layouts/admin/adminGallery", {
 			adminGallery: true,
-			links: adminLinks,
 			titles: titles,
 			images: await getImages(),
 			footerCopyright: footerCopyright,

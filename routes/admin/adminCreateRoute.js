@@ -12,20 +12,19 @@ import { getImages } from "../../functions/getImages.js"
 
 // Settings
 import { settings } from "../../config/settings.js"
-const { siteTitle, adminLinks, footerCopyright } = settings
+const { siteTitle, footerCopyright } = settings
 
 // Route to create a page or a post.
 const titles = {
 	siteTitle: siteTitle,
 	docTitle: "Admin Create",
-	docDescription: `${siteTitle} administration page to create`,
+	docDescription: `${siteTitle} Creation Page`,
 }
 
 export const adminCreateRoute = router
 	.get("/admin-create", async (req, res) => {
 		res.render("layouts/admin/adminCreate", {
 			adminCreate: true,
-			links: adminLinks,
 			titles: titles,
 			images: await getImages(),
 			footerCopyright: footerCopyright,
