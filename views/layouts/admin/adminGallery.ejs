@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/head') %>
-	<body>
-		<div id="layout">
-			<%#
-			<!-- Menu -->
-			%> <%- include('../../components/menu') %> <%#
-			<!-- Main container -->
-			%>
-			<div id="main">
-				<%# Page header %>
-				<div class="header">
-					<h1><%= titles.docTitle %></h1>
-					<h2><%= titles.docDescription %></h2>
-				</div>
+	<%- include('../../components/admin/head') %>
+	<body class="theme-light">
+		<div class="page">
+			<%- include('../../components/admin/menu') %>
 
-				<%# Page content %>
-				<div class="content" style="max-width: 100%">
-					<div class="pure-g">
-						<div class="pure-u-1">
-							<form action="/add-image" method="post" class="pure-form-stacked">
-								<div class="pure-u-1">
+			<div class="page-wrapper">
+				<%- include('../../components/admin/page-header') %>
+				<div class="page-body">
+					<div class="container-xl">
+						<div class="row m-auto mb-3">
+							<form action="/add-image" method="post">
+								<div class="col-md-6 col-lg-4">
 									<label for="add-image">
 										<b>Add up to 3 images at once. An image cannot exceed 3MB</b>
 									</label>
@@ -30,41 +21,82 @@
 										multiple
 										name="images"
 										id="add-image"
-										class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3"
+										class="form-file-button"
 										data-max-file-size="3MB"
 										data-max-files="3"
 										required
 									/>
 								</div>
 
-								<button class="pure-button" type="submit">Add image(s) ✅</button>
+								<button class="btn btn-primary" type="submit">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-checkbox"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										stroke-width="2"
+										stroke="currentColor"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+										<path d="M9 11l3 3l8 -8"></path>
+										<path
+											d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+										></path>
+									</svg>
+									Add image(s)
+								</button>
 							</form>
 						</div>
 
-						<% images.forEach(image => { %>
-						<div class="pure-u-1 pure-u-md-1-4">
-							<div style="padding: 1em">
-								<style>
-									.delete-button {
-										position: absolute;
-										color: white;
-										border-radius: 4px;
-										text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-										background: rgb(202, 60, 60);
-									}
-								</style>
-								<button class="pure-button delete-button">&#10008; DELETE !</button>
-								<img class="pure-img-responsive" src="<%= image %>" />
-								<% const imageName = image.split("/").pop() %>
-								<span><%= imageName %></span>
+						<div class="row row-cards m-auto mt-3">
+							<% images.forEach(image => { %>
+							<div class="col-sm-6 col-lg-3">
+								<div class="card card-sm">
+									<a data-fslightbox href="<%= image %>" class="d-block">
+										<img src="<%= image %>" class="card-img-top" />
+									</a>
+									<div class="card-body">
+										<% const imageName = image.split("/").pop() %>
+										<span><%= imageName %></span>
+									</div>
+									<div class="card-footer">
+										<button class="btn btn-danger delete-button">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-trash"
+												width="24"
+												height="24"
+												viewBox="0 0 24 24"
+												stroke-width="2"
+												stroke="currentColor"
+												fill="none"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+												<path d="M4 7l16 0"></path>
+												<path d="M10 11l0 6"></path>
+												<path d="M14 11l0 6"></path>
+												<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+												<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+											</svg>
+											DELETE !
+										</button>
+									</div>
+								</div>
 							</div>
+							<% }) %>
 						</div>
-						<% }) %>
 					</div>
 				</div>
+				<%- include('../../components/admin/footer') %>
 			</div>
 		</div>
-		<%- include('../../components/footer') %>
+		<%- include('../../components/admin/adminScripts') %>
 		<script>
 			// We want to preview images, so we need to register the Image Preview plugin
 			FilePond.registerPlugin(
@@ -95,7 +127,7 @@
 
 			const deleteButtons = document.querySelectorAll(".delete-button")
 			deleteButtons.forEach((deleteButton) => {
-				const imageName = deleteButton.nextElementSibling.nextElementSibling.textContent
+				const imageName = deleteButton.parentElement.previousElementSibling.innerText
 				deleteButton.addEventListener("click", () => {
 					Swal.fire({
 						title: `Delete ${imageName} ?!`,
@@ -106,7 +138,7 @@
 						this is IRREVERSIBLE !
 						<br />
 						This file will be FOREVER LOST if you proceed !
-						<form class="hidden" id="delete-image" action="/delete-image" method="post">
+						<form class="d-none" id="delete-image" action="/delete-image" method="post">
 						<input type="text" name="imageName" id="image-name" value="${imageName}" />
 						</form>`,
 						icon: "warning",
@@ -123,6 +155,8 @@
 					})
 				})
 			})
+
+			fsLightbox.props.exitFullscreenOnClose = true
 		</script>
 	</body>
 </html>

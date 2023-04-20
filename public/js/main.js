@@ -1,20 +1,22 @@
-// Toggle sidebar menu
-let elements = document.querySelectorAll("html, #menu, #layout, .footer")
-const menuToggle = document.getElementById("menuLink")
+if (!window.location.pathname.startsWith("/admin")) {
+	// Toggle sidebar menu
+	let elements = document.querySelectorAll("html, #menu, #layout, .footer")
+	const menuToggle = document.getElementById("menuLink")
 
-elements.forEach((element) => {
-	menuToggle.addEventListener("click", () => {
-		element.classList.toggle("active")
+	elements.forEach((element) => {
+		menuToggle.addEventListener("click", () => {
+			element.classList.toggle("active")
+		})
 	})
-})
 
-// Selected menu link style
-let links = document.querySelectorAll("#menu a")
-links.forEach((link) => {
-	window.location.pathname === link.getAttribute("href") && !link.classList.contains("pure-menu-heading")
-		? link.parentElement.classList.add("pure-menu-selected")
-		: link.parentElement.classList.remove("pure-menu-selected")
-})
+	// Selected menu link style
+	let links = document.querySelectorAll("#menu a")
+	links.forEach((link) => {
+		window.location.pathname === link.getAttribute("href") && !link.classList.contains("pure-menu-heading")
+			? link.parentElement.classList.add("pure-menu-selected")
+			: link.parentElement.classList.remove("pure-menu-selected")
+	})
+}
 
 // Detect external links
 const isExternalLink = (url) => {
