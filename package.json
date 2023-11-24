@@ -5,23 +5,18 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "node functions/build.js",
-    "watch": "nodemon -e ejs,css,js,json,md"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "LebCit",
   "license": "MIT",
   "dependencies": {
-    "archiver": "^5.3.1",
-    "ejs": "^3.1.8",
-    "express": "^4.18.2",
-    "formidable": "^3.2.5",
-    "gray-matter": "^4.0.3",
-    "markdown-it": "^13.0.1",
-    "markdown-it-prism": "^2.3.0"
+    "deta": "^2.0.0",
+    "eta": "^3.1.1",
+    "formidable": "^3.5.1",
+    "marked": "^9.1.6",
+    "velocy": "^0.0.13"
   },
   "devDependencies": {
-    "connect-livereload": "^0.6.1",
-    "livereload": "^0.9.3",
-    "nodemon": "^2.0.22"
+    "dotenv": "^16.3.1"
   }
 }
