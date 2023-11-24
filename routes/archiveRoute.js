@@ -1,29 +1,36 @@
-import { Router } from "express"
-const router = Router()
+import { initializeApp } from "../functions/initialize.js"
+import { getSettings } from "../functions/settings.js"
+import { getPosts } from "../functions/blog-doc.js"
 
-import { getPosts } from "../functions/getPosts.js"
-const posts = await getPosts()
+const { eta } = initializeApp()
 
-// Settings
-import { settings } from "../config/settings.js"
-const { siteTitle, menuLinks, archiveImage, postPreviewFallbackImage, footerCopyright } = settings
+// Render all the posts from the list of posts on the Archive Route.
+export function archiveRoute(app) {
+	app.get("/posts", async (req, res) => {
+		const settings = await getSettings()
 
-const titles = {
-	siteTitle: siteTitle,
-	docTitle: "Archive",
-	docDescription: "A list of all the posts",
-}
+		const posts = await getPosts()
 
-// Render all the posts from the list of posts on the archive route.
-export const archiveRoute = router.get("/posts", (req, res) => {
-	res.render("layouts/base", {
-		archiveRoute: true,
-		links: menuLinks,
-		titles: titles,
-		posts: posts,
-		paginated: false, // To hide the pagination component on the archive route.
-		featuredImage: archiveImage,
-		postPreviewFallbackImage: postPreviewFallbackImage,
-		footerCopyright: footerCopyright,
+		const data = {
+			title: "Archive",
+			description: "A list of all the posts",
+			featuredImage: settings.archiveImage,
+		}
+		const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
+			// Passing Route data
+			archiveRoute: true,
+			// Passing document data
+			data: data,
+			posts: posts,
+			paginated: false, // To hide the pagination component on the archive route.
+			// Passing document image data
+			postPreviewFallbackImage: settings.postPreviewFallbackImage,
+			// Passing needed settings for the template
+			siteTitle: settings.siteTitle,
+			menuLinks: settings.menuLinks,
+			footerCopyright: settings.footerCopyright,
+		})
+		res.writeHead(200, { "Content-Type": "text/html" })
+		res.end(response)
 	})
-})
+}

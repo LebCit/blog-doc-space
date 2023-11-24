@@ -1,11 +1,18 @@
-import { Router } from "express"
-const router = Router()
-
 import { sitemap } from "../functions/sitemap.js"
+import { getSettings } from "../functions/settings.js"
+import { initializeApp } from "../functions/initialize.js"
 
-// Render the sitemap on the sitemap route
-export const sitemapRoute = router.get("/sitemap", (req, res) => {
-	res.set("Content-Type", "text/xml").render("layouts/sitemap", {
-		urls: sitemap(),
+const { eta } = initializeApp()
+
+// Sitemap Route
+export function sitemapRoute(app) {
+	app.get("/sitemap", async (req, res) => {
+		const settings = await getSettings()
+
+		const response = eta.render(`themes/${settings.currentTheme}/layouts/sitemap.html`, {
+			urls: await sitemap(),
+		})
+		res.setHeader("Content-Type", "text/xml")
+		res.end(response)
 	})
-})
+}

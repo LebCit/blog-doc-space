@@ -1,72 +1,165 @@
-import { Router } from "express"
-const router = Router()
+// Internal Functions
+import { getImages, getSubDirs } from "../../functions/blog-doc.js"
+import { initializeApp } from "../../functions/initialize.js"
+import { transformParsedBody } from "../../functions/helpers.js"
 
-import { writeFile } from "node:fs/promises"
-
-// Functions
-import { getImages } from "../../functions/getImages.js"
+const { eta } = initializeApp()
 
 // Settings
-import { settings } from "../../config/settings.js"
+import { getSettings } from "../../functions/settings.js"
+
+import { formidable } from "formidable"
+
+import { drive } from "../../functions/deta-drive.js"
 
 // ROUTES TO MODIFY THE APP SETTINGS.
-export const adminConfigRoute = router
-	.get("/admin-config-site", async (req, res) => {
-		const titles = {
-			siteTitle: settings.siteTitle,
-			docTitle: "Config Settings",
-			docDescription: `${settings.siteTitle} Site Settings`,
+export const adminConfigRoute = (app) => {
+	app.get("/admin-config-site", async (req, res) => {
+		const settings = await getSettings()
+
+		const data = {
+			title: "Config Settings",
+			description: `${settings.siteTitle} Site Settings`,
 		}
 
-		res.render("layouts/admin/adminConfigSite", {
+		const response = eta.render("admin/layouts/adminConfigSite.html", {
 			adminConfig: true,
-			titles: titles,
+			data: data,
 			settings: settings,
 			images: await getImages(),
-			footerCopyright: settings.footerCopyright,
-		})
-	})
-
-	.get("/admin-config-menu", async (req, res) => {
-		const titles = {
+			themes: await getSubDirs("views/themes"),
 			siteTitle: settings.siteTitle,
-			docTitle: "Menu Settings",
-			docDescription: `${settings.siteTitle} Menu Settings`,
-		}
-
-		res.render("layouts/admin/adminConfigMenu", {
-			adminConfig: true,
-			titles: titles,
-			settings: settings,
-			images: await getImages(),
 			footerCopyright: settings.footerCopyright,
 		})
+		res.writeHead(200, { "Content-Type": "text/html" })
+		res.end(response)
 	})
 
-	.post("/admin-config-site", async (req, res) => {
-		let siteSettings = req.body
+		.get("/admin-config-menu", async (req, res) => {
+			const settings = await getSettings()
 
-		siteSettings.postsPerPage = JSON.parse(siteSettings.postsPerPage) // Get the value of postsPerPage as a number
-		siteSettings.searchFeature = JSON.parse(siteSettings.searchFeature) // Get the value of searchFeature as a boolean
-		siteSettings.addIdsToHeadings = JSON.parse(siteSettings.addIdsToHeadings) // Get the value of addIdsToHeadings as a boolean
-		siteSettings.menuLinks = settings.menuLinks // Assign the menuLinks to the siteSettings object
+			const data = {
+				title: "Menu Settings",
+				description: `${settings.siteTitle} Menu Settings`,
+			}
 
-		await writeFile("config/settings.json", JSON.stringify(siteSettings), "utf8")
-		res.redirect("/admin")
-	})
-
-	.post("/admin-config-menu", async (req, res) => {
-		let menuSettings = req.body
-
-		delete settings.menuLinks
-
-		let object = {}
-		menuSettings.menuLinks.forEach((obj) => {
-			object[obj.linkTarget] = obj.linkTitle
+			const response = eta.render("admin/layouts/adminConfigMenu.html", {
+				adminConfig: true,
+				data: data,
+				settings: settings,
+				images: await getImages(),
+				siteTitle: settings.siteTitle,
+				footerCopyright: settings.footerCopyright,
+			})
+			res.writeHead(200, { "Content-Type": "text/html" })
+			res.end(response)
 		})
-		object.admin = "Admin ⚡" // Added here, because it's removed `from menu configuration`
-		settings.menuLinks = object
 
-		await writeFile("config/settings.json", JSON.stringify(settings), "utf8")
-		res.redirect("/admin")
-	})
+		.post("/admin-config-site", async (req, res) => {
+			const settings = await getSettings()
+
+			const form = formidable() // Formidable instance must be called inside the route!
+			try {
+				form.parse(req, async (err, fields, files) => {
+					if (err) {
+						console.error("Error while parsing `/admin-config-site` request:", err.message)
+
+						res.writeHead(302, { Location: "/500" })
+						res.end()
+						return // Prevent rest of code execution in case of error
+					}
+
+					// Convert arrays of fields to strings
+					fields = Object.fromEntries(
+						Object.entries(fields).map(([key, value]) => [
+							key,
+							Array.isArray(value) ? value.join(", ") : value,
+						])
+					)
+
+					fields.postsPerPage = JSON.parse(fields.postsPerPage) // Get the value of postsPerPage as a number
+					fields.searchFeature = JSON.parse(fields.searchFeature) // Get the value of searchFeature as a boolean
+					fields.addIdsToHeadings = JSON.parse(fields.addIdsToHeadings) // Get the value of addIdsToHeadings as a boolean
+
+					fields.menuLinks = settings.menuLinks
+
+					// Convert the JavaScript object to a JSON string
+					const jsonString = JSON.stringify(fields)
+
+					// Convert the JSON string to a Buffer
+					const binaryData = Buffer.from(jsonString, "utf-8")
+
+					// Update `settings.json` under `config` folder in drive
+					await drive.put("config/settings.json", { data: binaryData })
+
+					// Redirect to a specific path on success within the application (relative path)
+					res.writeHead(302, { Location: "/admin" })
+					res.end()
+				})
+			} catch (error) {
+				console.error("Error while posting site config:", error.message)
+
+				res.writeHead(302, { Location: "/500" })
+				res.end()
+				return
+			}
+		})
+
+		.post("/admin-config-menu", async (req, res) => {
+			const settings = await getSettings()
+
+			const form = formidable() // Formidable instance must be called inside the route!
+
+			try {
+				form.parse(req, async (err, fields, files) => {
+					if (err) {
+						console.error("Error while parsing `/admin-config-menu` request:", err.message)
+
+						res.writeHead(302, { Location: "/500" })
+						res.end()
+						return // Prevent rest of code execution in case of error
+					}
+
+					// Convert arrays of fields to strings
+					fields = Object.fromEntries(
+						Object.entries(fields).map(([key, value]) => [
+							key,
+							Array.isArray(value) ? value.join(", ") : value,
+						])
+					)
+
+					let menuSettings = fields
+
+					menuSettings = transformParsedBody(menuSettings, "menuLinks")
+
+					delete settings.menuLinks
+
+					let object = {}
+					menuSettings.menuLinks.forEach((obj) => {
+						object[obj.linkTarget] = obj.linkTitle
+					})
+					object.admin = "Admin ⚡" // Added here, because it's removed `from menu configuration`
+					settings.menuLinks = object
+
+					// Convert the JavaScript object to a JSON string
+					const jsonString = JSON.stringify(settings)
+
+					// Convert the JSON string to a Buffer
+					const binaryData = Buffer.from(jsonString, "utf-8")
+
+					// Update `settings.json` under `config` folder in drive
+					await drive.put("config/settings.json", { data: binaryData })
+
+					// Redirect to a specific path on success within the application (relative path)
+					res.writeHead(302, { Location: "/admin" })
+					res.end()
+				})
+			} catch (error) {
+				console.error("Error while posting menu config:", error.message)
+
+				res.writeHead(302, { Location: "/500" })
+				res.end()
+				return
+			}
+		})
+}
