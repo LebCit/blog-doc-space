@@ -1,83 +1,60 @@
-import express from "express"
-const app = express()
+import { initializeApp } from "./functions/initialize.js"
+import { staticAssetLoader } from "./functions/static-asset-loader.js"
+import { createServer } from "velocy"
+import { drive } from "./functions/deta-drive.js"
 
-const port = process.env.PORT || 3000
+// Initialize application
+const { app } = initializeApp()
+// Set the port value
+const port = process.env.PORT || 8080
+// Load static assets from `static` folder in Blog-Doc App
+staticAssetLoader.serveStaticAssets(app)
 
-app.use(express.static("public"))
-app.set("view engine", "ejs")
+// Load static assets from Blog-Doc Drive
+import { staticAssetRoute } from "./routes/staticAssetRoute.js"
+staticAssetRoute(app)
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+// Entry Route Depending On Drive's Content
+import { mainRoute } from "./routes/mainRoute.js"
+import { adminBlogDocConfigRoute } from "./routes/admin/adminBlogDocConfigRoute.js"
+async function entryRoute() {
+	let allFiles = (await drive.list()).names.length
+	if (allFiles == 0) {
+		adminBlogDocConfigRoute(app)
+	} else {
+		mainRoute(app)
+	}
+}
+await entryRoute()
 
-import { settings } from "./config/settings.js"
-const { siteTitle, searchFeature, menuLinks, footerCopyright } = settings
-
-// Admin routes
+// Administration Routes
 import { adminRoutes, adminUpdateDelete } from "./routes/admin/adminRoute.js"
-import { adminConfigRoute } from "./routes/admin/adminConfigRoute.js"
 import { adminCreateRoute } from "./routes/admin/adminCreateRoute.js"
 import { adminGalleryRoute } from "./routes/admin/adminGalleryRoute.js"
-import { adminBuildAndDownloadRoute } from "./routes/admin/adminBuildAndDownloadRoute.js"
-app.use(
-	[adminRoutes, adminUpdateDelete, adminConfigRoute, adminCreateRoute, adminGalleryRoute, adminBuildAndDownloadRoute],
-	(req, res, next) => {
-		next()
-	}
-)
-
-// Search route
-import { searchRoute } from "./routes/searchRoute.js"
-if (searchFeature) app.use("/", searchRoute)
+import { adminConfigRoute } from "./routes/admin/adminConfigRoute.js"
+adminRoutes(app)
+adminCreateRoute(app)
+adminUpdateDelete(app)
+adminGalleryRoute(app)
+adminConfigRoute(app)
 
 // Routes
-import { mainRoute } from "./routes/mainRoute.js"
-import { filesRoute } from "./routes/filesRoute.js"
-import { tagsRoute } from "./routes/tagsRoute.js"
+import { markdownRoute } from "./routes/markdownRoute.js"
 import { archiveRoute } from "./routes/archiveRoute.js"
+import { searchRoute } from "./routes/searchRoute.js"
+import { tagsRoute } from "./routes/tagsRoute.js"
 import { rssRoute } from "./routes/rssRoute.js"
 import { sitemapRoute } from "./routes/sitemapRoute.js"
+markdownRoute(app)
+archiveRoute(app)
+searchRoute(app)
+tagsRoute(app)
+rssRoute(app)
+sitemapRoute(app)
 
-app.use([mainRoute, archiveRoute, rssRoute, sitemapRoute, tagsRoute, filesRoute], (req, res, next) => {
-	next()
-})
+import { errorRoute } from "./routes/errorRoute.js"
+errorRoute(app)
 
-// 404 route
-app.use((req, res, next) => {
-	const titles = {
-		siteTitle: siteTitle,
-		docTitle: "Page Not Found",
-		docDescription: "The server cannot find the requested resource",
-		subTitle: "Nothing to land on here !",
-	}
-	res.status(404).render("layouts/base", {
-		errorRoute: true,
-		links: menuLinks,
-		titles: titles,
-		imageSrc: "/images/404-not-found-error.png",
-		imageAlt: "Sailor on a 404 mast looking out to sea",
-		footerCopyright: footerCopyright,
-	})
-})
-
-// 500 route
-app.use((err, req, res, next) => {
-	console.error(err.stack)
-	const titles = {
-		siteTitle: siteTitle,
-		docTitle: "Internal Server Error",
-		docDescription: "The server encountered an unexpected condition that prevented it from fulfilling the request",
-		subTitle: "Server is on a break here !",
-	}
-	res.status(500).render("layouts/base", {
-		errorRoute: true,
-		links: menuLinks,
-		titles: titles,
-		imageSrc: "/images/500-internal-server-error.png",
-		imageAlt: "Sad robot in front of empty box",
-		footerCopyright: footerCopyright,
-	})
-})
-
-app.listen(port, () => {
-	console.log(`App 🚀 @ http://localhost:${port}`)
+createServer(app).listen(port, () => {
+	console.log(`App @ http://localhost:${port}`)
 })
