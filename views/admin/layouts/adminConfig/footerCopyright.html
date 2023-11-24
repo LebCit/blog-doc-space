@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="card-body">
-		<%# Site Title %>
+		<%/* Footer Copyright */%>
 		<div class="mb-3">
 			<label for="footer-copyright" class="form-label">
 				<b>Footer copyright* - REQUIRED !</b>
@@ -14,11 +14,11 @@
 				id="footer-copyright"
 				name="footerCopyright"
 				class="form-control"
-				value="<%= settings.footerCopyright %>"
+				value="<%= it.settings.footerCopyright %>"
 				placeholder="App built with ❤️ by <a href='https://lebcit.github.io/'>LebCit</a>"
 				required
 			/>
-			<div class="invalid-tooltip">Site title cannot be empty !</div>
+			<div class="invalid-tooltip">Footer copyright cannot be empty !</div>
 		</div>
 	</div>
 	<div class="card-footer text-instagram text-center">

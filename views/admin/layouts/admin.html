@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/admin/head') %>
+	<%~ include('../components/head.html', it) %>
 	<body class="theme-light">
 		<div class="page">
-			<%- include('../../components/admin/menu') %>
+			<%~ include('../components/menu.html', it) %>
 
 			<div class="page-wrapper">
-				<%- include('../../components/admin/page-header') %>
+				<%~ include('../components/page-header.html', it) %>
 				<div class="page-body">
 					<div class="container-xl">
 						<div class="row row-cards">
@@ -65,14 +65,12 @@
 								}
 							</style>
 
-							<!-- <h2 class="center">Choose the route you wish to visit !</h2> -->
-
 							<div class="col-sm-6 col-lg-4">
 								<div class="card">
 									<div class="single-card">
 										<div class="card_image">
 											<a href="/admin-create">
-												<img src="/admin/images/create.svg" />
+												<img src="/static/admin/images/create.svg" />
 											</a>
 										</div>
 										<div class="card_title">
@@ -89,7 +87,7 @@
 									<div class="single-card">
 										<div class="card_image">
 											<a href="/admin-pages">
-												<img src="/admin/images/pages.svg" />
+												<img src="/static/admin/images/pages.svg" />
 											</a>
 										</div>
 										<div class="card_title">
@@ -106,7 +104,7 @@
 									<div class="single-card">
 										<div class="card_image">
 											<a href="/admin-posts">
-												<img src="/admin/images/posts.svg" />
+												<img src="/static/admin/images/posts.svg" />
 											</a>
 										</div>
 										<div class="card_title">
@@ -123,7 +121,7 @@
 									<div class="single-card">
 										<div class="card_image">
 											<a href="/admin-config-site">
-												<img src="/admin/images/settings.svg" />
+												<img src="/static/admin/images/settings.svg" />
 											</a>
 										</div>
 										<div class="card_title">
@@ -140,7 +138,7 @@
 									<div class="single-card">
 										<div class="card_image">
 											<a href="/admin-config-menu">
-												<img src="/admin/images/menu.svg" />
+												<img src="/static/admin/images/menu.svg" />
 											</a>
 										</div>
 										<div class="card_title">
@@ -157,7 +155,7 @@
 									<div class="single-card">
 										<div class="card_image">
 											<a href="/admin-gallery">
-												<img src="/admin/images/gallery.svg" />
+												<img src="/static/admin/images/gallery.svg" />
 											</a>
 										</div>
 										<div class="card_title">
@@ -169,18 +167,18 @@
 								</div>
 							</div>
 
-							<div class="col-sm-6 col-lg-4">
+							<!-- <div class="col-sm-6 col-lg-4">
 								<div class="card">
 									<div class="single-card">
 										<div class="card_image">
-											<img class="bd-trigger" src="/admin/images/build.svg" />
+											<img class="bd-trigger" src="/static/admin/images/build.svg" />
 										</div>
 										<div class="card_title bd-trigger">
 											<p class="text-primary text-center">Build Static Site</p>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 							<p class="text-center">
 								Illustrations by
@@ -189,11 +187,11 @@
 						</div>
 					</div>
 				</div>
-				<%- include('../../components/admin/footer') %>
+				<%~ include('../components/footer.html') %>
 			</div>
 		</div>
 
-		<script>
+		<!-- <script>
 			const bdTriggers = document.querySelectorAll(".bd-trigger")
 			bdTriggers.forEach((bdTrigger) => {
 				bdTrigger.addEventListener("click", () => {
@@ -206,13 +204,34 @@
 						},
 						allowOutsideClick: () => !Swal.isLoading(),
 					})
+
+					let filename = ""
 					fetch("/build")
 						.then((response) => {
-							if (response.redirected) {
-								Swal.close()
-								window.location.href = response.url // Redirect to download route if build is successful
-							} else {
-								console.error("Build failed") // Log error if build fails
+							if (!response.ok) {
+								throw Error(response.statusText)
+							}
+
+							// Read the *Content-Disposition* header to get the original filename given from the server
+							const header = response.headers.get("Content-Disposition")
+							const parts = header.split(";")
+							filename = parts[1].split("=")[1].replaceAll('"', "")
+
+							// Close the sweet alert
+							Swal.close()
+
+							// Get the blob from the server response
+							return response.blob()
+						})
+						.then((blob) => {
+							if (blob != null) {
+								var url = window.URL.createObjectURL(blob)
+								var a = document.createElement("a")
+								a.href = url
+								a.download = filename
+								document.body.appendChild(a)
+								a.click()
+								a.remove()
 							}
 						})
 						.catch((error) => {
@@ -220,7 +239,7 @@
 						})
 				})
 			})
-		</script>
-		<%- include('../../components/admin/adminScripts') %>
+		</script> -->
+		<%~ include('../components/adminScripts.html', it) %>
 	</body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/admin/head') %>
+	<%~ include('../components/head.html', it) %>
 	<body class="theme-light">
 		<div class="page">
-			<%- include('../../components/admin/menu') %>
+			<%~ include('../components/menu.html', it) %>
 
 			<div class="page-wrapper">
-				<%- include('../../components/admin/page-header') %>
+				<%~ include('../components/page-header.html', it) %>
 				<div class="page-body">
 					<form id="file-form" action="/admin-create" method="post">
 						<div class="container-xl">
@@ -25,7 +25,7 @@
 									</div>
 
 									<div class="row m-auto">
-										<%# PAGE FRONT MATTER %>
+										<%/* PAGE FRONT MATTER */%>
 										<div id="page-front-matter" class="col-lg-6 d-none">
 											<div>
 												<label for="page-title-input" class="form-label">
@@ -67,16 +67,16 @@
 												</label>
 												<select name="pageImage" id="page-image-select" class="form-select">
 													<option value="">Choose an image from the gallery</option>
-													<% images.forEach(image => { %> <%#
+													<% it.images.forEach(image => { %> <%/*
 													<!-- Get the filename of each image -->
-													%> <% const imageName = image.split("/").pop() %>
+													*/%> <% const imageName = image.split("/").pop() %>
 													<option value="<%= image %>"><%= imageName %></option>
 													<% }) %>
 												</select>
 											</div>
 										</div>
 
-										<%# POST FRONT MATTER %>
+										<%/* POST FRONT MATTER */%>
 										<div id="post-front-matter" class="col-lg-6 d-none">
 											<div>
 												<label for="post-title-input" class="form-label">
@@ -130,9 +130,9 @@
 												</label>
 												<select name="postImage" id="post-image-select" class="form-select">
 													<option value="">Choose an image from the gallery</option>
-													<% images.forEach(image => { %> <%#
+													<% it.images.forEach(image => { %> <%/*
 													<!-- Get the filename of each image -->
-													%> <% const imageName = image.split("/").pop() %>
+													*/%> <% const imageName = image.split("/").pop() %>
 													<option value="<%= image %>"><%= imageName %></option>
 													<% }) %>
 												</select>
@@ -154,10 +154,10 @@
 									</div>
 									<div class="my-3">
 										<label class="form-label">Markdown editor</label>
-										<%# TOAST UI EDITOR %>
+										<%/* TOAST UI EDITOR */%>
 										<div id="editor"></div>
 
-										<%# Hidden textarea to get the content from the above editor %>
+										<%/* Hidden textarea to get the content from the above editor */%>
 										<div class="d-none">
 											<textarea
 												name="fileContents"
@@ -170,17 +170,15 @@
 								</div>
 
 								<div class="card-footer">
-									<button id="submit-button" type="button" class="btn btn-primary">
-										Submit
-									</button>
+									<button id="submit-button" type="button" class="btn btn-primary">Submit</button>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
-				<%- include('../../components/admin/footer') %>
+				<%~ include('../components/footer.html') %>
 			</div>
 		</div>
-		<%- include('../../components/admin/adminScripts') %>
+		<%~ include('../components/adminScripts.html', it) %>
 	</body>
 </html>

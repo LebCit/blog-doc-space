@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="card-body">
-		<%# Posts per page %>
+		<%/* Posts per page */%>
 		<div class="mb-3">
 			<label for="posts-per-page" class="form-label">
 				<b>Posts per page* - REQUIRED !</b>
@@ -15,7 +15,7 @@
 				id="posts-per-page"
 				name="postsPerPage"
 				class="form-control"
-				value="<%= settings.postsPerPage %>"
+				value="<%= it.settings.postsPerPage %>"
 				placeholder="Number of posts per page for the blog"
 				min="1"
 				max="10"
@@ -24,7 +24,7 @@
 			<div class="invalid-tooltip">Number of posts cannot be empty !</div>
 		</div>
 
-		<%# Post Preview Fallback Image %>
+		<%/* Post Preview Fallback Image */%>
 		<div class="mb-3">
 			<label for="post-preview-fallback-image-select" class="form-label">
 				<b>Post Preview Fallback Image* - REQUIRED !</b>
@@ -36,15 +36,15 @@
 				required
 			>
 				<option value="">Choose an image from the gallery</option>
-				<option value="<%= settings.postPreviewFallbackImage %>" selected>
-					<%= settings.postPreviewFallbackImage.split("/").pop() %>
+				<option value="<%= it.settings.postPreviewFallbackImage %>" selected>
+					<%= it.settings.postPreviewFallbackImage.split("/").pop() %>
 				</option>
-				<% let otherImages = images.filter(image => image !== settings.postPreviewFallbackImage) %><%#
+				<% let otherImages = it.images.filter(image => image !== it.settings.postPreviewFallbackImage) %><%/*
 				<!-- Display the other images from the gallery -->
-				%> <% otherImages.forEach(image => { %> <%#
+				*/%> <% otherImages.forEach(image => { %> <%/*
 				<!-- Get the filename of each other image -->
-				%> <% const otherImageName = image.split("/").pop() %>
-				<option value="<%= image %>"><%= otherImageName %></option>
+				*/%> <% const otherImageName = image.split("/").pop() %>
+				<option value="/<%= image %>"><%= otherImageName %></option>
 				<% }) %>
 			</select>
 			<div class="invalid-tooltip">Please choose an image from the gallery !</div>

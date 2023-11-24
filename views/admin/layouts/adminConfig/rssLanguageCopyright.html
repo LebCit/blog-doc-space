@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="card-body">
-		<%# RSS Site Language %>
+		<%/* RSS Site Language */%>
 		<div class="mb-3">
 			<label for="rss-site-language" class="form-label">
 				<b>RSS site language* - REQUIRED !</b>
@@ -14,7 +14,7 @@
 				id="rss-site-language"
 				name="rssSiteLanguage"
 				class="form-control"
-				value="<%= settings.rssSiteLanguage %>"
+				value="<%= it.settings.rssSiteLanguage %>"
 				placeholder="en-US"
 				required
 			/>
@@ -24,7 +24,7 @@
 			</span>
 		</div>
 
-		<%# RSS Copyright %>
+		<%/* RSS Copyright */%>
 		<div class="mb-3">
 			<label for="rss-copyright" class="form-label">
 				<b>RSS copyright* - REQUIRED !</b>
@@ -34,7 +34,7 @@
 				id="rss-copyright"
 				name="rssCopyright"
 				class="form-control"
-				value="<%= settings.rssCopyright %>"
+				value="<%= it.settings.rssCopyright %>"
 				placeholder="Copyright (c) 2022 - Present, LebCit under the MIT License"
 				required
 			/>

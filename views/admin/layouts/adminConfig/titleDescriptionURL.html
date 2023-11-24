@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="card-body">
-		<%# Site Title %>
+		<%/* Site Title */%>
 		<div class="mb-3">
 			<label for="site-title" class="form-label">
 				<b>Site title* - REQUIRED !</b>
@@ -14,14 +14,14 @@
 				id="site-title"
 				name="siteTitle"
 				class="form-control"
-				value="<%= settings.siteTitle %>"
+				value="<%= it.settings.siteTitle %>"
 				placeholder="Type your site title here"
 				required
 			/>
 			<div class="invalid-tooltip">Site title cannot be empty !</div>
 		</div>
 
-		<%# Site Description %>
+		<%/* Site Description */%>
 		<div class="mb-3">
 			<label for="site-description" class="form-label">
 				<b>Site description* - REQUIRED !</b>
@@ -31,14 +31,14 @@
 				id="site-description"
 				name="siteDescription"
 				class="form-control"
-				value="<%= settings.siteDescription %>"
+				value="<%= it.settings.siteDescription %>"
 				placeholder="Type your site description here"
 				required
 			/>
 			<div class="invalid-tooltip">Site description cannot be empty !</div>
 		</div>
 
-		<%# Site URL %>
+		<%/* Site URL */%>
 		<div class="mb-3">
 			<label for="site-url" class="form-label">
 				<b>Site URL* - REQUIRED !</b>
@@ -49,7 +49,7 @@
 				id="site-url"
 				name="siteURL"
 				class="form-control"
-				value="<%= settings.siteURL %>"
+				value="<%= it.settings.siteURL %>"
 				placeholder="https://my-domaine-name.com"
 				pattern="https://.*"
 				required

@@ -4,18 +4,18 @@
 	</div>
 
 	<div class="card-body">
-		<%# Search feature %>
+		<%/* Search feature */%>
 		<div class="mb-3">
 			<label for="search-feature" class="form-label">
 				<b>Search feature* - REQUIRED !</b>
 			</label>
 			<select id="search-feature" name="searchFeature" class="form-select" required>
 				<option value="">Please choose an option</option>
-				<% const sF = JSON.stringify(settings.searchFeature) %>
-				<option value="<%= settings.searchFeature %>" selected>
+				<% const sF = JSON.stringify(it.settings.searchFeature) %>
+				<option value="<%= it.settings.searchFeature %>" selected>
 					<%= sF.charAt(0).toUpperCase() + sF.slice(1) %>
 				</option>
-				<% if (settings.searchFeature===true) { %>
+				<% if (it.settings.searchFeature===true) { %>
 				<option value="false">False</option>
 				<% } else { %>
 				<option value="true">True</option>
@@ -24,18 +24,18 @@
 			<div class="invalid-tooltip">Please choose an option !</div>
 		</div>
 
-		<%# Ids for headings %>
+		<%/* Ids for headings */%>
 		<div class="mb-3">
 			<label for="ids-for-headings" class="form-label">
 				<b>Ids for headings* - REQUIRED !</b>
 			</label>
 			<select id="ids-for-headings" name="addIdsToHeadings" class="form-select" required>
 				<option value="">Please choose an option</option>
-				<% const aItH = JSON.stringify(settings.addIdsToHeadings) %>
-				<option value="<%= settings.addIdsToHeadings %>" selected>
+				<% const aItH = JSON.stringify(it.settings.addIdsToHeadings) %>
+				<option value="<%= it.settings.addIdsToHeadings %>" selected>
 					<%= aItH.charAt(0).toUpperCase() + aItH.slice(1) %>
 				</option>
-				<% if (settings.addIdsToHeadings===true) { %>
+				<% if (it.settings.addIdsToHeadings===true) { %>
 				<option value="false">False</option>
 				<% } else { %>
 				<option value="true">True</option>

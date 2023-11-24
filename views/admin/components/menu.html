@@ -1,6 +1,6 @@
 <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
 	<div class="container-fluid">
-		<%# Main menu button toggler for mobile %>
+		<%/* Main menu button toggler for mobile */%>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -13,23 +13,23 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<%# Logo %>
+		<%/* Logo */%>
 		<h1 class="navbar-brand navbar-brand-autodark">
 			<a href="/admin">
-				<%# visible below md %>
-				<img src="/admin/images/logo.svg" alt="Blog-Doc" class="d-md-none navbar-brand-image" />
-				<%# visible only on md %>
+				<%/* visible below md */%>
+				<img src="/static/admin/images/logo.svg" alt="Blog-Doc" class="d-md-none navbar-brand-image" />
+				<%/* visible only on md */%>
 				<img
-					src="/admin/images/logo.svg"
+					src="/static/admin/images/logo.svg"
 					alt="Blog-Doc"
 					class="d-none d-md-block d-lg-none navbar-brand-image"
 				/>
-				<%# hidden below lg %>
-				<img src="/admin/images/logo.svg" alt="Blog-Doc" class="d-none d-lg-block navbar-brand-image" />
+				<%/* hidden below lg */%>
+				<img src="/static/admin/images/logo.svg" alt="Blog-Doc" class="d-none d-lg-block navbar-brand-image" />
 			</a>
 		</h1>
 
-		<%# Secondary menu button for mobile %>
+		<%/* Secondary menu button for mobile */%>
 		<div class="navbar-nav flex-row d-lg-none">
 			<div class="nav-item dropdown">
 				<a
@@ -38,7 +38,7 @@
 					data-bs-toggle="dropdown"
 					aria-label="Open user menu"
 				>
-					<span class="avatar avatar-sm" style="background-image: url(/icons/favicon.ico)"></span>
+					<span class="avatar avatar-sm" style="background-image: url(/static/icons/favicon.ico)"></span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 					<a href="/" class="dropdown-item">Home</a>
@@ -49,18 +49,18 @@
 					<div class="dropdown-divider"></div>
 					<a href="/admin-config-site" class="dropdown-item">Site Settings</a>
 					<a href="/admin-config-menu" class="dropdown-item">Menu Settings</a>
-					<% if (locals.admin) { %>
-					<div class="dropdown-divider"></div>
-					<button class="dropdown-item text-instagram bd-trigger" type="button">Build Static Site</button>
+					<% if (it.admin) { %>
+					<!-- <div class="dropdown-divider"></div> -->
+					<!-- <button class="dropdown-item text-instagram bd-trigger" type="button">Build Static Site</button> -->
 					<% } %>
 				</div>
 			</div>
 		</div>
 
-		<%# Main menu %>
+		<%/* Main menu */%>
 		<div class="collapse navbar-collapse" id="sidebar-menu">
 			<ul class="navbar-nav pt-lg-3">
-				<%# Home link. Single list item with no children. %>
+				<%/* Home link. Single list item with no children. */%>
 				<li class="nav-item">
 					<a class="nav-link" href="/">
 						<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -86,7 +86,7 @@
 					</a>
 				</li>
 
-				<%# Pages link. Single list item with no children. %>
+				<%/* Pages link. Single list item with no children. */%>
 				<li class="nav-item">
 					<a class="nav-link" href="/admin-pages">
 						<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -114,7 +114,7 @@
 					</a>
 				</li>
 
-				<%# Posts link. Single list item with no children. %>
+				<%/* Posts link. Single list item with no children. */%>
 				<li class="nav-item">
 					<a class="nav-link" href="/admin-posts">
 						<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -140,7 +140,7 @@
 					</a>
 				</li>
 
-				<%# Create link. Single list item with no children. %>
+				<%/* Create link. Single list item with no children. */%>
 				<li class="nav-item">
 					<a class="nav-link" href="/admin-create">
 						<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -169,7 +169,7 @@
 					</a>
 				</li>
 
-				<%# Gallery link. Single list item with no children. %>
+				<%/* Gallery link. Single list item with no children. */%>
 				<li class="nav-item">
 					<a class="nav-link" href="/admin-gallery">
 						<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -198,7 +198,7 @@
 					</a>
 				</li>
 
-				<%# SETTINGS %>
+				<%/* SETTINGS */%>
 				<li class="nav-item dropdown">
 					<a
 						class="nav-link dropdown-toggle"
@@ -290,8 +290,8 @@
 					</div>
 				</li>
 
-				<% if (locals.admin) { %>
-				<li class="nav-item">
+				<% if (it.admin) { %>
+				<!-- <li class="nav-item">
 					<button class="btn btn-action nav-link bd-trigger" type="button">
 						<span class="nav-link-icon text-pink d-md-none d-lg-inline-block">
 							<svg
@@ -317,7 +317,7 @@
 						</span>
 						<span class="nav-link-title text-pink">Build Static Site</span>
 					</button>
-				</li>
+				</li> -->
 				<% } %>
 			</ul>
 		</div>

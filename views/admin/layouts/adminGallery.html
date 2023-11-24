@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/admin/head') %>
+	<%~ include('../components/head.html', it) %>
 	<body class="theme-light">
 		<div class="page">
-			<%- include('../../components/admin/menu') %>
+			<%~ include('../components/menu.html', it) %>
 
 			<div class="page-wrapper">
-				<%- include('../../components/admin/page-header') %>
+				<%~ include('../components/page-header.html', it) %>
 				<div class="page-body">
 					<div class="container-xl">
 						<div class="row m-auto mb-3">
-							<form action="/add-image" method="post">
+							<form action="/save-image" method="post">
 								<div class="col-md-6 col-lg-4">
 									<label for="add-image">
 										<b>Add up to 3 images at once. An image cannot exceed 3MB</b>
@@ -53,11 +53,17 @@
 						</div>
 
 						<div class="row row-cards m-auto mt-3">
-							<% images.forEach(image => { %>
+							<% it.images.forEach(image => { %>
 							<div class="col-sm-6 col-lg-3">
 								<div class="card card-sm">
-									<a data-fslightbox href="<%= image %>" class="d-block">
-										<img src="<%= image %>" class="card-img-top" />
+									<a data-fslightbox href="/static/<%= image %>" class="d-block">
+										<style>
+											.card-img-top {
+												height: 200px;
+												object-fit: cover;
+											}
+										</style>
+										<img src="/static/<%= image %>" class="card-img-top" />
 									</a>
 									<div class="card-body">
 										<% const imageName = image.split("/").pop() %>
@@ -93,10 +99,10 @@
 						</div>
 					</div>
 				</div>
-				<%- include('../../components/admin/footer') %>
+				<%~ include('../components/footer.html') %>
 			</div>
 		</div>
-		<%- include('../../components/admin/adminScripts') %>
+		<%~ include('../components/adminScripts.html', it) %>
 		<script>
 			// We want to preview images, so we need to register the Image Preview plugin
 			FilePond.registerPlugin(

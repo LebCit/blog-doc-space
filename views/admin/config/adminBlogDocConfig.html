@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blog-Doc | Settings</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico/css/pico.min.css" />
+		<link rel="shortcut icon" href="/static/config/favicon.ico" type="image/x-icon" />
+	</head>
+	<body>
+		<main class="container">
+			<h1>Blog-Doc Settings</h1>
+
+			<p>
+				Welcome to the Settings Page of Blog-Doc!
+				<br />
+				This page will guide you on setting the main configuration to begin using Blog-Doc.
+			</p>
+
+			<article>
+				<header>Generate a Data Key</header>
+				Blog-Doc uses
+				<a
+					href="https://deta.space/docs/en/build/reference/drive"
+					target="_blank"
+					rel="external noopener noreferrer"
+				>
+					Deta Drive
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon icon-tabler icon-tabler-external-link"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						style="vertical-align: bottom"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+						<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+						<path d="M11 13l9 -9"></path>
+						<path d="M15 4h5v5"></path>
+					</svg>
+				</a>
+				to deliver its content.
+				<br />
+				The first crucial step is to generate a
+				<a
+					href="https://deta.space/docs/en/build/fundamentals/data-storage#data-keys"
+					target="_blank"
+					rel="external noopener noreferrer"
+				>
+					Data Key
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon icon-tabler icon-tabler-external-link"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						style="vertical-align: bottom"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+						<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+						<path d="M11 13l9 -9"></path>
+						<path d="M15 4h5v5"></path>
+					</svg>
+				</a>
+				to communicate with the Drive of Blog-Doc.
+				<br />
+				As you can read in the documentation, you can do it from the Builder of Blog-Doc or Blog-Doc's card in
+				Horizon.
+				<br />
+				Once generated, copy and save it somewhere safe.
+				<br />
+				Now, from Blog-Doc's Builder, navigate to the Develop tab and the Configuration sub-tab. In the
+				Environment Variables paste the generated Data Key in the field in front of BLOG_DOC_TOKEN and click on
+				Save Changes.
+			</article>
+
+			<p>
+				The second step is to fill in the desired and correct values in each field on the form below.
+				<br />
+				Some settings are enabled by default, some other are automatically added, you'll be able to modify them
+				later on.
+				<br />
+				Lastly, download the default files from
+				<a
+					href="https://drive.google.com/drive/folders/19z50BFXBUZrHJLJ01F3Zhx8XRS9qG3WZ?usp=sharing"
+					target="_blank"
+					rel="external noopener noreferrer"
+				>
+					this drive
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon icon-tabler icon-tabler-external-link"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						style="vertical-align: bottom"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+						<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+						<path d="M11 13l9 -9"></path>
+						<path d="M15 4h5v5"></path>
+					</svg>
+				</a>
+				and upload them to the appropriate locations before submitting the form. This will load Blog-Doc with
+				some default content so you can start using it right away. You can later delete these files.
+			</p>
+
+			<article>
+				<form action="/admin-blog-doc-config" enctype="multipart/form-data" method="post">
+					<div class="grid">
+						<label for="siteTitle">
+							Your site title
+							<input
+								type="text"
+								id="siteTitle"
+								name="siteTitle"
+								placeholder="Site title"
+								value="Blog-Doc"
+								required=""
+							/>
+						</label>
+
+						<label for="siteDescription">
+							A tagline describing your site
+							<input
+								type="text"
+								id="siteDescription"
+								name="siteDescription"
+								placeholder="Site description"
+								value="The simplest Node.js CMS and SSG!"
+								required=""
+							/>
+						</label>
+					</div>
+
+					<label for="siteURL">The live URL of your site</label>
+					<input
+						type="text"
+						id="siteURL"
+						name="siteURL"
+						placeholder="Live URL of your site"
+						value="https://blocdoc-1-v3476171.deta.app/"
+						required=""
+					/>
+					<small>The live URL MUST end with a slash /</small>
+
+					<label for="rssCopyright">RSS Copyright of your site</label>
+					<input
+						type="text"
+						id="rssCopyright"
+						name="rssCopyright"
+						placeholder="Live URL of your site"
+						value="Copyright (c) 2022 - Present, LebCit under the MIT License"
+						required=""
+					/>
+
+					<div class="grid">
+						<label for="rssSiteLanguage">
+							Language of your RSS feed
+							<input
+								type="text"
+								id="rssSiteLanguage"
+								name="rssSiteLanguage"
+								placeholder="RSS site language"
+								value="en-US"
+								required=""
+							/>
+							<small>
+								<a
+									href="https://www.rssboard.org/rss-language-codes"
+									target="_blank"
+									rel="external noopener noreferrer"
+								>
+									RSS language codes page
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-external-link"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										stroke-width="2"
+										stroke="currentColor"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										style="vertical-align: bottom"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+										<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+										<path d="M11 13l9 -9"></path>
+										<path d="M15 4h5v5"></path>
+									</svg>
+								</a>
+							</small>
+						</label>
+
+						<label for="postsPerPage">
+							Number of posts per page
+							<input
+								type="number"
+								id="postsPerPage"
+								name="postsPerPage"
+								min="1"
+								max="5"
+								value="3"
+								required=""
+							/>
+						</label>
+
+						<label for="searchFeature">
+							Search feature enabled
+							<input
+								type="text"
+								id="searchFeature"
+								name="searchFeature"
+								value="true"
+								required=""
+								readonly
+							/>
+						</label>
+
+						<label for="addIdsToHeadings">
+							Ids in headings enabled
+							<input
+								type="text"
+								id="addIdsToHeadings"
+								name="addIdsToHeadings"
+								value="true"
+								required=""
+								readonly
+							/>
+						</label>
+					</div>
+
+					<label for="footerCopyright">Footer Copyright of your site</label>
+					<input
+						type="text"
+						id="footerCopyright"
+						name="footerCopyright"
+						placeholder="Footer Copyright of your site"
+						value="App built with ❤️ by <a href='https://lebcit.github.io/'>LebCit</a><br />Static Site <a href='https://blogdoc.github.io/'>Demo</a>"
+						required=""
+					/>
+					<small>IF YOU USE HTML IN THE FOOTER COPYRIGHT, ATTRIBUTES MUST BE SINGLE QUOTED!</small>
+
+					<article data-theme="light">
+						<label for="posts">Markdown posts files</label>
+						<input type="file" name="posts" id="posts" multiple required />
+						<small>Upload the drive's default posts here.</small>
+					</article>
+
+					<article data-theme="light">
+						<label for="pages">Markdown pages files</label>
+						<input type="file" name="pages" id="pages" required />
+						<small>Upload the drive's default pages here.</small>
+					</article>
+
+					<article data-theme="light">
+						<label for="images">Images files</label>
+						<input type="file" name="images" id="images" multiple required />
+						<small>Upload the drive's default images here.</small>
+					</article>
+
+					<article data-theme="light">
+						<label for="icons">Icons files</label>
+						<input type="file" name="icons" id="icons" multiple required />
+						<small>Upload the drive's default icons here.</small>
+					</article>
+
+					<input hidden type="text" name="currentTheme" id="currentTheme" value="default" />
+
+					<input
+						hidden
+						type="text"
+						name="blogImage"
+						id="blogImage"
+						value="images/black-and-white-checked-photo.webp"
+					/>
+
+					<input
+						hidden
+						type="text"
+						name="archiveImage"
+						id="archiveImage"
+						value="images/assorted-folders-photo.avif"
+					/>
+
+					<input
+						hidden
+						type="text"
+						name="tagsImage"
+						id="tagsImage"
+						value="images/pile-of-assorted-color-papers-photo.avif"
+					/>
+
+					<input
+						hidden
+						type="text"
+						name="tagImage"
+						id="tagImage"
+						value="images/assorted-color-sticky-notes-photo.avif"
+					/>
+
+					<input
+						hidden
+						type="text"
+						name="searchImage"
+						id="searchImage"
+						value="images/brown-and-silver-telescope-near-water.avif"
+					/>
+
+					<input
+						hidden
+						type="text"
+						name="postPreviewFallbackImage"
+						id="postPreviewFallbackImage"
+						value="images/white-camera-on-black-background.webp"
+					/>
+
+					<input
+						hidden
+						type="text"
+						name="menuLinks"
+						id="menuLinks"
+						value='{"posts": "Archive","tags":"Tags","search": "Search","pages/documentation":"Documentation","https://github.com/LebCit/blog-doc-space": "GitHub Repo","admin": "Admin ⚡"}'
+					/>
+
+					<button type="submit">Submit</button>
+				</form>
+			</article>
+		</main>
+
+		<script src="/static/config/main.js"></script>
+	</body>
+</html>

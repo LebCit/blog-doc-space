@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-	<%- include('../../components/admin/head') %>
+	<%~ include('../components/head.html', it) %>
 	<body class="theme-light">
 		<div class="page">
-			<%- include('../../components/admin/menu') %>
+			<%~ include('../components/menu.html', it) %>
 
 			<div class="page-wrapper">
-				<%- include('../../components/admin/page-header') %>
+				<%~ include('../components/page-header.html', it) %>
 				<div class="page-body">
-					<span id="file" class="d-none"><%= JSON.stringify(file) %></span>
-					<% const fileTitle = file[0].replace(".md", "") %>
+					<span id="file" class="d-none"><%= JSON.stringify(it.file) %></span>
+					<% const fileTitle = it.file[0].replace(".md", "") %>
 					<form id="file-form" action="/admin-update/<%= fileTitle %>" method="post">
 						<div class="container-xl">
 							<div class="card">
 								<div class="card-body">
 									<div class="row m-auto">
-										<% const filePath = file[1].path.split("../").pop() %>
+										<% const filePath = it.file.path %>
+
 										<input
 											type="text"
 											name="filePath"
@@ -23,11 +24,11 @@
 											class="d-none"
 											value="<%= filePath %>"
 										/>
-										<% if (filePath.includes("/pages/")) { %> <%#
+										<% if (filePath.includes("pages/")) { %> <%/*
 										<!-- PAGE FRONT MATTER -->
-										%>
+										*/%>
 										<div id="page-front-matter" class="col-lg-6">
-											<div>
+											<div class="d-none">
 												<label for="page-title-input" class="form-label">
 													<b>Page title* - REQUIRED !</b>
 												</label>
@@ -40,7 +41,7 @@
 													id="page-title-input"
 													class="form-control"
 													placeholder="Type your page title here"
-													value="<%= file[1].data.title %>"
+													value="<%= it.file[1].frontmatter.title %>"
 													required
 												/>
 											</div>
@@ -58,7 +59,7 @@
 													id="page-description-input"
 													class="form-control"
 													placeholder="Describe your page's content shortly"
-													value="<%= file[1].data.description %>"
+													value="<%= it.file[1].frontmatter.description %>"
 													required
 												/>
 											</div>
@@ -69,36 +70,39 @@
 												</label>
 												<select name="pageImage" id="page-image-select" class="form-select">
 													<option value="">Choose an image from the gallery</option>
-													<% if (file[1].data.featuredImage) { %>
-													<option value="<%= file[1].data.featuredImage %>" selected>
-														<%= file[1].data.featuredImage.split("/").pop() %>
+													<% if (it.file[1].frontmatter.featuredImage) { %>
+													<option
+														value="<%= it.file[1].frontmatter.featuredImage %>"
+														selected
+													>
+														<%= it.file[1].frontmatter.featuredImage.split("/").pop() %>
 													</option>
-													<% let otherImages = images.filter(image => image !==
-													file[1].data.featuredImage) %><%#
+													<% let otherImages = it.images.filter(image => image !==
+													it.file[1].frontmatter.featuredImage) %><%/*
 													<!-- Display the other images from the gallery -->
-													%> <% otherImages.forEach(image => { %> <%#
+													*/%> <% otherImages.forEach(image => { %> <%/*
 													<!-- Get the filename of each other image -->
-													%> <% const otherImageName = image.split("/").pop() %>
+													*/%> <% const otherImageName = image.split("/").pop() %>
 													<option value="<%= image %>"><%= otherImageName %></option>
-													<% }) %> <%#
+													<% }) %> <%/*
 													<!-- If the page doesn't have a featuredImage -->
-													%> <% } else { %> <%#
+													*/%> <% } else { %> <%/*
 													<!-- Comment added for readability -->
-													%> <% images.forEach(image => { %> <%#
+													*/%> <% it.images.forEach(image => { %> <%/*
 													<!-- Get the filename of each image -->
-													%> <% const imageName = image.split("/").pop() %>
+													*/%> <% const imageName = image.split("/").pop() %>
 													<option value="<%= image %>"><%= imageName %></option>
 													<% }) %> <% } %>
 												</select>
 											</div>
 										</div>
-										<% } %> <%#
+										<% } %> <%/*
 										<!-- Comment added for readability -->
-										%> <% if (filePath.includes("/posts/")) { %> <%#
+										*/%> <% if (filePath.includes("posts/")) { %> <%/*
 										<!-- POST FRONT MATTER -->
-										%>
+										*/%>
 										<div id="post-front-matter" class="col-lg-6">
-											<div>
+											<div class="d-none">
 												<label for="post-title-input" class="form-label">
 													<b>Post title* - REQUIRED !</b>
 												</label>
@@ -111,7 +115,7 @@
 													id="post-title-input"
 													class="form-control"
 													placeholder="Type your post title here"
-													value="<%= file[1].data.title %>"
+													value="<%= it.file[1].frontmatter.title %>"
 													required
 												/>
 											</div>
@@ -124,8 +128,8 @@
 													A post must have a date !
 												</div>
 												<input type="date" name="postDate" id="post-date-input"
-												class="form-control" value="<%= file[1].data.date.split("/").join("-")
-												%>" required />
+												class="form-control" value="<%=
+												it.file[1].frontmatter.date.split("/").join("-") %>" required />
 											</div>
 
 											<div>
@@ -138,7 +142,7 @@
 													id="post-description-input"
 													class="form-control"
 													placeholder="Describe your post's content shortly"
-													value="<%= file[1].data.description %>"
+													value="<%= it.file[1].frontmatter.description %>"
 												/>
 											</div>
 
@@ -148,24 +152,27 @@
 												</label>
 												<select name="postImage" id="post-image-select" class="form-select">
 													<option value="">Choose an image from the gallery</option>
-													<% if (file[1].data.featuredImage) { %>
-													<option value="<%= file[1].data.featuredImage %>" selected>
-														<%= file[1].data.featuredImage.split("/").pop() %>
+													<% if (it.file[1].frontmatter.featuredImage) { %>
+													<option
+														value="<%= it.file[1].frontmatter.featuredImage %>"
+														selected
+													>
+														<%= it.file[1].frontmatter.featuredImage.split("/").pop() %>
 													</option>
-													<% let otherImages = images.filter(image => image !==
-													file[1].data.featuredImage) %><%#
+													<% let otherImages = it.images.filter(image => image !==
+													it.file[1].frontmatter.featuredImage) %><%/*
 													<!-- Display the other images from the gallery -->
-													%> <% otherImages.forEach(image => { %> <%#
+													*/%> <% otherImages.forEach(image => { %> <%/*
 													<!-- Get the filename of each other image -->
-													%> <% const otherImageName = image.split("/").pop() %>
+													*/%> <% const otherImageName = image.split("/").pop() %>
 													<option value="<%= image %>"><%= otherImageName %></option>
-													<% }) %> <%#
+													<% }) %> <%/*
 													<!-- If the post doesn't have a featuredImage -->
-													%> <% } else { %> <%#
+													*/%> <% } else { %> <%/*
 													<!-- Comment added for readability -->
-													%> <% images.forEach(image => { %> <%#
+													*/%> <% it.images.forEach(image => { %> <%/*
 													<!-- Get the filename of each image -->
-													%> <% const imageName = image.split("/").pop() %>
+													*/%> <% const imageName = image.split("/").pop() %>
 													<option value="<%= image %>"><%= imageName %></option>
 													<% }) %> <% } %>
 												</select>
@@ -181,7 +188,7 @@
 													id="post-tags-input"
 													class="form-control"
 													placeholder="Coffee, Mood, Wall-Decor, JS-Party"
-													value="<%= file[1].data.tags %>"
+													value="<%= it.file[1].frontmatter.tags %>"
 												/>
 											</div>
 										</div>
@@ -189,10 +196,10 @@
 									</div>
 									<div class="my-3">
 										<label class="form-label">Markdown editor</label>
-										<%# TOAST UI EDITOR %>
+										<%/* TOAST UI EDITOR */%>
 										<div id="editor"></div>
 
-										<%# Hidden textarea to get the content from the above editor %>
+										<%/* Hidden textarea to get the content from the above editor */%>
 										<div class="d-none">
 											<textarea
 												name="fileContents"
@@ -211,9 +218,9 @@
 						</div>
 					</form>
 				</div>
-				<%- include('../../components/admin/footer') %>
+				<%~ include('../components/footer.html') %>
 			</div>
 		</div>
-		<%- include('../../components/admin/adminScripts') %>
+		<%~ include('../components/adminScripts.html', it) %>
 	</body>
 </html>
