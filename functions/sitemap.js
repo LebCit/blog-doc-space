@@ -1,52 +1,24 @@
-import { statSync } from "fs"
+import { getPages, getPosts } from "../functions/blog-doc.js"
+import { getSettings } from "../functions/settings.js"
 
-// Functions
-import { getPosts } from "./getPosts.js"
-import { postsByTagList } from "./postsByTagList.js"
-import { getFiles } from "../functions/getFiles.js"
-
-const viewsFiles = await getFiles("views")
+const pages = await getPages()
 const posts = await getPosts()
 
-// Settings
-import { readFile } from "node:fs/promises"
-const { siteURL } = JSON.parse(await readFile(new URL("../config/settings.json", import.meta.url)))
+export async function sitemap() {
+	const settings = await getSettings()
 
-export function sitemap() {
 	let urlsData = []
 
 	/**
 	 * This function loops through an array of posts,
-	 * gets the newest modification date from those posts,
-	 * creates an object with the location of those posts and their last modification date,
+	 * creates an object with the location of those posts,
 	 * then add the created object to the urlsData array.
 	 * This function is used for the main route, the archive route, the tags route and the blog routes.
 	 */
 	function postsObj(array, url) {
-		let arr = []
-		let temp = 0
-
-		array.forEach((post) => {
-			const postTitle = post[0]
-			const postLastMod = statSync(`views/posts/${postTitle}`).mtimeMs
-			// Add the last modification date of each post into the empty array.
-			arr.push(postLastMod)
-		})
-
-		// Get the biggest number out of arr. It's the last modification date for this list of posts.
-		arr.forEach((msDate) => {
-			if (temp < msDate) {
-				temp = msDate
-			}
-		})
-
-		// Return the last modification as a date with the format YYYY-MM-DD
-		let urlLastMod = new Date(temp).toLocaleDateString().split("/").reverse().join("-")
-
 		// Create the object for those posts
 		let postsObj = {
 			urlLocation: url,
-			urlLastMod: urlLastMod,
 		}
 
 		// Add the postsObj to the urlsData array.
@@ -54,25 +26,25 @@ export function sitemap() {
 	}
 
 	// MAIN ROUTE
-	const newestFivePosts = posts.slice(0, 5) // Array of, at most, the newest five posts
-	postsObj(newestFivePosts, siteURL)
+	const newestPosts = posts.slice(0, settings.postsPerPage) // Array of, at most, the newest X posts
+	postsObj(newestPosts, settings.siteURL)
 
 	// ARCHIVE ROUTE
-	const archiveURL = siteURL + "archive"
+	const archiveURL = settings.siteURL + "archive"
 	postsObj(posts, archiveURL)
 
 	// TAGS ROUTE
-	const tagsURL = siteURL + "tags"
+	const tagsURL = settings.siteURL + "tags"
 	postsObj(posts, tagsURL)
 
 	// BLOG ROUTES
 	/**
-	 * 1- Check if the array of posts is greater then 5.
-	 * 2- Slice the array of posts into chunks of 5.
+	 * 1- Check if the array of posts is greater then postsPerPage.
+	 * 2- Slice the array of posts into chunks of postsPerPage.
 	 * 3- Remove the first chunk corresponding to the main route.
 	 * 4- For each other chunk apply the postsObj() function.
 	 */
-	if (posts.length > 5) {
+	if (posts.length > settings.postsPerPage) {
 		function sliceIntoChunks(arr, chunkSize) {
 			const res = []
 			for (let i = 0; i < arr.length; i += chunkSize) {
@@ -82,36 +54,29 @@ export function sitemap() {
 			return res
 		}
 
-		let slicedArray = sliceIntoChunks(posts, 5)
+		let slicedArray = sliceIntoChunks(posts, settings.postsPerPage)
 		slicedArray.shift()
 
 		slicedArray.forEach((arr, idx) => {
-			let pageURL = `${siteURL}page/${idx + 1}`
+			let pageURL = `${settings.siteURL}page/${idx + 1}`
 			postsObj(arr, pageURL)
 		})
 	}
 
 	/**
-	 * This function loops trough an array of files,
-	 * and returns the location as well as the last modification date of each file as an object.
-	 * This function is used for all the pages, posts and templates.
+	 * This function loops trough an array of files, and returns the location as an object.
+	 * This function is used for all the pages and posts.
 	 */
 	function filesObj() {
-		let files = viewsFiles.filter(
-			(path) => !path.startsWith("views/components") && !path.startsWith("views/layouts")
-		)
-		files.forEach((file) => {
-			const fileTitle = file
-				.split("/")
-				.pop()
-				.replace(/\.[^/.]+$/, "")
+		let files = pages.concat(posts)
 
-			let fileLastMod = statSync(file).mtimeMs
-			let fileLastModDate = new Date(fileLastMod).toLocaleDateString().split("/").reverse().join("-")
+		files.forEach((file) => {
+			const fileTitle = file[0].replace(/\.[^/.]+$/, "")
+
+			const fileDir = file.dir
 
 			let fileObj = {
-				urlLocation: siteURL + fileTitle,
-				urlLastMod: fileLastModDate,
+				urlLocation: `${settings.siteURL + fileDir}/${fileTitle}`,
 			}
 
 			urlsData.push(fileObj)
@@ -121,32 +86,17 @@ export function sitemap() {
 
 	// EACH TAG ROUTE
 	function tagObj() {
-		const allTagsArray = posts.flatMap((post) => post[1].data.tags).sort()
+		const allTagsArray = posts.flatMap((post) => post[1].frontmatter.tags).sort()
 
 		// Remove duplicates from tagsArray using a Set
 		const tagsArray = [...new Set(allTagsArray)]
 
 		tagsArray.forEach((tag) => {
-			// If tag is not undefined
-			if (tag) {
-				let tagLastMod
-
-				const postsByTag = postsByTagList(tag)
-
-				postsByTag.forEach((post) => {
-					const postTitle = post[0]
-					const postLastMod = statSync(`views/posts/${postTitle}`).mtimeMs
-
-					tagLastMod = new Date(postLastMod).toLocaleDateString().split("/").reverse().join("-")
-				})
-
-				let tagObj = {
-					urlLocation: siteURL + "tags/" + tag,
-					urlLastMod: tagLastMod,
-				}
-
-				urlsData.push(tagObj)
+			let tagObj = {
+				urlLocation: settings.siteURL + "tags/" + tag,
 			}
+
+			urlsData.push(tagObj)
 		})
 	}
 	tagObj()
