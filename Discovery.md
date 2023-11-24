@@ -1,53 +1,21 @@
 ---
 title: "Blog-Doc: Node.js CMS & SSG"
-tagline: "A tiny and dead simple static site generator written in JavaScript."
+tagline: "The Simplest Node.js CMS & SSG!"
 theme_color: "#e8b750"
 git: "https://github.com/LebCit/blog-doc-space"
 homepage: "https://blocdoc-1-v3476171.deta.app/"
 ---
 
-The Simplest Node.js CMS & SSG !
+A tiny flame in the darkness of error...
 
-## Features ⚡
+## Documentation
 
--   Administrate your app from the front-end ! ![Settings icon](/public/icons/settings.svg)
--   Gallery to upload your images ![Image upload icon](/public/icons/photo-up.svg)
--   Create, Read, Update & Delete your pages and posts ![Pencil icon](/public/icons/pencil.svg)
--   Paginated blog with chosen number of posts per page ![Left and right arrows icon](/public/icons/arrows-left-right.svg)
--   Posts pagination to navigate between your posts ![Arrow left and right icon](/public/icons/arrow-left-right.svg)
--   Write your content in Markdown ![Markdown icon](/public/icons/markdown.svg)
--   Ability to use HTML in Markdown ![HTML5 icon](/public/icons/brand-html5.svg)
--   Tag(s) for posts ![Tags icon](/public/icons/tags.svg)
--   Featured image for posts ![Image icon](/public/icons/photo.svg)
--   Archive route for posts ![Archive icon](/public/icons/archive.svg)
--   Tags list route ![Bookmarks icon](/public/icons/bookmarks.svg)
--   Individual route for each tag ![Bookmark icon](/public/icons/bookmark.svg)
--   Titles & Meta Descriptions ![H1 icon](/public/icons/h-1.svg)
--   Drag and drop your menu links to sort them ![Menu order icon](/public/icons/menu-order.svg)
--   RSS feed ![RSS icon](/public/icons/rss.svg)
--   Sitemap ![Sitemap icon](/public/icons/sitemap.svg)
--   Search ![Search icon](/public/icons/search.svg)
--   Code highlighting with [Prism](https://prismjs.com/) ![Highlight icon](/public/icons/highlight.svg)
--   Ids for H2 till H4 in Markdown ![Hash icon](/public/icons/hash.svg)
--   Hot reloading in development mode ![Flame icon](/public/icons/flame.svg)
-
-## Solid stack of technologies 🪨
-
-### Backend (input)
-
--   Node.js 16.x or higher.
--   EJS is 100% JavaScript.
--   Markdown to focus on your content.
-
-### Frontend (output)
-
--   HTML, CSS and a tiny JS file.
+Please read the [documentation](https://blocdoc-1-v3476171.deta.app/pages/documentation) especially the [installation](https://blocdoc-1-v3476171.deta.app/pages/documentation#installation).
 
 ## Blazing fast and simple 🚀
 
--   A zero configuration static site generator.
--   Ready to use on your Node.js server as a Node.js CMS.
--   Ready to use, after build, as a static site.
+-   A zero code configuration static site generator.
+-   Ready to use as a Node.js CMS.
 -   Without any unnecessary functionalities, loads in a blink of an eye.
 -   Easy to install and use.
 
@@ -56,3 +24,27 @@ The Simplest Node.js CMS & SSG !
 -   Responsive, elegant and simple layout.
 -   Ready to use template for blog and/or documentation.
 -   Easy to modify if you opt for another design.
+
+## Features ⚡
+
+-   Administrate your app from the front-end!
+-   Themes to change the look and feel of your site! (**COMING SOON TO SPACE**)
+-   Gallery to upload your images
+-   Create, Read, Update & Delete your pages and posts
+-   Paginated blog with chosen number of posts per page
+-   Posts pagination to navigate between your posts
+-   Write your content in Markdown
+-   Ability to use HTML in Markdown
+-   Tag(s) for posts
+-   Featured image for posts and pages
+-   Archive route for posts
+-   Tags list route
+-   Individual route for each tag
+-   Titles & Meta Descriptions
+-   Drag and drop your menu links to sort them
+-   RSS feed
+-   Sitemap
+-   Search
+-   Code highlighting with [highlight.js](https://highlightjs.org/)
+-   Ids for H2 till H4 in Markdown
+-   No need for hot reloading in development mode (**INFO FOR DEVELOPERS**)
