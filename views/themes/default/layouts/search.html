@@ -11,7 +11,7 @@
 		text-decoration: underline;
 	}
 </style>
-<form id="searchForm" class="pure-form pure-g" <% if (locals.build) { %>
+<form id="searchForm" class="pure-form pure-g" <% if (it.build) { %>
 	action="/search/index.html" method="GET" <% } else { %> action="/search" method="POST" <% } %> >
 	<div class="pure-u-1">
 		<label for="searchInput">Searchbox at your service :</label>
@@ -27,29 +27,29 @@
 </form>
 
 <div id="searchResult">
-	<% if (!locals.build) { %>
+	<% if (!it.build) { %>
 	<script>
 		const searchInput = document.getElementById("searchInput")
 		searchInput.focus()
 	</script>
-	<% if (locals.resultLength > 0) { %><%#
+	<% if (it.resultLength > 0) { %><%/*
 	<!-- Added comment for readability -->
-	%><% if (locals.resultLength >= 2) { %>
-	<h3>Your search returned <%= locals.resultLength %> posts</h3>
+	*/%><% if (it.resultLength >= 2) { %>
+	<h3>Your search returned <%= it.resultLength %> posts</h3>
 	<% } else { %>
 	<h3>Your search returned 1 post</h3>
 	<% } %> <% } %> <% } else {%>
-	<span id="post-preview-fallback-image" hidden><%= JSON.stringify(postPreviewFallbackImage) %></span>
+	<span id="post-preview-fallback-image" hidden><%= JSON.stringify(it.postPreviewFallbackImage) %></span>
 	<%} %>
 </div>
 
-<% if (locals.results) { %> <%#
+<% if (it.results) { %> <%/*
 <!-- Added comment for readability -->
-%> <%- include('./index') %> <%#
+*/%> <%~ include('./index.html', it) %> <%/*
 <!-- Added comment for readability -->
-%> <% } %> <%#
+*/%> <% } %> <%/*
 <!-- Added comment for readability -->
-%> <% if (locals.noResults) { %>
+*/%> <% if (it.noResults) { %>
 <p>
 	Sorry, your search didn't return any result.
 	<br />
