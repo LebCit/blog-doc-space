@@ -43,8 +43,8 @@ submitButton.addEventListener("click", () => {
 		})
 	} else {
 		Swal.fire({
-			title: `Update "${file[1].data.title}" ?!`,
-			html: `By clicking on <b>Update</b>,<br><b>"${file[1].data.title}"</b> will be updated,<br>with the provided data.`,
+			title: `Update "${file[1].frontmatter.title}" ?!`,
+			html: `By clicking on <b>Update</b>,<br><b>"${file[1].frontmatter.title}"</b> will be updated,<br>with the provided data.`,
 			icon: "question",
 			showCancelButton: true,
 			confirmButtonText: "Update",

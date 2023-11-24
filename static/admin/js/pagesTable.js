@@ -13,7 +13,7 @@ const table = new Tabulator("#admin-table", {
 		{ formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
 		{
 			title: "Title",
-			field: "1.data.title",
+			field: "1.frontmatter.title",
 			cellClick: function (e, cell) {
 				console.log(cell.getRow().getData())
 			},
@@ -26,25 +26,25 @@ const table = new Tabulator("#admin-table", {
 			headerFilter: true,
 			headerFilterPlaceholder: "Find a Page...",
 		},
-		{ title: "Description", field: "1.data.description" },
+		{ title: "Description", field: "1.frontmatter.description" },
 		{
 			formatter: function () {
 				return "<button type='button' class='btn btn-danger'>&#10008; DELETE !</button>"
 			},
 			cellClick: function (e, cell) {
-				const postData = cell.getRow().getData()
-				const filePath = postData[1].path.split("../").pop()
+				const pageData = cell.getRow().getData()
+				const filePath = pageData.path
 
 				Swal.fire({
-					title: `Delete ${postData[1].data.title} ?!`,
+					title: `Delete ${pageData[1].frontmatter.title} ?!`,
 					html: `By clicking on <b>Delete</b>,
 					<br />
-					<b>${postData[1].data.title}</b> will be deleted,
+					<b>${pageData[1].frontmatter.title}</b> will be deleted,
 					<br />
 					this is IRREVERSIBLE !
 					<br />
 					This file will be FOREVER LOST if you proceed !
-					<form class="d-none" id="delete-form" action="/delete/${postData[0].replace(".md", "")}" method="post">
+					<form class="d-none" id="delete-form" action="/delete/${pageData[0].replace(".md", "")}" method="post">
 					<input type="text" name="filePath" id="file-path" value="${filePath}" />
 					</form>`,
 					icon: "warning",

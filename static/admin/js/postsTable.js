@@ -13,13 +13,13 @@ const table = new Tabulator("#admin-table", {
 		{ formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
 		{
 			title: "Date",
-			field: "1.data.date",
+			field: "1.frontmatter.date",
 			headerFilter: true,
 			headerFilterPlaceholder: "Date ?",
 		},
 		{
 			title: "Title",
-			field: "1.data.title",
+			field: "1.frontmatter.title",
 			cellClick: function (e, cell) {
 				console.log(cell.getRow().getData())
 			},
@@ -32,10 +32,10 @@ const table = new Tabulator("#admin-table", {
 			headerFilter: true,
 			headerFilterPlaceholder: "Find a Post...",
 		},
-		{ title: "Description", field: "1.data.description" },
+		{ title: "Description", field: "1.frontmatter.description" },
 		{
 			title: "Tags",
-			field: "1.data.tags",
+			field: "1.frontmatter.tags",
 			sorter: "array",
 			sorterParams: {
 				type: "length",
@@ -50,13 +50,13 @@ const table = new Tabulator("#admin-table", {
 			},
 			cellClick: function (e, cell) {
 				const postData = cell.getRow().getData()
-				const filePath = postData[1].path.split("../").pop()
+				const filePath = postData.path
 
 				Swal.fire({
-					title: `Delete ${postData[1].data.title} ?!`,
+					title: `Delete ${postData[1].frontmatter.title} ?!`,
 					html: `By clicking on <b>Delete</b>,
 					<br />
-					<b>${postData[1].data.title}</b> will be deleted,
+					<b>${postData[1].frontmatter.title}</b> will be deleted,
 					<br />
 					this is IRREVERSIBLE !
 					<br />
