@@ -16,11 +16,11 @@ A tiny flame in the darkness of error...
 -   Ready to use template for blog and/or documentation.
 -   Easy to modify if you opt for another design.
 
-## Features ⚡
+## Features
 
 -   Administrate your app from the front-end!
--   Themes to change the look and feel of your site! (**COMING SOON TO SPACE**)
--   Gallery to upload your images
+-   [Themes](#themes) to change the look and feel of your site! (**COMING SOON TO SPACE**)
+-   [Gallery](#the-gallery) to upload your images
 -   Create, Read, Update & Delete your pages and posts
 -   Paginated blog with chosen number of posts per page
 -   Posts pagination to navigate between your posts
@@ -33,11 +33,11 @@ A tiny flame in the darkness of error...
 -   Individual route for each tag
 -   Titles & Meta Descriptions
 -   Drag and drop your menu links to sort them
--   RSS feed
--   Sitemap
--   Search
--   Code highlighting with [highlight.js](https://highlightjs.org/)
--   Ids for H2 till H4 in Markdown
+-   [RSS feed](#rss)
+-   [Sitemap](#sitemap)
+-   [Search](#search)
+-   [Code highlighting](#code-highlighting) with [highlight.js](https://highlightjs.org/)
+-   [Ids for H2 till H4 in Markdown](#ids-for-h2-till-h4-in-markdown)
 -   No need for hot reloading in development mode (**INFO FOR DEVELOPERS**)
 
 ## How to install Blog-Doc?
@@ -47,12 +47,16 @@ To install Blog-Doc on Space, head over its [installation page](https://deta.spa
 Once installed, open the app from your [Horizon](https://deta.space/docs/en/use/interface#horizon) or by [accessing the builder instance](https://deta.space/docs/en/build/fundamentals/development/builder-instance#accessing-a-builder-instance) of the app and clicking on the `Open Builder Instance` button.
 
 You will be redirected to the app's address and see in your browser the following message: `Route Not Found`.<br />
-Please don't freak out! I've tried some other ways, but this is the simplest and most secure one.<br />
-Now assuming that your instance of Blog-Doc has the following address: `https://abc-1-x234.deta.app`, you can see it in the [address bar](https://en.wikipedia.org/wiki/Address_bar) of your browser.<br />
-Add after it `/admin-blog-doc-config`, the address is now: `https://abc-1-x234.deta.app/admin-blog-doc-config`, and hit enter.
+Please don't freak out! I've tried some other ways, but this is the simplest and most secure one.
+
+Now assuming that your instance of Blog-Doc has the following address:<br />
+`https://abc-1-x234.deta.app`, in the [address bar](https://en.wikipedia.org/wiki/Address_bar) of your browser.<br />
+Add after it `/admin-blog-doc-config`, the address is now:<br />
+`https://abc-1-x234.deta.app/admin-blog-doc-config`, hit enter.<br />
 You'll be redirected to a page that will guide you on setting the main configuration to begin using Blog-Doc, 2 easy steps of 2 minutes.<br />
 At the end you'll submit a form, it takes at most 30 seconds to upload the configuration, then you'll be redirected to the initial address `https://abc-1-x234.deta.app` and see once again: `Route Not Found`.<br />
-You have to wait a minute, at most two, for the code to interact with the newly created drive, then you can reload/refresh the page and begin to use your own instance of Blog-Doc.
+Again don't panic! Just add `/pages/documentation`` after the address. Browse inside the app for a minute (time for the code to interact with the newly created drive) without visiting the home route, then go to the main route and begin to use your own instance of Blog-Doc 🎉<br />
+If it doesn't work from the first time do it again once more and it will.
 
 ## RSS!
 
@@ -65,12 +69,16 @@ You **SHOULD** replace the `siteTitle`, `siteDescription` and `rssCopyright` **v
 You **MAY** replace the `rssSiteLanguage` value with the language of your site.  
 A list of available language codes can be found on the [RSS language codes page](https://www.rssboard.org/rss-language-codes).
 
+[⬆️ Back to features](#features)
+
 ## Sitemap
 
 Like the RSS feed, you **MUST** provide the **live URL** of your site in the Settings page by modifying the `siteURL` value to generate the correct links for each page, post, tag and template as well as for the blog routes.  
 Please remember that the **Site URL** **MUST** end with a slash `/`
 
 You can check the sitemap of your site under the `/sitemap` route.
+
+[⬆️ Back to features](#features)
 
 ## Search
 
@@ -80,6 +88,8 @@ The search functionality allows a user to make a research on **the titles** and 
 You can check the search of your site under the `/search` route.
 
 You can disable the search in the Node.js app as well as for the generated static site by giving `searchFeature` a value of `false` in the Site Settings page.
+
+[⬆️ Back to features](#features)
 
 ## Code highlighting
 
@@ -115,6 +125,8 @@ Visit the [Supported Languages of highlight.js](https://highlightjs.readthedocs.
 
 Alternatively, you can write a block of code without providing an alias, highlight.js will automatically detect the language.<br />
 If the highlighter fails to detect the correct language for a block of code without an alias, just add the desired language to the block as indicated above.
+
+[⬆️ Back to features](#features)
 
 ## Ids for H2 till H4 in Markdown
 
@@ -188,15 +200,15 @@ As an example :
 The HTML output will be : <h2 id="honey-amp-bees">Honey & Bees</h2>
 ```
 
-At build time, predefined ids will be generated into the HTML of the static site.
-
 If you wish to disable this feature, set the `addIdsToHeadings` value to `false` in the Site Settings page.
+
+[⬆️ Back to features](#features)
 
 ## The Gallery!
 
 Since Blog-Doc turned into a CMS, I've planned to add a gallery and a way to retrieve images for the pages and posts directly.  
 Now it's almost done. Almost, because there is always space to bring on improvements.  
-For now, you can visit the gallery by hitting the `/admin-gallery` route, or go to the Administration page and click on the **Gallery** link in the menu or it's card.
+For now, you can visit the gallery by hitting the `/admin/gallery/images` route, or go to the Administration page and click on the **Gallery** link in the menu or it's card.
 
 In the global spirit of Blog-Doc, The Galley is pretty simple to use.  
 You'll find a drop zone where you can drop your image(s) or click on it and choose the image(s) you wish to upload.  
@@ -206,7 +218,11 @@ You can also delete an image from the gallery by clicking on it's **&#10008; DEL
 
 Finally, to assign an image to a page or a post, you can, while creating or updating, choose an image from the gallery by selecting it directly from the page or post.
 
-## Themes (coming soon to Space)
+[⬆️ Back to features](#features)
+
+## Themes
+
+(coming soon to Space)
 
 You can switch between themes and choose the design that suites your needs.
 
@@ -222,6 +238,8 @@ If a picture is worth a thousand words, a video is worth a million!<br />
 If you've coded a theme for Blog-Doc and wish to list it among the available themes, you can let me know in the Discussions of Blog-Doc's repository under the [Ideas](https://github.com/LebCit/blog-doc/discussions/categories/ideas) category.<br />
 Please keep in mind that Blog-Doc themes **MUST** only use plain JavaScript and cannot contain any code or image(s) that have publishing and/or distribution restrictions!
 
+[⬆️ Back to features](#features)
+
 ## Technical information for developers
 
 ### Motivation & Purpose
@@ -230,7 +248,7 @@ _With all due respect to the time and hard work of every developer who made a St
 _I offer my sincerest apologies in advance to each one of these developers, but an app is not supposed to be a gasworks..._<br />
 While the following posts are no more relevant to the actual version of Blog-Doc they explain quite well my motivation and may shock you.
 
-**Please read** [From 145 to 7 💪](https://lebcit.github.io/posts/from-145-to-7/)<br /> 
+**Please read** [From 145 to 7 💪](https://lebcit.github.io/posts/from-145-to-7/)<br />
 **Also read** [The New Blog-Doc](/posts/the-new-blog-doc)<br />
 **Also read** [node_modules is not heavy, developers are lazy!](https://lebcit.github.io/posts/node-modules-is-not-heavy-developers-are-lazy/)
 
@@ -245,7 +263,7 @@ While the following posts are no more relevant to the actual version of Blog-Doc
 -   [formidable](https://github.com/node-formidable/formidable), The most used, flexible, fast and streaming parser for multipart form data.
 -   And [deta](https://www.npmjs.com/package/deta) for the [Drive SDK](https://deta.space/docs/en/build/reference/sdk/drive).
 
-**Blog-Doc for Space now uses only 14 modules (1916.1 KB or 1.9161 MB) instead of 131 (10082 KB or 10.082 MB) !!!**
+**Blog-Doc for Space now uses only 14 modules (1916.1 KB or 1.9161 MB) instead of 131 (10082 KB or 10.082 MB)!**
 
 ## FAQ
 
@@ -282,7 +300,7 @@ While the following posts are no more relevant to the actual version of Blog-Doc
 	<summary>When I open the app I get: Route Not Found!</summary>
 	<p>
 		Please read the
-		<a href="#installation">installation section.</a>
+		<a href="#how-to-install-blog-doc">installation section.</a>
 	</p>
 </details>
 

@@ -8,9 +8,10 @@ homepage: "https://blocdoc-1-v3476171.deta.app/"
 
 A tiny flame in the darkness of error...
 
-## Documentation
+## Documentation and preview
 
-Please read the [documentation](https://blocdoc-1-v3476171.deta.app/pages/documentation) especially the [installation](https://blocdoc-1-v3476171.deta.app/pages/documentation#installation).
+Please read the [documentation](https://blocdoc-1-v3476171.deta.app/pages/documentation) especially the [installation](https://blocdoc-1-v3476171.deta.app/pages/documentation#installation).  
+If you want to have a quick look at Blog-Doc front-end and administration, head over [Blog-Doc's preview](https://blocdoc-1-v3476171.deta.app/posts/blog-docs-preview) where you'll also find useful information about Blog-Doc features.
 
 ## Blazing fast and simple 🚀
 
