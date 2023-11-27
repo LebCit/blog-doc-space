@@ -18,6 +18,7 @@ export async function searchRoute(app) {
 				title: "Search",
 				description: "Make a research in the site's posts",
 				featuredImage: settings.searchImage,
+				favicon: settings.favicon,
 			}
 
 			const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
@@ -50,6 +51,7 @@ export async function searchRoute(app) {
 					title: "Search",
 					description: "Make a research in the site's posts",
 					featuredImage: settings.searchImage,
+					favicon: settings.favicon,
 				}
 
 				let { query } = req.params

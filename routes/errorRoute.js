@@ -12,6 +12,7 @@ export function errorRoute(app) {
 			title: "Page Not Found",
 			description: "The server cannot find the requested resource",
 			subTitle: "Nothing to land on here !",
+			favicon: settings.favicon,
 		}
 		const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 			// Passing Route data
@@ -39,6 +40,7 @@ export function errorRoute(app) {
 			title: "Internal Server Error",
 			description: "The server encountered an unexpected condition that prevented it from fulfilling the request",
 			subTitle: "Server is on a break here !",
+			favicon: settings.favicon,
 		}
 		const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 			// Passing Route data

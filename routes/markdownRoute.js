@@ -22,6 +22,7 @@ export function markdownRoute(app) {
 
 		if (currentFile) {
 			const fileData = currentFile[1].frontmatter
+			fileData.favicon = settings.favicon
 			const fileContent = marked.parse(currentFile[1].content)
 			const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 				// Passing Route data
@@ -55,6 +56,7 @@ export function markdownRoute(app) {
 
 		if (currentFile) {
 			const fileData = currentFile[1].frontmatter
+			fileData.favicon = settings.favicon
 			const fileContent = marked.parse(currentFile[1].content)
 			const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 				// Passing Route data

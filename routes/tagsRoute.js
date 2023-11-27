@@ -14,6 +14,7 @@ export async function tagsRoute(app) {
 			title: "Tags",
 			description: "A list of all the tags",
 			featuredImage: settings.tagsImage,
+			favicon: settings.favicon,
 		}
 		const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 			// Passing Route data
@@ -43,6 +44,7 @@ export async function tagsRoute(app) {
 				description: `List of posts tagged ${tag}`,
 				featuredImage: settings.tagImage,
 				subTitle: postsByTag.length > 1 ? `${postsByTag.length} posts with this tag` : `1 post with this tag`,
+				favicon: settings.favicon,
 			}
 			const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 				// Passing Route data

@@ -20,6 +20,7 @@ export function mainRoute(app) {
 			title: "Home",
 			description: settings.siteDescription,
 			featuredImage: settings.blogImage,
+			favicon: settings.favicon,
 		}
 
 		const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
@@ -56,6 +57,7 @@ export function mainRoute(app) {
 				title: "Home",
 				description: settings.siteDescription,
 				featuredImage: settings.blogImage,
+				favicon: settings.favicon,
 			}
 
 			// Dynamic page number

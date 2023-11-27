@@ -15,6 +15,7 @@ export function archiveRoute(app) {
 			title: "Archive",
 			description: "A list of all the posts",
 			featuredImage: settings.archiveImage,
+			favicon: settings.favicon,
 		}
 		const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
 			// Passing Route data
