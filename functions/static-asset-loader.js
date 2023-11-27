@@ -28,7 +28,7 @@ class StaticAssetLoader {
 		const extname = path.extname(file)
 		if (extname === ".css") {
 			return "text/css"
-		} else if (extname === ".js") {
+		} else if (extname === ".js" || extname === ".mjs") {
 			return "application/javascript"
 		} else if (extname === ".png") {
 			return "image/png"
