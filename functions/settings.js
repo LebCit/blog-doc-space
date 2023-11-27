@@ -6,7 +6,10 @@ export async function getSettings() {
 		let settings = await drive.get("config/settings.json")
 		const buffer = await settings.arrayBuffer()
 		const textContent = new TextDecoder().decode(buffer)
-		return JSON.parse(textContent)
+		// Since v5.1.0 to allow favicon replacement
+		const settingsObj = JSON.parse(textContent)
+		Object.hasOwn(settingsObj, "favicon") ? settingsObj : (settingsObj.favicon = "icons/favicon.ico")
+		return settingsObj
 	} catch (error) {
 		console.error("Error while retrieving settings:", error.message)
 
