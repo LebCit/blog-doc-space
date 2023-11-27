@@ -1,5 +1,5 @@
 // Internal Functions
-import { getImages, getSubDirs } from "../../functions/blog-doc.js"
+import { getIcons, getImages, getSubDirs } from "../../functions/blog-doc.js"
 import { initializeApp } from "../../functions/initialize.js"
 import { transformParsedBody } from "../../functions/helpers.js"
 
@@ -26,6 +26,7 @@ export const adminConfigRoute = (app) => {
 			adminConfig: true,
 			data: data,
 			settings: settings,
+			icons: await getIcons(),
 			images: await getImages(),
 			themes: await getSubDirs("views/themes"),
 			siteTitle: settings.siteTitle,
@@ -82,6 +83,12 @@ export const adminConfigRoute = (app) => {
 					fields.addIdsToHeadings = JSON.parse(fields.addIdsToHeadings) // Get the value of addIdsToHeadings as a boolean
 
 					fields.menuLinks = settings.menuLinks
+
+					// Remove unneeded properties from fields
+					delete fields.modalSelectedFavicon
+					delete fields.modalSelectedPageImage
+					delete fields.modalSelectedPostImage
+					delete fields.modalSelectedPostPreviewFallbackImage
 
 					// Convert the JavaScript object to a JSON string
 					const jsonString = JSON.stringify(fields)
