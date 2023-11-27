@@ -2,7 +2,7 @@
 import { readFileSync } from "fs"
 
 // Internal Functions
-import { getImages } from "../../functions/blog-doc.js"
+import { getIcons, getImages } from "../../functions/blog-doc.js"
 import { initializeApp } from "../../functions/initialize.js"
 import { drive } from "../../functions/deta-drive.js"
 
@@ -13,31 +13,40 @@ import { getSettings } from "../../functions/settings.js"
 
 import { formidable } from "formidable"
 
-// GALLERY ROUTE.
+// GALLERIES ROUTE - Since v5.1.0
 export const adminGalleryRoute = (app) => {
-	app.get("/admin-gallery", async (req, res) => {
+	app.get("/admin/gallery/:files", async (req, res) => {
 		const settings = await getSettings()
 
+		const { files } = req.params
+		const firstLetter = files.charAt(0)
+		const firstLetterCap = firstLetter.toUpperCase()
+		const remainingLetters = files.slice(1)
+		const capitalizedFiles = firstLetterCap + remainingLetters
+
 		const data = {
-			title: "Images gallery",
-			description: `${settings.siteTitle} gallery page`,
+			title: `${capitalizedFiles} gallery`,
+			description: `${settings.siteTitle} ${files} gallery page`,
 		}
 		const response = eta.render("admin/layouts/adminGallery.html", {
 			adminGallery: true,
+			adminIcons: files == "icons" ? true : false,
 			data: data,
-			images: await getImages(),
+			images: files == "icons" ? await getIcons() : await getImages(),
 			siteTitle: settings.siteTitle,
 			footerCopyright: settings.footerCopyright,
 		})
 		res.writeHead(200, { "Content-Type": "text/html" })
 		res.end(response)
 	})
-		.post("/add-image", async (req, res) => {
+		.post("/add/:image", async (req, res) => {
+			const { image } = req.params
+
 			const form = formidable({ keepExtensions: true }) // Formidable instance must be called inside the route!
 			try {
 				form.parse(req, async (err, fields, files) => {
 					if (err) {
-						console.error("Error while parsing `/add-image` request:", err.message)
+						console.error(`Error while parsing "/add/${image}" request:`, err.message)
 
 						res.writeHead(302, { Location: "/500" })
 						res.end()
@@ -56,8 +65,12 @@ export const adminGalleryRoute = (app) => {
 							// Read each file content
 							const fileContent = readFileSync(filePath)
 
-							// Upload each file under the images directory in drive
-							await drive.put(`images/${fileName}`, { data: fileContent })
+							// Upload each file under the respective directory in drive
+							image == "icon"
+								? await drive.put(`icons/${fileName}`, { data: fileContent })
+								: await drive.put(`images/${fileName}`, { data: fileContent })
+
+							console.log(`Successfully added ${fileName} to ${image}s folder`)
 						}
 					}
 
@@ -66,7 +79,7 @@ export const adminGalleryRoute = (app) => {
 					return
 				})
 			} catch (error) {
-				console.error("Error while posting config:", error.message)
+				console.error(`Error while adding ${image}:`, error.message)
 
 				res.writeHead(302, { Location: "/500" })
 				res.end()
@@ -74,18 +87,28 @@ export const adminGalleryRoute = (app) => {
 			}
 		})
 
-		.post("/save-image", (req, res) => {
-			res.writeHead(302, { Location: "/admin-gallery" })
+		.post("/save/:image", (req, res) => {
+			// Get the request parameter from FilePond server
+			const { image } = req.params
+
+			res.writeHead(302, { Location: `/admin/gallery/${image}s` })
 			res.end()
 			return
 		})
 
-		.post("/delete-image", async (req, res) => {
+		/**
+		 * Used erase instead of delete because adminRoute() precedes adminGalleryRoute()
+		 * The request parameter property will be `filename` and not `image`
+		 */
+		.post("/erase/:image", async (req, res) => {
+			// Get the request parameter from `delete-image` form
+			const { image } = req.params
+
 			const form = formidable({ keepExtensions: true }) // Formidable instance must be called inside the route!
 			try {
 				form.parse(req, async (err, fields, files) => {
 					if (err) {
-						console.error("Error while parsing `/delete-image` request:", err.message)
+						console.error(`Error while parsing "/erase/${image}" request:`, err.message)
 
 						res.writeHead(302, { Location: "/500" })
 						res.end()
@@ -101,16 +124,16 @@ export const adminGalleryRoute = (app) => {
 					)
 
 					const { imageName } = fields
-					await drive.delete(`images/${imageName}`)
-					console.log(`successfully deleted images/${imageName}`)
+					await drive.delete(`${image}s/${imageName}`)
+					console.log(`Successfully erased ${imageName} from ${image}s folder`)
 
 					// Redirect to a specific path on success within the application (relative path)
-					res.writeHead(302, { Location: "/admin-gallery" })
+					res.writeHead(302, { Location: `/admin/gallery/${image}s` })
 					res.end()
 					return
 				})
 			} catch (error) {
-				console.error("Error while deleting image:", error.message)
+				console.error(`Error while erasing ${image}:`, error.message)
 
 				res.writeHead(302, { Location: "/500" })
 				res.end()
