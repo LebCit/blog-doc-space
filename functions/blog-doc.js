@@ -114,6 +114,22 @@ class Blog_Doc {
 		return images
 	}
 
+	// Method to get the icons from their directory. Since v5.1.0
+	async getIcons() {
+		let icons = await getFiles("icons")
+
+		const excludedIcons = [
+			"icons/chevron-left.svg",
+			"icons/chevron-right.svg",
+			"icons/date-post-details.svg",
+			"icons/tag-post-details.svg",
+		]
+
+		icons = icons.filter((icon) => !excludedIcons.includes(icon))
+
+		return icons
+	}
+
 	// Method to count the occurrence of each tag from the posts front-matter.
 	async postsByTagCount() {
 		const posts = await getPosts()
@@ -202,6 +218,7 @@ export const {
 	getPages,
 	getPosts,
 	getImages,
+	getIcons,
 	postsByTagCount,
 	postsByTagList,
 	prevNext,
