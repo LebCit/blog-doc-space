@@ -19,13 +19,23 @@ export function imagesModal(modal) {
 
 		// Check/Mark the current image in the gallery
 		const currentImage = allCheckInputs.filter((el) => el.value == hiddenInput.value)
-		currentImage[0].checked = true
+		if (currentImage.length) {
+			currentImage[0].checked = true
+		} else {
+			const urlRadio = modalBody.querySelector(".input-group-text").firstElementChild
+			urlRadio.checked = true
+			const urlInput = modalBody.querySelector(".input-group").lastElementChild
+			urlInput.value = hiddenInput.value
+		}
 	})
 
 	let selectedImage
 	modalBody.addEventListener("change", (event) => {
 		if (event.target.classList.contains("form-imagecheck-input")) {
 			selectedImage = event.target.value
+		} else {
+			const urlInput = modalBody.querySelector(".input-group").lastElementChild
+			selectedImage = urlInput.value
 		}
 	})
 

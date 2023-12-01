@@ -20,6 +20,19 @@ name="pageImage" value="<%= it.adminCreate? "" : it.file[1].frontmatter.featured
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
+				<small>Enter an https:// URL of an image:</small>
+				<div class="input-group mb-3">
+					<div class="input-group-text">
+						<input class="form-check-input mt-0" type="radio" name="modalSelectedPageImage" />
+					</div>
+					<input
+						type="url"
+						class="form-control"
+						placeholder="https://an-image-url.com"
+						pattern="https://.*"
+						aria-label="URL input with radio button"
+					/>
+				</div>
 				<div class="row g-2">
 					<div class="col-2">
 						<label class="form-imagecheck mb-2">

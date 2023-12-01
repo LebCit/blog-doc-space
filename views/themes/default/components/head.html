@@ -1,16 +1,16 @@
 <head>
-	<% /* Metadata */ %>
+	<!-- Metadata -->
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="<%= it.data.description %>" />
 
-	<% /* Favicon */ %>
-	<link rel="shortcut icon" href="<%= `/static/${it.data.favicon}` %>" type="image/x-icon" />
-
-	<% /* Title */ %>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="<%= it.data.favicon.startsWith("https") ? it.data.favicon :
+	`/static/${it.data.favicon}` %>" type="image/x-icon" />
+	<!-- Title -->
 	<title><%= it.siteTitle %> | <%= it.data.title %></title>
 
-	<% /* Stylesheets*/ %>
+	<!-- Stylesheets -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css" />
 	<link rel="stylesheet" href="/static/styles/styles.min.css" />
 	<% if (it.mdRoute) { %>
