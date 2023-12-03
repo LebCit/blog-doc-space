@@ -104,10 +104,7 @@ class Blog_Doc {
 	async getImages() {
 		let images = await getFiles("images")
 
-		const excludedImages = [
-			"images/404-not-found-error.png",
-			"images/500-internal-server-error.png",
-		]
+		const excludedImages = ["images/404-not-found-error.png", "images/500-internal-server-error.png"]
 
 		images = images.filter((image) => !excludedImages.includes(image))
 
