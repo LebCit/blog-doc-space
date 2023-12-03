@@ -89,6 +89,7 @@ export const adminConfigRoute = (app) => {
 					delete fields.modalSelectedPageImage
 					delete fields.modalSelectedPostImage
 					delete fields.modalSelectedPostPreviewFallbackImage
+					delete fields.modalSelectedRouteImage
 
 					// Convert the JavaScript object to a JSON string
 					const jsonString = JSON.stringify(fields)
