@@ -1,8 +1,8 @@
 import { getPages, getPosts } from "../functions/blog-doc.js"
 import { getSettings } from "../functions/settings.js"
 
-const pages = await getPages()
-const posts = await getPosts()
+const pages = (await getPages()).filter((page) => page[1].frontmatter.published == "true")
+const posts = (await getPosts()).filter((post) => post[1].frontmatter.published == "true")
 
 export async function sitemap() {
 	const settings = await getSettings()

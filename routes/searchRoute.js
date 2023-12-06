@@ -6,7 +6,7 @@ import { initializeApp } from "../functions/initialize.js"
 const { eta } = initializeApp()
 
 export async function searchRoute(app) {
-	const posts = await getPosts()
+	const posts = (await getPosts()).filter((post) => post[1].frontmatter.published == "true")
 
 	// Render the search form on the search route
 	app.get("/search", async (req, res) => {

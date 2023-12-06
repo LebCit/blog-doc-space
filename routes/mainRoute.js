@@ -9,7 +9,7 @@ export function mainRoute(app) {
 	app.get("/", async (req, res) => {
 		const settings = await getSettings()
 
-		const posts = await getPosts()
+		const posts = (await getPosts()).filter((post) => post[1].frontmatter.published == "true")
 		const paginatedPosts = paginator(posts, 1, settings.postsPerPage) // Paginate all the posts. Set the first page to 1 and X posts per page.
 		const newestPosts = paginatedPosts.data // Get the first X posts.
 		const lastPage = paginatedPosts.total_pages - 1 // Get the last page number by removing 1 from the total number of pages.
@@ -47,7 +47,7 @@ export function mainRoute(app) {
 	app.get("/page/:actualBlogPage", async (req, res) => {
 		const settings = await getSettings()
 
-		const posts = await getPosts()
+		const posts = (await getPosts()).filter((post) => post[1].frontmatter.published == "true")
 		const paginatedPosts = paginator(posts, 1, settings.postsPerPage) // Paginate all the posts. Set the first page to 1 and X posts per page.
 		const lastPage = paginatedPosts.total_pages - 1 // Get the last page number by removing 1 from the total number of pages.
 

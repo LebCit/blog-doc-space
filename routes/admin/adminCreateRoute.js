@@ -71,12 +71,14 @@ export const adminCreateRoute = (app) => {
 					postDescription,
 					postImage,
 					postTags,
+					published,
 				} = fields
 
 				const pageContents = `---
 title : ${pageTitle}
 description: ${pageDescription}
 featuredImage: ${pageImage}
+published: ${published}
 ---
 ${fileContents}`
 
@@ -86,12 +88,15 @@ date: ${postDate.split("-").join("/")}
 description: ${postDescription}
 featuredImage: ${postImage}
 tags: [${postTags}]
+published: ${published}
 ---
 ${fileContents}`
 
 				const utf8Encoder = new TextEncoder()
 
 				if (fileType === "page") {
+					const path = published == "true" ? "/pages" : "/admin-preview-page"
+
 					const createdPageName = pageTitle
 						.toLowerCase()
 						.replace(/[^a-zA-Z0-9-_ ]/g, "") // Remove special characters except hyphen and underscore
@@ -103,9 +108,12 @@ ${fileContents}`
 
 					const utf8Array = utf8Encoder.encode(pageContents)
 					await drive.put(`pages/${createdPageName}.md`, { data: utf8Array })
-					res.writeHead(302, { Location: `/pages/${createdPageName}` })
+					res.writeHead(302, { Location: `${path}/${createdPageName}` })
 					res.end()
+					return
 				} else {
+					const path = published == "true" ? "/posts" : "/admin-preview-post"
+
 					const createdPostName = postTitle
 						.toLowerCase()
 						.replace(/[^a-zA-Z0-9-_ ]/g, "") // Remove special characters except hyphen and underscore
@@ -117,8 +125,9 @@ ${fileContents}`
 
 					const utf8Array = utf8Encoder.encode(postContents)
 					await drive.put(`posts/${createdPostName}.md`, { data: utf8Array })
-					res.writeHead(302, { Location: `/posts/${createdPostName}` })
+					res.writeHead(302, { Location: `${path}/${createdPostName}` })
 					res.end()
+					return
 				}
 			})
 		})

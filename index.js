@@ -32,11 +32,13 @@ import { adminRoutes, adminUpdateDelete } from "./routes/admin/adminRoute.js"
 import { adminCreateRoute } from "./routes/admin/adminCreateRoute.js"
 import { adminGalleryRoute } from "./routes/admin/adminGalleryRoute.js"
 import { adminConfigRoute } from "./routes/admin/adminConfigRoute.js"
+import { adminPreviewRoute } from "./routes/admin/adminPreviewRoute.js"
 adminRoutes(app)
 adminCreateRoute(app)
 adminUpdateDelete(app)
 adminGalleryRoute(app)
 adminConfigRoute(app)
+adminPreviewRoute(app)
 
 // Routes
 import { markdownRoute } from "./routes/markdownRoute.js"

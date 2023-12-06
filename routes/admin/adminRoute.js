@@ -133,6 +133,7 @@ const adminUpdateDelete = (app) => {
 					postImage,
 					postTags,
 					fileContents,
+					published,
 				} = fields
 
 				const updatedFile = filePath.split("/").pop().replace(".md", "")
@@ -142,14 +143,17 @@ const adminUpdateDelete = (app) => {
 title: ${pageTitle}
 description: ${pageDescription}
 featuredImage: ${pageImage}
+published: ${published}
 ---
 ${fileContents}`
 
 					const utf8Encoder = new TextEncoder()
 					const utf8Array = utf8Encoder.encode(pageContents)
+					const path = published == "true" ? "/pages" : "/admin-preview-page"
 
 					await drive.put(`${filePath}`, { data: utf8Array })
-					res.writeHead(302, { Location: `/pages/${updatedFile}` })
+
+					res.writeHead(302, { Location: `${path}/${updatedFile}` })
 					res.end()
 					return
 				} else {
@@ -159,14 +163,17 @@ date: ${postDate.split("-").join("/")}
 description: ${postDescription}
 featuredImage: ${postImage}
 tags: [${postTags}]
+published: ${published}
 ---
 ${fileContents}`
 
 					const utf8Encoder = new TextEncoder()
 					const utf8Array = utf8Encoder.encode(postContents)
+					const path = published == "true" ? "/posts" : "/admin-preview-post"
 
 					await drive.put(`${filePath}`, { data: utf8Array })
-					res.writeHead(302, { Location: `/posts/${updatedFile}` })
+
+					res.writeHead(302, { Location: `${path}/${updatedFile}` })
 					res.end()
 					return
 				}

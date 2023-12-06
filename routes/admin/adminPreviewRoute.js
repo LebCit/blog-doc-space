@@ -1,24 +1,24 @@
-import { getPages, getPosts, prevNext } from "../functions/blog-doc.js"
-import { initializeApp } from "../functions/initialize.js"
-import { idsInHeadings } from "../functions/helpers.js"
-import { getSettings } from "../functions/settings.js"
+import { getPages, getPosts, prevNext } from "../../functions/blog-doc.js"
+import { initializeApp } from "../../functions/initialize.js"
+import { idsInHeadings } from "../../functions/helpers.js"
+import { getSettings } from "../../functions/settings.js"
 import { marked } from "marked"
 
 const { eta } = initializeApp()
 
 // Markdown Route
-export function markdownRoute(app) {
+export function adminPreviewRoute(app) {
 	/**
 	 * Due to Velocy architecture, a route without a defined start point cannot be reached.
 	 * This is why two routes are created, one for the pages and the other for posts.
 	 * In short, the following route "/:folder/:filename" doesn't work in Velocy.
 	 */
-	app.get("/pages/:filename", async (req, res) => {
+	app.get("/admin-preview-page/:filename", async (req, res) => {
 		const settings = await getSettings()
 
 		const pages = await getPages()
-		const publishedPages = pages.filter((page) => page[1].frontmatter.published == "true")
-		const currentFile = publishedPages.find((file) => file.path === `pages/${req.params.filename}.md`)
+		const unpublishedPages = pages.filter((page) => page[1].frontmatter.published == "false")
+		const currentFile = unpublishedPages.find((file) => file.path === `pages/${req.params.filename}.md`)
 
 		if (currentFile) {
 			const fileData = currentFile[1].frontmatter
@@ -47,12 +47,12 @@ export function markdownRoute(app) {
 		}
 	})
 
-	app.get("/posts/:filename", async (req, res) => {
+	app.get("/admin-preview-post/:filename", async (req, res) => {
 		const settings = await getSettings()
 
 		const posts = await getPosts()
-		const publishedPosts = posts.filter((post) => post[1].frontmatter.published == "true")
-		const currentFile = publishedPosts.find((file) => file.path === `posts/${req.params.filename}.md`)
+        const unpublishedPosts = posts.filter((post) => post[1].frontmatter.published == "false")
+		const currentFile = unpublishedPosts.find((file) => file.path === `posts/${req.params.filename}.md`)
 
 		if (currentFile) {
 			const fileData = currentFile[1].frontmatter

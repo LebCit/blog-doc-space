@@ -9,7 +9,7 @@ export function archiveRoute(app) {
 	app.get("/posts", async (req, res) => {
 		const settings = await getSettings()
 
-		const posts = await getPosts()
+		const posts = (await getPosts()).filter((post) => post[1].frontmatter.published == "true")
 
 		const data = {
 			title: "Archive",

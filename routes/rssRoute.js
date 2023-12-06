@@ -10,7 +10,7 @@ export function rssRoute(app) {
 		const settings = await getSettings()
 
 		// Get the posts array
-		const posts = await getPosts()
+		const posts = (await getPosts()).filter((post) => post[1].frontmatter.published == "true")
 
 		const response = eta.render(`themes/${settings.currentTheme}/layouts/rss.html`, {
 			// Passing needed settings for the template
