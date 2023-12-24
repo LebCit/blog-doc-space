@@ -3,6 +3,9 @@
 The Simplest Node.js CMS & SSG!
 A tiny flame in the darkness of error...
 
+> [!IMPORTANT]  
+> This documentation no longer represents the diverse features of Blog-Doc. Kindly consult the comprehensive [documentation](https://blog-doc.pages.dev/) for up-to-date information on Blog-Doc's functionalities.
+
 ## Blazing fast and simple 🚀
 
 -   A zero code configuration static site generator.
