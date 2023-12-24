@@ -10,8 +10,13 @@ A tiny flame in the darkness of error...
 
 ## Documentation and preview
 
-Please read the [documentation](https://blocdoc-1-v3476171.deta.app/pages/documentation) especially the [installation](https://blocdoc-1-v3476171.deta.app/pages/documentation#installation).  
-If you want to have a quick look at Blog-Doc front-end and administration, head over [Blog-Doc's preview](https://blocdoc-1-v3476171.deta.app/posts/blog-docs-preview) where you'll also find useful information about Blog-Doc features.
+[Blog-Doc's documentation website](https://blog-doc.pages.dev/)
+
+[Blog-Doc Space installation page](https://blog-doc.pages.dev/docs/install-blog-doc-on-space/)
+
+[Blog-Doc's administration preview](https://blog-doc.pages.dev/docs/admin-interface-of-blog-doc/)
+
+[Blog-Doc's front-end preview](https://blog-doc.pages.dev/docs/blog-doc-front-end-preview/)
 
 ## Blazing fast and simple 🚀
 
