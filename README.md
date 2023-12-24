@@ -1,6 +1,6 @@
 # Blog-Doc
 
-The Simplest Node.js CMS & SSG!
+The Simplest Node.js CMS & SSG!<br />
 A tiny flame in the darkness of error...
 
 > [!IMPORTANT]  
