@@ -10,11 +10,7 @@ A tiny flame in the darkness of error...
 
 ## Documentation and preview
 
-[Blog-Doc's documentation website](https://blog-doc.pages.dev/)
-
-[Blog-Doc Space installation page](https://blog-doc.pages.dev/docs/install-blog-doc-on-space/)
-
-[Blog-Doc's administration preview](https://blog-doc.pages.dev/docs/admin-interface-of-blog-doc/)
+Kindly consult the comprehensive [documentation](https://blog-doc.pages.dev/) for up-to-date information on Blog-Doc's functionalities.
 
 [Blog-Doc's front-end preview](https://blog-doc.pages.dev/docs/blog-doc-front-end-preview/)
 
