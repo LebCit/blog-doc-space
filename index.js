@@ -5,7 +5,7 @@ import { drive } from "./functions/deta-drive.js"
 import { getSettings } from "./functions/settings.js"
 
 // Initialize application
-const { app } = initializeApp()
+const { app, eta } = initializeApp()
 // Set the port value
 const port = process.env.PORT || 8080
 // Load static assets from `static` folder in Blog-Doc App
