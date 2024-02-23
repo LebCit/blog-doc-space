@@ -83,6 +83,34 @@ app.notFound(async (req, res) => {
 	return
 })
 
+// 500 Route
+app.onError(async (error, req, res) => {
+	console.error("Something went wrong:", error)
+	const settings = await getSettings()
+
+	const data = {
+		title: "Internal Server Error",
+		description: "The server encountered an unexpected condition that prevented it from fulfilling the request",
+		subTitle: "Server is on a break here !",
+		favicon: settings.favicon,
+	}
+	const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
+		// Passing Route data
+		errorRoute: true,
+		// Passing document data
+		data: data,
+		// Passing document image data
+		imageSrc: "/static/images/500-internal-server-error.png",
+		imageAlt: "Sad robot in front of empty box",
+		// Passing needed settings for the template
+		siteTitle: settings.siteTitle,
+		menuLinks: settings.menuLinks,
+		footerCopyright: settings.footerCopyright,
+	})
+	res.writeHead(500, { "Content-Type": "text/html" })
+	res.end(response)
+	return
+})
 
 createServer(app).listen(port, () => {
 	console.log(`App @ http://localhost:${port}`)
