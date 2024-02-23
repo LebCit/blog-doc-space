@@ -2,6 +2,7 @@ import { initializeApp } from "./functions/initialize.js"
 import { staticAssetLoader } from "./functions/static-asset-loader.js"
 import { createServer } from "./functions/router.js"
 import { drive } from "./functions/deta-drive.js"
+import { getSettings } from "./functions/settings.js"
 
 // Initialize application
 const { app } = initializeApp()
