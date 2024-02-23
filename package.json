@@ -13,8 +13,7 @@
     "deta": "^2.0.0",
     "eta": "^3.2.0",
     "formidable": "^3.5.1",
-    "marked": "^9.1.6",
-    "velocy": "^0.0.13"
+    "marked": "^9.1.6"
   },
   "devDependencies": {
     "dotenv": "^16.4.1"
