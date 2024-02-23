@@ -1,5 +1,5 @@
 import { join } from "path"
-import { Router } from "velocy"
+import { Router } from "./router.js"
 import { Eta } from "eta"
 
 export function initializeApp() {
