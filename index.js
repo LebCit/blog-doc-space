@@ -55,8 +55,34 @@ tagsRoute(app)
 rssRoute(app)
 sitemapRoute(app)
 
-import { errorRoute } from "./routes/errorRoute.js"
-errorRoute(app)
+// 404 Route
+app.notFound(async (req, res) => {
+	const settings = await getSettings()
+
+	const data = {
+		title: "Page Not Found",
+		description: "The server cannot find the requested resource",
+		subTitle: "Nothing to land on here !",
+		favicon: settings.favicon,
+	}
+	const response = eta.render(`themes/${settings.currentTheme}/layouts/base.html`, {
+		// Passing Route data
+		errorRoute: true,
+		// Passing document data
+		data: data,
+		// Passing document image data
+		imageSrc: "/static/images/404-not-found-error.png",
+		imageAlt: "Sailor on a 404 mast looking out to sea",
+		// Passing needed settings for the template
+		siteTitle: settings.siteTitle,
+		menuLinks: settings.menuLinks,
+		footerCopyright: settings.footerCopyright,
+	})
+	res.writeHead(404, { "Content-Type": "text/html" })
+	res.end(response)
+	return
+})
+
 
 createServer(app).listen(port, () => {
 	console.log(`App @ http://localhost:${port}`)
